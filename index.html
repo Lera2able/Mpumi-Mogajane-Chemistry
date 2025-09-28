@@ -5,13 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
-  <title>Chemistry Practice Hub</title>
-  <meta name="description" content="Grade 12 Chemistry Practice Questions" />
+  <title>Chemistry Practice Hub - Grade 12 Matric Prep</title>
+  <meta name="description" content="Official Grade 12 Physical Sciences Chemistry practice website aligned with exam guidelines" />
   <meta name="author" content="MGX" />
-
-  <meta property="og:title" content="Chemistry Practice Hub" />
-  <meta property="og:description" content="Grade 12 Chemistry Practice Questions" />
-  <meta property="og:type" content="website" />
 
   <style>
     * {
@@ -109,14 +105,25 @@
       color: #4a5568;
       border: 2px solid #e2e8f0;
       margin-bottom: 20px;
-      position: sticky;
-      top: 10px;
-      z-index: 100;
     }
 
     .btn-back:hover {
       background: #edf2f7;
       border-color: #cbd5e0;
+    }
+
+    .btn-memo {
+      background: #e6fffa;
+      color: #2d3748;
+      border: 2px solid #38b2ac;
+      padding: 8px 16px;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .btn-memo:hover {
+      background: #b2f5ea;
+      border-color: #319795;
     }
 
     .question-card {
@@ -177,6 +184,93 @@
       color: white;
     }
 
+    .memo-section {
+      margin-top: 20px;
+      padding: 20px;
+      background: linear-gradient(135deg, #e6fffa 0%, #f0fff4 100%);
+      border-radius: 12px;
+      border-left: 4px solid #38b2ac;
+      display: none;
+    }
+
+    .memo-section.show {
+      display: block;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .memo-title {
+      color: #2d3748;
+      font-weight: 700;
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .memo-content {
+      color: #2d3748;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .guidelines-section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border-left: 4px solid #667eea;
+    }
+
+    .guidelines-section h3 {
+      color: #667eea;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+
+    .guidelines-section h4 {
+      color: #4a5568;
+      margin: 15px 0 10px 0;
+      font-size: 1.1em;
+    }
+
+    .guidelines-section ul {
+      margin-left: 20px;
+      color: #4a5568;
+    }
+
+    .guidelines-section li {
+      margin-bottom: 8px;
+    }
+
+    .exam-info {
+      background: linear-gradient(135deg, #fed7e2 0%, #fbb6ce 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-left: 4px solid #e53e3e;
+    }
+
+    .exam-info h3 {
+      color: #742a2a;
+      margin-bottom: 10px;
+    }
+
+    .exam-info p {
+      color: #742a2a;
+      font-weight: 500;
+    }
+
     .timer {
       position: fixed;
       top: 20px;
@@ -187,7 +281,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       font-weight: 600;
       color: #4a5568;
-      z-index: 1000;
     }
 
     .score {
@@ -245,25 +338,14 @@
       margin-bottom: 8px;
     }
 
-    /* Fixed back button for exam mode */
-    .exam-back-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #f7fafc;
-      color: #4a5568;
-      border: 2px solid #e2e8f0;
-      padding: 10px 20px;
+    .correct-answer {
+      background: #f0fff4;
+      border: 2px solid #48bb78;
+      padding: 10px;
       border-radius: 8px;
-      cursor: pointer;
+      margin-top: 10px;
       font-weight: 600;
-      z-index: 1001;
-      transition: all 0.3s ease;
-    }
-
-    .exam-back-button:hover {
-      background: #edf2f7;
-      border-color: #cbd5e0;
+      color: #2f855a;
     }
 
     @media (max-width: 768px) {
@@ -294,13 +376,6 @@
         margin-bottom: 20px;
         text-align: center;
       }
-
-      .exam-back-button {
-        position: static;
-        margin-bottom: 20px;
-        width: 100%;
-        max-width: 200px;
-      }
     }
 
     .hidden {
@@ -315,24 +390,223 @@
     <div id="main-page" class="page active">
       <div class="header">
         <h1>🧪 Chemistry Practice Hub</h1>
-        <p>Master Grade 12 Chemistry with comprehensive practice questions</p>
+        <p>Official Grade 12 Physical Sciences (Chemistry - Paper 2) Exam Preparation</p>
+      </div>
+
+      <div class="exam-info">
+        <h3>📋 Official Exam Information</h3>
+        <p><strong>Subject:</strong> Physical Sciences - Chemistry Paper 2</p>
+        <p><strong>Grade:</strong> 12 (Matric Final Exam)</p>
+        <p><strong>Aligned with:</strong> 2021 Official Exam Guidelines</p>
       </div>
 
       <div class="guidelines">
-        <h3>📋 Study Guidelines</h3>
+        <h3>📚 Study Guidelines for Mpumi</h3>
         <ul>
-          <li>Practice regularly with different question types</li>
-          <li>Focus on understanding concepts, not just memorizing</li>
-          <li>Review incorrect answers to identify knowledge gaps</li>
-          <li>Use the timer to simulate exam conditions</li>
-          <li>Cover all topics: Atomic Structure, Chemical Bonding, Acids & Bases, etc.</li>
+          <li>Focus on the 9 main exam topics as per official guidelines</li>
+          <li>Use the "Show Memo" button to see step-by-step solutions</li>
+          <li>Practice calculations using the correct formulas (n = m/M, C = n/V)</li>
+          <li>Master equation balancing and chemical representations</li>
+          <li>Understand intermolecular forces and their effects on properties</li>
+          <li>Practice organic chemistry naming and reactions</li>
         </ul>
       </div>
 
       <div class="nav-buttons">
+        <button class="btn btn-primary" onclick="showPage('guidelines-page')">📖 Final Exam Guidelines</button>
         <button class="btn btn-primary" onclick="showPage('practice-page')">📚 Practice Questions</button>
         <button class="btn btn-primary" onclick="showPage('mcq-page')">✅ MCQ Only</button>
         <button class="btn btn-primary" onclick="showPage('mock-exam-page')">⏰ Mock Exam</button>
+      </div>
+    </div>
+
+    <!-- Final Exam Guidelines Page -->
+    <div id="guidelines-page" class="page">
+      <button class="btn btn-back" onclick="showPage('main-page')">← Back to Main</button>
+      
+      <div class="header">
+        <h1>📖 Official Final Exam Guidelines</h1>
+        <p>Grade 12 Physical Sciences - Chemistry Paper 2</p>
+      </div>
+
+      <div class="exam-info">
+        <h3>🎯 Exam Focus Areas</h3>
+        <p>These are the 9 main topics Mpumi must master for the final Chemistry exam, as per official guidelines.</p>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>1. Representing Chemical Change</h3>
+        <h4>Key Focus Areas:</h4>
+        <ul>
+          <li>Writing and balancing chemical equations</li>
+          <li>Conservation of atoms and mass</li>
+          <li>Use of state symbols: (s), (l), (g), (aq)</li>
+          <li>Identifying reactants and products</li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>2. Quantitative Aspects of Chemical Change</h3>
+        <h4>Essential Calculations:</h4>
+        <ul>
+          <li><strong>Mole calculations:</strong> n = m/M (moles = mass/molar mass)</li>
+          <li><strong>Concentration:</strong> C = n/V (concentration = moles/volume)</li>
+          <li><strong>Gas laws:</strong> PV = nRT, combined gas law</li>
+          <li><strong>Molar volume:</strong> 22.4 dm³ at STP</li>
+          <li><strong>Limiting reagents:</strong> identifying and calculating</li>
+          <li><strong>Percentage yield and purity calculations</strong></li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>3. Intermolecular Forces (IMFs)</h3>
+        <h4>Types of Forces:</h4>
+        <ul>
+          <li><strong>London forces:</strong> weakest, all molecules</li>
+          <li><strong>Dipole-dipole forces:</strong> polar molecules</li>
+          <li><strong>Hydrogen bonding:</strong> H bonded to N, O, or F</li>
+        </ul>
+        <h4>Effects on Physical Properties:</h4>
+        <ul>
+          <li>Boiling point and melting point</li>
+          <li>Vapour pressure</li>
+          <li>Solubility ("like dissolves like")</li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>4. Organic Chemistry</h3>
+        <h4>Must Know:</h4>
+        <ul>
+          <li><strong>Functional groups:</strong> -OH, -COOH, -CHO, -CO-, -NH₂</li>
+          <li><strong>Homologous series:</strong> alkanes, alkenes, alcohols, etc.</li>
+          <li><strong>IUPAC naming:</strong> systematic naming rules</li>
+          <li><strong>Isomers:</strong> structural and functional isomers</li>
+          <li><strong>Physical properties:</strong> boiling points, solubility</li>
+          <li><strong>Combustion reactions</strong></li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>5. Organic Reactions</h3>
+        <h4>Reaction Types:</h4>
+        <ul>
+          <li><strong>Substitution:</strong> halogenation of alkanes</li>
+          <li><strong>Addition:</strong> hydrogenation, halogenation of alkenes</li>
+          <li><strong>Elimination:</strong> dehydration of alcohols</li>
+          <li><strong>Combustion:</strong> complete and incomplete</li>
+          <li><strong>Esterification:</strong> alcohol + carboxylic acid</li>
+        </ul>
+        <h4>Reaction Conditions:</h4>
+        <ul>
+          <li>Catalysts (Pt, Ni, H₂SO₄)</li>
+          <li>Heat and temperature requirements</li>
+          <li>UV light for substitution</li>
+          <li>Reflux conditions</li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>6. Energy and Heats of Reaction</h3>
+        <h4>Key Concepts:</h4>
+        <ul>
+          <li><strong>Endothermic reactions:</strong> ΔH &gt; 0, absorb energy</li>
+          <li><strong>Exothermic reactions:</strong> ΔH &lt; 0, release energy</li>
+          <li><strong>Activation energy:</strong> minimum energy for reaction</li>
+          <li><strong>Energy profile diagrams:</strong> reactants → products</li>
+          <li><strong>Enthalpy calculations:</strong> using bond enthalpies</li>
+          <li><strong>ΔH = bonds broken - bonds formed</strong></li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>7. Rates of Reaction</h3>
+        <h4>Collision Theory:</h4>
+        <ul>
+          <li>Successful collisions require correct orientation and sufficient energy</li>
+          <li>Rate = frequency of successful collisions</li>
+        </ul>
+        <h4>Factors Affecting Rate:</h4>
+        <ul>
+          <li><strong>Temperature:</strong> higher T → faster rate</li>
+          <li><strong>Concentration:</strong> higher [reactants] → faster rate</li>
+          <li><strong>Surface area:</strong> smaller particles → faster rate</li>
+          <li><strong>Catalysts:</strong> lower activation energy</li>
+        </ul>
+        <h4>Graph Interpretation:</h4>
+        <ul>
+          <li>Concentration vs time graphs</li>
+          <li>Rate vs time graphs</li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>8. Chemical Equilibrium</h3>
+        <h4>Key Principles:</h4>
+        <ul>
+          <li><strong>Dynamic equilibrium:</strong> forward rate = reverse rate</li>
+          <li><strong>Le Châtelier's principle:</strong> system responds to stress</li>
+        </ul>
+        <h4>Factors Affecting Equilibrium:</h4>
+        <ul>
+          <li><strong>Concentration:</strong> adding/removing reactants/products</li>
+          <li><strong>Temperature:</strong> favors endothermic/exothermic direction</li>
+          <li><strong>Pressure:</strong> favors side with fewer gas molecules</li>
+        </ul>
+        <h4>Calculations:</h4>
+        <ul>
+          <li><strong>Equilibrium constant (Kc):</strong> Kc = [products]/[reactants]</li>
+          <li><strong>ICE tables:</strong> Initial, Change, Equilibrium</li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>9. Acids and Bases</h3>
+        <h4>Definitions:</h4>
+        <ul>
+          <li><strong>Brønsted-Lowry:</strong> acid = proton donor, base = proton acceptor</li>
+          <li><strong>Conjugate pairs:</strong> acid-base relationships</li>
+          <li><strong>Strong vs weak:</strong> degree of dissociation</li>
+        </ul>
+        <h4>Calculations:</h4>
+        <ul>
+          <li><strong>pH calculations:</strong> pH = -log[H⁺]</li>
+          <li><strong>Kw = [H⁺][OH⁻] = 1×10⁻¹⁴</strong></li>
+          <li><strong>Hydrolysis of salts</strong></li>
+          <li><strong>Titrations and indicators</strong></li>
+        </ul>
+      </div>
+
+      <div class="guidelines-section">
+        <h3>10. Electrochemistry</h3>
+        <h4>Cell Types:</h4>
+        <ul>
+          <li><strong>Galvanic cells:</strong> spontaneous, produce electricity</li>
+          <li><strong>Electrolytic cells:</strong> non-spontaneous, require electricity</li>
+        </ul>
+        <h4>Key Concepts:</h4>
+        <ul>
+          <li><strong>Anode:</strong> oxidation occurs, electrons produced</li>
+          <li><strong>Cathode:</strong> reduction occurs, electrons consumed</li>
+          <li><strong>Half-reactions:</strong> oxidation and reduction separately</li>
+          <li><strong>Electron flow:</strong> anode → cathode (external circuit)</li>
+        </ul>
+        <h4>Calculations:</h4>
+        <ul>
+          <li><strong>Standard electrode potentials (E°)</strong></li>
+          <li><strong>E°cell = E°cathode - E°anode</strong></li>
+          <li><strong>Industrial applications:</strong> electrolysis, electroplating</li>
+        </ul>
+      </div>
+
+      <div class="exam-info">
+        <h3>💡 Exam Success Tips for Mpumi</h3>
+        <p><strong>1.</strong> Master the formulas: n = m/M, C = n/V, PV = nRT</p>
+        <p><strong>2.</strong> Practice balancing equations daily</p>
+        <p><strong>3.</strong> Understand Le Châtelier's principle applications</p>
+        <p><strong>4.</strong> Know all functional groups and their properties</p>
+        <p><strong>5.</strong> Practice pH calculations and titration problems</p>
+        <p><strong>6.</strong> Understand electrochemistry cell diagrams</p>
       </div>
     </div>
 
@@ -342,18 +616,21 @@
       
       <div class="header">
         <h1>📚 Practice Questions</h1>
-        <p>Mixed question types with detailed explanations</p>
+        <p>Aligned with official exam guidelines - Mixed question types with detailed explanations</p>
       </div>
 
       <div class="filter-buttons">
         <button class="filter-btn active" onclick="filterQuestions('all')">All Topics</button>
-        <button class="filter-btn" onclick="filterQuestions('atomic-structure')">Atomic Structure</button>
-        <button class="filter-btn" onclick="filterQuestions('chemical-bonding')">Chemical Bonding</button>
+        <button class="filter-btn" onclick="filterQuestions('representing-change')">Representing Change</button>
+        <button class="filter-btn" onclick="filterQuestions('quantitative')">Quantitative Aspects</button>
+        <button class="filter-btn" onclick="filterQuestions('imf')">Intermolecular Forces</button>
+        <button class="filter-btn" onclick="filterQuestions('organic-chemistry')">Organic Chemistry</button>
+        <button class="filter-btn" onclick="filterQuestions('organic-reactions')">Organic Reactions</button>
+        <button class="filter-btn" onclick="filterQuestions('energy-heats')">Energy & Heats</button>
+        <button class="filter-btn" onclick="filterQuestions('reaction-rates')">Reaction Rates</button>
+        <button class="filter-btn" onclick="filterQuestions('equilibrium')">Chemical Equilibrium</button>
         <button class="filter-btn" onclick="filterQuestions('acids-bases')">Acids & Bases</button>
-        <button class="filter-btn" onclick="filterQuestions('organic')">Organic Chemistry</button>
-        <button class="filter-btn" onclick="filterQuestions('physical')">Physical Chemistry</button>
         <button class="filter-btn" onclick="filterQuestions('electrochemistry')">Electrochemistry</button>
-        <button class="filter-btn" onclick="filterQuestions('industrial')">Industrial Chemistry</button>
       </div>
 
       <div id="practice-questions"></div>
@@ -366,18 +643,21 @@
       
       <div class="header">
         <h1>✅ Multiple Choice Questions</h1>
-        <p>Quick MCQ practice with instant feedback</p>
+        <p>Quick MCQ practice with instant feedback & explanations - Exam aligned</p>
       </div>
 
       <div class="filter-buttons">
         <button class="filter-btn active" onclick="filterMCQ('all')">All Topics</button>
-        <button class="filter-btn" onclick="filterMCQ('atomic-structure')">Atomic Structure</button>
-        <button class="filter-btn" onclick="filterMCQ('chemical-bonding')">Chemical Bonding</button>
+        <button class="filter-btn" onclick="filterMCQ('representing-change')">Representing Change</button>
+        <button class="filter-btn" onclick="filterMCQ('quantitative')">Quantitative Aspects</button>
+        <button class="filter-btn" onclick="filterMCQ('imf')">Intermolecular Forces</button>
+        <button class="filter-btn" onclick="filterMCQ('organic-chemistry')">Organic Chemistry</button>
+        <button class="filter-btn" onclick="filterMCQ('organic-reactions')">Organic Reactions</button>
+        <button class="filter-btn" onclick="filterMCQ('energy-heats')">Energy & Heats</button>
+        <button class="filter-btn" onclick="filterMCQ('reaction-rates')">Reaction Rates</button>
+        <button class="filter-btn" onclick="filterMCQ('equilibrium')">Chemical Equilibrium</button>
         <button class="filter-btn" onclick="filterMCQ('acids-bases')">Acids & Bases</button>
-        <button class="filter-btn" onclick="filterMCQ('organic')">Organic Chemistry</button>
-        <button class="filter-btn" onclick="filterMCQ('physical')">Physical Chemistry</button>
         <button class="filter-btn" onclick="filterMCQ('electrochemistry')">Electrochemistry</button>
-        <button class="filter-btn" onclick="filterMCQ('industrial')">Industrial Chemistry</button>
       </div>
 
       <div style="text-align: center; margin-bottom: 20px;">
@@ -395,7 +675,7 @@
       
       <div class="header">
         <h1>⏰ Mock Examination</h1>
-        <p>Timed practice exam (180 minutes)</p>
+        <p>Timed practice exam (180 minutes) - Real Matric conditions with official topics</p>
       </div>
 
       <div style="text-align: center; margin-bottom: 30px;">
@@ -410,11 +690,6 @@
     <div id="timer" class="timer" style="display: none;">
       Time: <span id="time-display">180:00</span>
     </div>
-
-    <!-- Fixed Back Button for Exam Mode -->
-    <button id="exam-back-button" class="exam-back-button" onclick="exitExam()" style="display: none;">
-      ← Exit Exam
-    </button>
   </div>
 
   <script>
@@ -424,7 +699,6 @@
     let examTimer = null;
     let currentFilter = 'all';
     let mcqDisplayCount = 5;
-    let isExamMode = false;
 
     // Navigation function
     function showPage(pageId) {
@@ -441,8 +715,6 @@
         clearInterval(examTimer);
         examTimer = null;
         document.getElementById('timer').style.display = 'none';
-        document.getElementById('exam-back-button').style.display = 'none';
-        isExamMode = false;
       }
       
       // Load content based on page
@@ -453,778 +725,544 @@
       }
     }
 
-    // Exit exam function
-    function exitExam() {
-      if (confirm('Are you sure you want to exit the exam? Your progress will be lost.')) {
-        if (examTimer) {
-          clearInterval(examTimer);
-          examTimer = null;
-        }
-        document.getElementById('timer').style.display = 'none';
-        document.getElementById('exam-back-button').style.display = 'none';
-        isExamMode = false;
-        showPage('main-page');
-      }
-    }
-
-    // Question data
+    // Enhanced Question Bank aligned with official exam guidelines
     const questionBank = {
       mcq: [
         {
           id: 1,
-          topic: 'atomic-structure',
-          question: "Which of the following represents the electron configuration of a chlorine atom (Cl, atomic number 17)?",
-          options: [
-            "1s² 2s² 2p⁶ 3s² 3p⁵",
-            "1s² 2s² 2p⁶ 3s² 3p³",
-            "1s² 2s² 2p⁶ 3s¹ 3p⁶",
-            "1s² 2s² 2p⁵ 3s² 3p⁶"
-          ],
-          correct: 0,
-          explanation: "Chlorine has 17 electrons. Following the aufbau principle: 1s² 2s² 2p⁶ 3s² 3p⁵"
+          topic: 'representing-change',
+          question: "Balance the following equation: C₃H₈ + O₂ → CO₂ + H₂O. What is the coefficient of O₂?",
+          options: ["3", "4", "5", "6"],
+          correct: 2,
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Write the unbalanced equation
+C₃H₈ + O₂ → CO₂ + H₂O
+
+STEP 2: Count atoms on each side
+Left: C = 3, H = 8, O = 2
+Right: C = 1, H = 2, O = 3
+
+STEP 3: Balance carbon first
+C₃H₈ + O₂ → 3CO₂ + H₂O
+(3 carbons on left, need 3 CO₂ on right)
+
+STEP 4: Balance hydrogen
+C₃H₈ + O₂ → 3CO₂ + 4H₂O
+(8 hydrogens on left, need 4 H₂O on right)
+
+STEP 5: Balance oxygen
+Right side: (3 × 2) + (4 × 1) = 6 + 4 = 10 oxygen atoms
+Left side needs: 10 oxygen atoms = 5 O₂ molecules
+
+STEP 6: Final balanced equation
+C₃H₈ + 5O₂ → 3CO₂ + 4H₂O
+
+ANSWER: 5`
         },
         {
           id: 2,
-          topic: 'chemical-bonding',
-          question: "What type of bond is formed between sodium and chlorine in NaCl?",
-          options: [
-            "Covalent bond",
-            "Ionic bond", 
-            "Metallic bond",
-            "Hydrogen bond"
-          ],
+          topic: 'quantitative',
+          question: "Calculate the number of moles in 44 g of CO₂. (Molar mass of CO₂ = 44 g/mol)",
+          options: ["0.5 mol", "1.0 mol", "2.0 mol", "44 mol"],
           correct: 1,
-          explanation: "Sodium loses an electron to chlorine, forming Na⁺ and Cl⁻ ions held together by electrostatic attraction (ionic bond)."
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Identify the given information
+• Mass of CO₂ = 44 g
+• Molar mass of CO₂ = 44 g/mol
+• Find: number of moles (n)
+
+STEP 2: Use the mole formula
+n = m/M
+Where: n = moles, m = mass, M = molar mass
+
+STEP 3: Substitute the values
+n = 44 g ÷ 44 g/mol
+n = 1.0 mol
+
+STEP 4: Check units
+g ÷ (g/mol) = g × (mol/g) = mol ✓
+
+ANSWER: 1.0 mol`
         },
         {
           id: 3,
-          topic: 'acids-bases',
-          question: "What is the pH of a 0.01 M HCl solution?",
-          options: [
-            "1",
-            "2",
-            "12", 
-            "14"
-          ],
-          correct: 1,
-          explanation: "HCl is a strong acid that completely dissociates. [H⁺] = 0.01 M = 10⁻² M, so pH = -log(10⁻²) = 2"
+          topic: 'imf',
+          question: "Which compound has the highest boiling point due to hydrogen bonding?",
+          options: ["CH₄", "NH₃", "H₂O", "HF"],
+          correct: 2,
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Identify hydrogen bonding requirements
+• H must be bonded to N, O, or F
+• These are highly electronegative atoms
+
+STEP 2: Check each compound
+A) CH₄: No N, O, or F → No hydrogen bonding
+B) NH₃: H bonded to N → Hydrogen bonding ✓
+C) H₂O: H bonded to O → Hydrogen bonding ✓
+D) HF: H bonded to F → Hydrogen bonding ✓
+
+STEP 3: Compare hydrogen bonding strength
+• Number of H-bonds per molecule:
+  - NH₃: 1 H-bond per molecule
+  - H₂O: 2 H-bonds per molecule
+  - HF: 1 H-bond per molecule
+
+STEP 4: Consider molecular structure
+• H₂O can form extensive H-bond networks
+• Each water molecule can form 4 H-bonds (2 as donor, 2 as acceptor)
+
+STEP 5: Boiling point order
+HF < NH₃ < H₂O
+(Due to extent of hydrogen bonding)
+
+ANSWER: H₂O`
         },
         {
           id: 4,
-          topic: 'organic',
-          question: "Which functional group is present in alcohols?",
-          options: [
-            "-COOH",
-            "-OH",
-            "-CHO",
-            "-NH₂"
-          ],
+          topic: 'organic-chemistry',
+          question: "What is the IUPAC name for CH₃CH₂CH(OH)CH₃?",
+          options: ["1-butanol", "2-butanol", "2-methyl-1-propanol", "butanol"],
           correct: 1,
-          explanation: "Alcohols contain the hydroxyl functional group (-OH) attached to a carbon atom."
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Identify the structure
+CH₃CH₂CH(OH)CH₃
+• 4 carbon chain with -OH group
+
+STEP 2: Find the longest carbon chain
+C-C-C-C = 4 carbons
+• 4 carbons = "but" prefix
+
+STEP 3: Number the carbon chain
+Give -OH group the lowest number:
+1. CH₃-CH₂-CH(OH)-CH₃ (OH on carbon 2)
+2. CH₃-CH(OH)-CH₂-CH₃ (OH on carbon 3)
+
+Choose option 1: OH on carbon 2
+
+STEP 4: Apply IUPAC naming rules
+• Base name: butan (4 carbons)
+• Functional group: -ol (alcohol)
+• Position: 2 (OH on carbon 2)
+• Full name: butan-2-ol or 2-butanol
+
+ANSWER: 2-butanol`
         },
         {
           id: 5,
-          topic: 'physical',
-          question: "According to Le Chatelier's principle, increasing pressure will favor the formation of:",
-          options: [
-            "Products with more gas molecules",
-            "Products with fewer gas molecules",
-            "Only endothermic reactions",
-            "Only exothermic reactions"
-          ],
+          topic: 'organic-reactions',
+          question: "What type of reaction occurs when ethene (C₂H₄) reacts with hydrogen gas in the presence of a nickel catalyst?",
+          options: ["Substitution", "Addition", "Elimination", "Combustion"],
           correct: 1,
-          explanation: "Increasing pressure favors the side with fewer gas molecules to reduce the pressure stress on the system."
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Write the reaction equation
+C₂H₄ + H₂ → C₂H₆
+(ethene + hydrogen → ethane)
+
+STEP 2: Identify what happens
+• Ethene has a C=C double bond
+• Hydrogen atoms add across the double bond
+• Double bond becomes single bond
+
+STEP 3: Analyze the reaction type
+• Starting material: alkene (C=C)
+• Product: alkane (C-C)
+• Atoms are ADDED to the molecule
+• No atoms are removed or substituted
+
+STEP 4: Classify the reaction
+This is ADDITION because:
+• Hydrogen atoms add to the double bond
+• No leaving groups
+• Unsaturated → saturated compound
+
+STEP 5: Reaction conditions
+• Catalyst: Nickel (Ni)
+• Process: Hydrogenation
+• Industrial use: Making margarine from oils
+
+ANSWER: Addition`
         },
         {
           id: 6,
-          topic: 'electrochemistry',
-          question: "In an electrochemical cell, reduction occurs at the:",
-          options: [
-            "Anode",
-            "Cathode",
-            "Salt bridge",
-            "External circuit"
-          ],
+          topic: 'energy-heats',
+          question: "In an exothermic reaction, the enthalpy change (ΔH) is:",
+          options: ["Positive", "Negative", "Zero", "Variable"],
           correct: 1,
-          explanation: "Reduction (gain of electrons) always occurs at the cathode in electrochemical cells."
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Define exothermic reaction
+• "Exo" = out, "thermic" = heat
+• Heat is released to the surroundings
+• System loses energy
+
+STEP 2: Understand enthalpy change (ΔH)
+ΔH = H(products) - H(reactants)
+• If products have less energy than reactants: ΔH < 0
+• If products have more energy than reactants: ΔH > 0
+
+STEP 3: Energy in exothermic reactions
+• Energy is released (given out)
+• Products are more stable (lower energy)
+• H(products) < H(reactants)
+
+STEP 4: Calculate ΔH sign
+ΔH = H(products) - H(reactants)
+Since H(products) < H(reactants):
+ΔH = (smaller number) - (larger number) = NEGATIVE
+
+STEP 5: Examples of exothermic reactions
+• Combustion: C + O₂ → CO₂ (ΔH = -394 kJ/mol)
+• Neutralization: HCl + NaOH → NaCl + H₂O
+
+ANSWER: Negative`
         },
         {
           id: 7,
-          topic: 'atomic-structure',
-          question: "How many neutrons are in an atom of carbon-14?",
-          options: [
-            "6",
-            "8",
-            "12",
-            "14"
-          ],
-          correct: 1,
-          explanation: "Carbon-14 has mass number 14 and atomic number 6. Neutrons = 14 - 6 = 8"
+          topic: 'reaction-rates',
+          question: "Which factor will increase the rate of reaction between zinc and hydrochloric acid?",
+          options: ["Using zinc powder instead of zinc granules", "Decreasing temperature", "Decreasing HCl concentration", "Adding water"],
+          correct: 0,
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Identify the reaction
+Zn + 2HCl → ZnCl₂ + H₂
+• Heterogeneous reaction (solid + liquid)
+
+STEP 2: Apply collision theory
+• Rate depends on frequency of successful collisions
+• More collisions = faster reaction
+
+STEP 3: Analyze each option
+
+A) Zinc powder vs zinc granules:
+• Powder has much larger surface area
+• More Zn atoms exposed to HCl
+• More collision sites available
+• INCREASES reaction rate ✓
+
+B) Decreasing temperature:
+• Lower kinetic energy of particles
+• Fewer successful collisions
+• DECREASES reaction rate ✗
+
+C) Decreasing HCl concentration:
+• Fewer HCl molecules per unit volume
+• Fewer collisions with Zn
+• DECREASES reaction rate ✗
+
+D) Adding water:
+• Dilutes the HCl solution
+• Lower concentration of HCl
+• DECREASES reaction rate ✗
+
+STEP 4: Surface area effect
+• Smaller particles = larger surface area
+• More contact between reactants
+• Faster reaction rate
+
+ANSWER: Using zinc powder instead of zinc granules`
         },
         {
           id: 8,
-          topic: 'chemical-bonding',
-          question: "Which molecule has a bent molecular geometry?",
-          options: [
-            "CO₂",
-            "H₂O",
-            "BeCl₂",
-            "BF₃"
-          ],
+          topic: 'equilibrium',
+          question: "For the reaction N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + heat, increasing temperature will:",
+          options: ["Shift equilibrium to the right", "Shift equilibrium to the left", "Not affect equilibrium", "Stop the reaction"],
           correct: 1,
-          explanation: "H₂O has 2 bonding pairs and 2 lone pairs on oxygen, resulting in a bent molecular geometry."
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Identify reaction characteristics
+N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + heat
+• Heat is produced (exothermic reaction)
+• ΔH < 0 (negative)
+
+STEP 2: Apply Le Châtelier's Principle
+• When system is disturbed, it shifts to counteract the disturbance
+• Increasing temperature = adding heat to system
+
+STEP 3: Rewrite equation showing heat
+N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + HEAT
+• Heat appears on the product side
+• Heat acts like a "product"
+
+STEP 4: Effect of adding heat (increasing temperature)
+• System wants to remove excess heat
+• Shifts to consume heat
+• Shifts AWAY from the side producing heat
+• Shifts LEFT (toward reactants)
+
+STEP 5: Result of temperature increase
+• More N₂ and H₂ formed
+• Less NH₃ formed
+• Equilibrium position shifts left
+
+STEP 6: General rule
+• Exothermic reaction + ↑Temperature → shifts left
+• Endothermic reaction + ↑Temperature → shifts right
+
+ANSWER: Shift equilibrium to the left`
         },
         {
           id: 9,
           topic: 'acids-bases',
-          question: "Which of the following is a Lewis acid?",
-          options: [
-            "NH₃",
-            "BF₃",
-            "OH⁻",
-            "H₂O"
-          ],
-          correct: 1,
-          explanation: "BF₃ can accept electron pairs (Lewis acid) due to boron's incomplete octet."
+          question: "What is the pH of a 0.001 M HCl solution?",
+          options: ["1", "2", "3", "11"],
+          correct: 2,
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Identify the acid type
+• HCl = hydrochloric acid
+• Strong acid (completely dissociates)
+
+STEP 2: Write dissociation equation
+HCl(aq) → H⁺(aq) + Cl⁻(aq)
+• 100% dissociation for strong acids
+
+STEP 3: Find [H⁺] concentration
+• [HCl] = 0.001 M = 1 × 10⁻³ M
+• Since complete dissociation: [H⁺] = [HCl]
+• [H⁺] = 1 × 10⁻³ M
+
+STEP 4: Apply pH formula
+pH = -log[H⁺]
+pH = -log(1 × 10⁻³)
+pH = -log(10⁻³)
+pH = -(-3)
+pH = 3
+
+STEP 5: Verify the answer
+• pH < 7 = acidic solution ✓
+• Strong acid = low pH ✓
+• 0.001 M = 10⁻³ M → pH = 3 ✓
+
+ANSWER: 3`
         },
         {
           id: 10,
-          topic: 'organic',
-          question: "What is the IUPAC name for CH₃CH₂CH₂OH?",
-          options: [
-            "Propanol",
-            "1-Propanol",
-            "2-Propanol",
-            "Propyl alcohol"
-          ],
-          correct: 1,
-          explanation: "This is a 3-carbon chain with -OH on carbon 1, so it's 1-propanol (or propan-1-ol)."
-        },
-        {
-          id: 11,
-          topic: 'physical',
-          question: "The rate of a chemical reaction generally increases with temperature because:",
-          options: [
-            "More molecules have sufficient activation energy",
-            "The equilibrium shifts to products",
-            "Pressure increases",
-            "Concentration increases"
-          ],
-          correct: 0,
-          explanation: "Higher temperature means more molecules have kinetic energy ≥ activation energy, increasing reaction rate."
-        },
-        {
-          id: 12,
           topic: 'electrochemistry',
-          question: "Which metal would be most easily oxidized?",
-          options: [
-            "Gold (Au)",
-            "Copper (Cu)",
-            "Zinc (Zn)",
-            "Silver (Ag)"
-          ],
-          correct: 2,
-          explanation: "Zinc has the most negative standard reduction potential, making it most easily oxidized."
-        },
-        {
-          id: 13,
-          topic: 'industrial',
-          question: "In the Haber process, nitrogen and hydrogen combine to form:",
-          options: [
-            "Nitric acid",
-            "Ammonia",
-            "Ammonium nitrate",
-            "Nitrogen dioxide"
-          ],
+          question: "In a galvanic cell, which electrode is the anode?",
+          options: ["The electrode where reduction occurs", "The electrode where oxidation occurs", "The positive electrode", "The electrode that gains electrons"],
           correct: 1,
-          explanation: "The Haber process: N₂ + 3H₂ ⇌ 2NH₃ (ammonia production)"
-        },
-        {
-          id: 14,
-          topic: 'atomic-structure',
-          question: "Which quantum number describes the shape of an orbital?",
-          options: [
-            "Principal (n)",
-            "Azimuthal (l)",
-            "Magnetic (mₗ)",
-            "Spin (mₛ)"
-          ],
-          correct: 1,
-          explanation: "The azimuthal quantum number (l) determines the shape of the orbital (s, p, d, f)."
-        },
-        {
-          id: 15,
-          topic: 'chemical-bonding',
-          question: "Which type of intermolecular force is strongest?",
-          options: [
-            "London dispersion forces",
-            "Dipole-dipole interactions",
-            "Hydrogen bonding",
-            "Ion-dipole interactions"
-          ],
-          correct: 3,
-          explanation: "Ion-dipole interactions are the strongest intermolecular forces, followed by hydrogen bonding."
-        },
-        {
-          id: 16,
-          topic: 'acids-bases',
-          question: "What is the conjugate base of H₂SO₄?",
-          options: [
-            "SO₄²⁻",
-            "HSO₄⁻",
-            "H₃SO₄⁺",
-            "SO₃"
-          ],
-          correct: 1,
-          explanation: "When H₂SO₄ loses one proton (H⁺), it forms HSO₄⁻ (hydrogen sulfate ion)."
-        },
-        {
-          id: 17,
-          topic: 'organic',
-          question: "Which type of reaction converts an alkene to an alkane?",
-          options: [
-            "Substitution",
-            "Addition",
-            "Elimination",
-            "Condensation"
-          ],
-          correct: 1,
-          explanation: "Addition reactions add hydrogen (hydrogenation) across the double bond, converting alkenes to alkanes."
-        },
-        {
-          id: 18,
-          topic: 'physical',
-          question: "At equilibrium, the rate of the forward reaction is:",
-          options: [
-            "Greater than the reverse reaction",
-            "Less than the reverse reaction", 
-            "Equal to the reverse reaction",
-            "Zero"
-          ],
-          correct: 2,
-          explanation: "At equilibrium, forward and reverse reaction rates are equal, maintaining constant concentrations."
-        },
-        {
-          id: 19,
-          topic: 'electrochemistry',
-          question: "During electrolysis of water, oxygen gas is produced at the:",
-          options: [
-            "Cathode",
-            "Anode",
-            "Salt bridge",
-            "Both electrodes"
-          ],
-          correct: 1,
-          explanation: "Oxygen is produced by oxidation of water at the anode: 2H₂O → O₂ + 4H⁺ + 4e⁻"
-        },
-        {
-          id: 20,
-          topic: 'industrial',
-          question: "The Contact process is used to manufacture:",
-          options: [
-            "Ammonia",
-            "Sulfuric acid",
-            "Nitric acid",
-            "Hydrochloric acid"
-          ],
-          correct: 1,
-          explanation: "The Contact process converts SO₂ to SO₃, which then forms H₂SO₄ (sulfuric acid)."
-        },
-        {
-          id: 21,
-          topic: 'atomic-structure',
-          question: "Which element has the electron configuration [Ne] 3s²?",
-          options: [
-            "Sodium",
-            "Magnesium",
-            "Aluminum", 
-            "Silicon"
-          ],
-          correct: 1,
-          explanation: "Magnesium (atomic number 12) has configuration [Ne] 3s², where [Ne] represents 1s² 2s² 2p⁶."
-        },
-        {
-          id: 22,
-          topic: 'chemical-bonding',
-          question: "In which molecule are all bonds polar but the molecule is nonpolar?",
-          options: [
-            "H₂O",
-            "NH₃",
-            "CCl₄",
-            "HCl"
-          ],
-          correct: 2,
-          explanation: "CCl₄ has polar C-Cl bonds, but the tetrahedral geometry makes the molecule nonpolar due to symmetry."
-        },
-        {
-          id: 23,
-          topic: 'acids-bases',
-          question: "Which indicator would be most suitable for titrating a weak acid with a strong base?",
-          options: [
-            "Methyl orange (pH 3.1-4.4)",
-            "Bromothymol blue (pH 6.0-7.6)",
-            "Phenolphthalein (pH 8.2-10.0)",
-            "Litmus (pH 4.5-8.3)"
-          ],
-          correct: 2,
-          explanation: "Weak acid + strong base has equivalence point around pH 8-9, so phenolphthalein is ideal."
-        },
-        {
-          id: 24,
-          topic: 'organic',
-          question: "Which compound is an isomer of butane (C₄H₁₀)?",
-          options: [
-            "Propane",
-            "Pentane",
-            "2-methylpropane",
-            "Butene"
-          ],
-          correct: 2,
-          explanation: "2-methylpropane (isobutane) has the same molecular formula (C₄H₁₀) but different structure."
-        },
-        {
-          id: 25,
-          topic: 'physical',
-          question: "For the reaction N₂ + 3H₂ ⇌ 2NH₃ + heat, which change will increase NH₃ production?",
-          options: [
-            "Increasing temperature",
-            "Decreasing pressure",
-            "Removing NH₃",
-            "Adding a catalyst"
-          ],
-          correct: 2,
-          explanation: "Removing NH₃ shifts equilibrium right to replace it. Catalyst doesn't affect position, only rate."
-        },
-        {
-          id: 26,
-          topic: 'electrochemistry',
-          question: "What is the oxidation number of sulfur in SO₄²⁻?",
-          options: [
-            "+4",
-            "+6",
-            "-2",
-            "+8"
-          ],
-          correct: 1,
-          explanation: "In SO₄²⁻: 4 oxygens × (-2) + S = -2, so S = +6"
-        },
-        {
-          id: 27,
-          topic: 'atomic-structure',
-          question: "Which of the following has the largest atomic radius?",
-          options: [
-            "Li",
-            "Na", 
-            "K",
-            "Rb"
-          ],
-          correct: 3,
-          explanation: "Atomic radius increases down a group due to additional electron shells. Rb is lowest in Group 1."
-        },
-        {
-          id: 28,
-          topic: 'chemical-bonding',
-          question: "How many lone pairs are on the central atom in NH₃?",
-          options: [
-            "0",
-            "1",
-            "2",
-            "3"
-          ],
-          correct: 1,
-          explanation: "Nitrogen in NH₃ has 5 valence electrons: 3 used in N-H bonds, 2 remain as 1 lone pair."
-        },
-        {
-          id: 29,
-          topic: 'acids-bases',
-          question: "Which solution has the highest pH?",
-          options: [
-            "0.1 M HCl",
-            "0.1 M CH₃COOH",
-            "0.1 M NaOH",
-            "0.1 M NH₃"
-          ],
-          correct: 2,
-          explanation: "NaOH is a strong base with complete dissociation, giving the highest [OH⁻] and pH."
-        },
-        {
-          id: 30,
-          topic: 'organic',
-          question: "What is the product when ethene reacts with hydrogen bromide?",
-          options: [
-            "Bromoethane",
-            "1,2-dibromoethane",
-            "Ethyl bromide",
-            "Both A and C"
-          ],
-          correct: 3,
-          explanation: "CH₂=CH₂ + HBr → CH₃CH₂Br (bromoethane = ethyl bromide). Both names are correct."
-        },
-        {
-          id: 31,
-          topic: 'physical',
-          question: "Which factor does NOT affect reaction rate?",
-          options: [
-            "Temperature",
-            "Concentration",
-            "Enthalpy change",
-            "Catalyst"
-          ],
-          correct: 2,
-          explanation: "Enthalpy change (ΔH) affects whether a reaction is favorable but not the rate of reaction."
-        },
-        {
-          id: 32,
-          topic: 'electrochemistry',
-          question: "In a galvanic cell, electrons flow from:",
-          options: [
-            "Cathode to anode through external circuit",
-            "Anode to cathode through external circuit",
-            "Positive to negative electrode",
-            "High to low potential inside the cell"
-          ],
-          correct: 1,
-          explanation: "Electrons flow from anode (oxidation site) to cathode (reduction site) through the external circuit."
-        },
-        {
-          id: 33,
-          topic: 'industrial',
-          question: "Which catalyst is used in the Haber process?",
-          options: [
-            "Platinum",
-            "Iron",
-            "Vanadium pentoxide",
-            "Nickel"
-          ],
-          correct: 1,
-          explanation: "Iron catalyst (often with promoters) is used in the Haber process for ammonia synthesis."
-        },
-        {
-          id: 34,
-          topic: 'atomic-structure',
-          question: "What is the maximum number of electrons in the 3d subshell?",
-          options: [
-            "2",
-            "6",
-            "10",
-            "14"
-          ],
-          correct: 2,
-          explanation: "The d subshell has 5 orbitals, each holding 2 electrons maximum: 5 × 2 = 10 electrons."
-        },
-        {
-          id: 35,
-          topic: 'chemical-bonding',
-          question: "Which compound exhibits hydrogen bonding?",
-          options: [
-            "CH₄",
-            "HF",
-            "H₂S",
-            "PH₃"
-          ],
-          correct: 1,
-          explanation: "HF exhibits hydrogen bonding because H is bonded to highly electronegative F."
-        },
-        {
-          id: 36,
-          topic: 'acids-bases',
-          question: "What is the Kw value for water at 25°C?",
-          options: [
-            "1.0 × 10⁻¹²",
-            "1.0 × 10⁻¹⁴",
-            "1.0 × 10⁻⁷",
-            "1.0 × 10⁻¹"
-          ],
-          correct: 1,
-          explanation: "Kw = [H⁺][OH⁻] = 1.0 × 10⁻¹⁴ at 25°C for pure water."
-        },
-        {
-          id: 37,
-          topic: 'organic',
-          question: "Which functional group is present in ketones?",
-          options: [
-            "C=O (at end of chain)",
-            "C=O (in middle of chain)",
-            "-OH",
-            "-COOH"
-          ],
-          correct: 1,
-          explanation: "Ketones have C=O group bonded to two carbon atoms (in middle of chain)."
-        },
-        {
-          id: 38,
-          topic: 'physical',
-          question: "What happens to Kc when temperature increases for an exothermic reaction?",
-          options: [
-            "Increases",
-            "Decreases", 
-            "Remains constant",
-            "Becomes zero"
-          ],
-          correct: 1,
-          explanation: "For exothermic reactions, increasing temperature shifts equilibrium left, decreasing Kc."
-        },
-        {
-          id: 39,
-          topic: 'electrochemistry',
-          question: "Which half-reaction occurs at the cathode during electrolysis of molten NaCl?",
-          options: [
-            "Na⁺ + e⁻ → Na",
-            "2Cl⁻ → Cl₂ + 2e⁻",
-            "2H₂O → O₂ + 4H⁺ + 4e⁻",
-            "Na → Na⁺ + e⁻"
-          ],
-          correct: 0,
-          explanation: "At cathode, reduction occurs: Na⁺ + e⁻ → Na (sodium metal is produced)."
-        },
-        {
-          id: 40,
-          topic: 'industrial',
-          question: "What is the main environmental concern with the Haber process?",
-          options: [
-            "High energy consumption",
-            "Toxic ammonia production",
-            "Greenhouse gas emissions",
-            "All of the above"
-          ],
-          correct: 3,
-          explanation: "The Haber process requires high energy, produces potentially toxic NH₃, and generates CO₂."
-        },
-        {
-          id: 41,
-          topic: 'atomic-structure',
-          question: "Which ion has the same electron configuration as neon?",
-          options: [
-            "Na⁺",
-            "Mg²⁺",
-            "F⁻",
-            "All of the above"
-          ],
-          correct: 3,
-          explanation: "Na⁺, Mg²⁺, and F⁻ all have 10 electrons, same as neon (isoelectronic)."
-        },
-        {
-          id: 42,
-          topic: 'chemical-bonding',
-          question: "What is the hybridization of carbon in methane (CH₄)?",
-          options: [
-            "sp",
-            "sp²",
-            "sp³",
-            "sp³d"
-          ],
-          correct: 2,
-          explanation: "Carbon in CH₄ forms 4 equivalent bonds in tetrahedral geometry, requiring sp³ hybridization."
-        },
-        {
-          id: 43,
-          topic: 'acids-bases',
-          question: "Which is the strongest acid?",
-          options: [
-            "HF",
-            "HCl",
-            "HBr", 
-            "HI"
-          ],
-          correct: 3,
-          explanation: "Acid strength increases down the halogen group: HI > HBr > HCl > HF."
-        },
-        {
-          id: 44,
-          topic: 'organic',
-          question: "What type of reaction is: CH₃CH₂Br + OH⁻ → CH₃CH₂OH + Br⁻?",
-          options: [
-            "Addition",
-            "Elimination",
-            "Substitution",
-            "Condensation"
-          ],
-          correct: 2,
-          explanation: "This is nucleophilic substitution where OH⁻ replaces Br⁻."
-        },
-        {
-          id: 45,
-          topic: 'physical',
-          question: "Which statement about catalysts is correct?",
-          options: [
-            "They are consumed in the reaction",
-            "They change the equilibrium position",
-            "They lower activation energy",
-            "They increase reaction enthalpy"
-          ],
-          correct: 2,
-          explanation: "Catalysts lower activation energy, increasing reaction rate without being consumed."
-        },
-        {
-          id: 46,
-          topic: 'electrochemistry',
-          question: "What is the standard hydrogen electrode potential?",
-          options: [
-            "-1.0 V",
-            "0.0 V",
-            "+1.0 V",
-            "+2.0 V"
-          ],
-          correct: 1,
-          explanation: "The standard hydrogen electrode is defined as 0.0 V reference point."
-        },
-        {
-          id: 47,
-          topic: 'atomic-structure',
-          question: "Which element has the highest first ionization energy?",
-          options: [
-            "Lithium",
-            "Fluorine",
-            "Helium",
-            "Neon"
-          ],
-          correct: 2,
-          explanation: "Helium has the highest first ionization energy due to its complete, stable electron configuration."
-        },
-        {
-          id: 48,
-          topic: 'chemical-bonding',
-          question: "Which molecule has the shortest bond length?",
-          options: [
-            "H-H",
-            "C-C",
-            "C=C",
-            "C≡C"
-          ],
-          correct: 3,
-          explanation: "Triple bonds (C≡C) are shorter than double bonds (C=C), which are shorter than single bonds."
-        },
-        {
-          id: 49,
-          topic: 'acids-bases',
-          question: "What is the pH of a buffer solution containing equal molar amounts of CH₃COOH and CH₃COONa?",
-          options: [
-            "Equal to pKa",
-            "Equal to pKb",
-            "Equal to 7",
-            "Equal to pKw"
-          ],
-          correct: 0,
-          explanation: "For a buffer with equal concentrations of weak acid and conjugate base, pH = pKa."
-        },
-        {
-          id: 50,
-          topic: 'organic',
-          question: "Which compound can exhibit optical isomerism?",
-          options: [
-            "CH₃CH₂CH₃",
-            "CH₃CHClCH₃", 
-            "CHCl₃",
-            "CH₃CH(OH)CH₂CH₃"
-          ],
-          correct: 3,
-          explanation: "CH₃CH(OH)CH₂CH₃ has a chiral carbon (attached to 4 different groups), showing optical isomerism."
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Define key terms
+• Anode: electrode where oxidation occurs
+• Cathode: electrode where reduction occurs
+• Oxidation: loss of electrons
+• Reduction: gain of electrons
+
+STEP 2: Remember memory aids
+• "AN OX" = ANode = OXidation
+• "RED CAT" = REDuction = CAThode
+• "OIL RIG" = Oxidation Involves Loss, Reduction Involves Gain
+
+STEP 3: Analyze each option
+
+A) "Electrode where reduction occurs"
+• This describes the CATHODE, not anode ✗
+
+B) "Electrode where oxidation occurs"
+• This is the definition of ANODE ✓
+
+C) "The positive electrode"
+• In galvanic cells, anode is actually NEGATIVE
+• In electrolytic cells, anode is positive ✗
+
+D) "Electrode that gains electrons"
+• Gaining electrons = reduction = CATHODE ✗
+
+STEP 4: Galvanic cell specifics
+• Anode: oxidation occurs, electrons produced
+• Cathode: reduction occurs, electrons consumed
+• Electrons flow: anode → cathode (external circuit)
+
+STEP 5: Example
+Zn|Zn²⁺||Cu²⁺|Cu cell:
+• Anode: Zn → Zn²⁺ + 2e⁻ (oxidation)
+• Cathode: Cu²⁺ + 2e⁻ → Cu (reduction)
+
+ANSWER: The electrode where oxidation occurs`
         }
       ],
       longQuestions: [
         {
           id: 101,
-          topic: 'atomic-structure',
-          question: "Explain the concept of atomic orbitals and describe how electrons are arranged in atoms according to the Aufbau principle, Hund's rule, and Pauli exclusion principle.",
-          points: 15,
-          markingScheme: [
-            "Definition of atomic orbitals (3 marks)",
-            "Aufbau principle explanation (4 marks)",
-            "Hund's rule explanation (4 marks)", 
-            "Pauli exclusion principle (4 marks)"
-          ]
-        },
-        {
-          id: 102,
-          topic: 'chemical-bonding',
-          question: "Compare and contrast ionic and covalent bonding. Include in your answer: formation mechanisms, properties of compounds formed, and examples.",
-          points: 20,
-          markingScheme: [
-            "Ionic bonding mechanism (5 marks)",
-            "Covalent bonding mechanism (5 marks)",
-            "Properties comparison (6 marks)",
-            "Relevant examples (4 marks)"
-          ]
-        },
-        {
-          id: 103,
-          topic: 'acids-bases',
-          question: "A student titrates 25.0 mL of 0.100 M NaOH with 0.150 M HCl. Calculate the pH at the equivalence point and explain why this pH value is obtained.",
+          topic: 'quantitative',
+          question: "A student reacts 10.0 g of calcium carbonate (CaCO₃) with excess hydrochloric acid according to the equation: CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂. Calculate: (a) the number of moles of CaCO₃ used, (b) the volume of CO₂ gas produced at STP. (Molar mass of CaCO₃ = 100 g/mol)",
           points: 12,
           markingScheme: [
             "Balanced equation (2 marks)",
-            "Moles calculation (3 marks)",
-            "Volume at equivalence point (3 marks)",
-            "pH calculation (3 marks)",
-            "Explanation of pH value (1 mark)"
-          ]
+            "Moles of CaCO₃ calculation (3 marks)",
+            "Mole ratio analysis (2 marks)",
+            "Volume of CO₂ at STP calculation (4 marks)",
+            "Final answer with units (1 mark)"
+          ],
+          stepByStepAnswer: `COMPREHENSIVE STEP-BY-STEP SOLUTION:
+
+PART A: MOLES OF CaCO₃ (5 marks)
+
+STEP 1: Write the balanced equation (2 marks)
+CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂
+• Check: Ca(1), C(1), O(4), H(2), Cl(2) on both sides ✓
+
+STEP 2: Identify given information
+• Mass of CaCO₃ = 10.0 g
+• Molar mass of CaCO₃ = 100 g/mol
+• Need to find: moles of CaCO₃
+
+STEP 3: Apply mole formula (3 marks)
+n = m/M
+Where: n = moles, m = mass, M = molar mass
+
+n(CaCO₃) = 10.0 g ÷ 100 g/mol = 0.10 mol
+
+PART B: VOLUME OF CO₂ AT STP (7 marks)
+
+STEP 4: Analyze mole ratio (2 marks)
+From balanced equation: CaCO₃ : CO₂ = 1 : 1
+• 1 mole CaCO₃ produces 1 mole CO₂
+• Therefore: n(CO₂) = n(CaCO₃) = 0.10 mol
+
+STEP 5: Apply molar volume at STP (4 marks)
+At STP: 1 mole of any gas = 22.4 dm³
+V = n × Vm
+Where: V = volume, n = moles, Vm = molar volume
+
+V(CO₂) = 0.10 mol × 22.4 dm³/mol = 2.24 dm³
+
+STEP 6: Final answers with units (1 mark)
+(a) Moles of CaCO₃ = 0.10 mol
+(b) Volume of CO₂ at STP = 2.24 dm³
+
+CHECKING OUR WORK:
+• Units are correct: g ÷ (g/mol) = mol ✓
+• Mole ratio respected: 1:1 ✓
+• STP conditions used correctly ✓`
         },
         {
-          id: 104,
-          topic: 'organic',
-          question: "Describe the mechanism of nucleophilic substitution reactions. Compare SN1 and SN2 mechanisms, including factors that favor each mechanism.",
-          points: 18,
-          markingScheme: [
-            "SN1 mechanism steps (5 marks)",
-            "SN2 mechanism steps (5 marks)",
-            "Factors favoring SN1 (4 marks)",
-            "Factors favoring SN2 (4 marks)"
-          ]
-        },
-        {
-          id: 105,
-          topic: 'physical',
-          question: "For the reaction: N₂(g) + 3H₂(g) ⇌ 2NH₃(g) ΔH = -92 kJ/mol. Explain how changes in temperature, pressure, and concentration affect the equilibrium position using Le Chatelier's principle.",
+          id: 102,
+          topic: 'equilibrium',
+          question: "For the equilibrium system: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g) + 196 kJ. Explain how each of the following changes will affect the equilibrium position: (a) increasing temperature, (b) increasing pressure, (c) adding a catalyst, (d) removing SO₃ from the system.",
           points: 16,
           markingScheme: [
-            "Le Chatelier's principle statement (2 marks)",
             "Effect of temperature increase (4 marks)",
             "Effect of pressure increase (4 marks)",
-            "Effect of concentration changes (4 marks)",
-            "Industrial applications (2 marks)"
-          ]
-        },
-        {
-          id: 106,
-          topic: 'electrochemistry',
-          question: "Design an electrochemical cell using copper and zinc electrodes. Calculate the standard cell potential and determine the direction of electron flow. Include half-reactions and overall cell reaction.",
-          points: 14,
-          markingScheme: [
-            "Cell diagram (3 marks)",
-            "Half-reactions (4 marks)",
-            "Overall reaction (2 marks)",
-            "Standard cell potential calculation (3 marks)",
-            "Electron flow direction (2 marks)"
-          ]
-        },
-        {
-          id: 107,
-          topic: 'industrial',
-          question: "Discuss the Haber process for ammonia production. Include reaction conditions, catalyst used, and explain why these specific conditions are chosen from both kinetic and thermodynamic perspectives.",
-          points: 20,
-          markingScheme: [
-            "Balanced chemical equation (2 marks)",
-            "Reaction conditions (temperature, pressure) (4 marks)",
-            "Catalyst and promoters (3 marks)",
-            "Kinetic considerations (5 marks)",
-            "Thermodynamic considerations (4 marks)",
-            "Industrial importance (2 marks)"
-          ]
-        },
-        {
-          id: 108,
-          topic: 'physical',
-          question: "Explain the concept of reaction mechanisms and rate-determining steps. How do catalysts affect reaction rates and mechanisms? Use a specific example to illustrate your answer.",
-          points: 17,
-          markingScheme: [
-            "Definition of reaction mechanism (3 marks)",
-            "Rate-determining step concept (4 marks)",
-            "How catalysts work (5 marks)",
-            "Specific example with mechanism (5 marks)"
-          ]
+            "Effect of adding catalyst (4 marks)",
+            "Effect of removing SO₃ (4 marks)"
+          ],
+          stepByStepAnswer: `COMPREHENSIVE EQUILIBRIUM ANALYSIS:
+
+GIVEN REACTION: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g) + 196 kJ
+
+PART A: EFFECT OF INCREASING TEMPERATURE (4 marks)
+
+STEP 1: Identify reaction type
+• Heat appears on product side (+ 196 kJ)
+• This is an EXOTHERMIC reaction (ΔH < 0)
+
+STEP 2: Apply Le Châtelier's Principle
+• Increasing temperature = adding heat to system
+• System will shift to counteract this disturbance
+• System shifts to consume excess heat
+
+STEP 3: Determine direction of shift
+• Heat acts like a "product"
+• Adding heat shifts equilibrium AWAY from products
+• Equilibrium shifts LEFT (toward reactants)
+
+STEP 4: Result
+• More SO₂ and O₂ formed
+• Less SO₃ formed
+• Equilibrium position shifts left
+
+PART B: EFFECT OF INCREASING PRESSURE (4 marks)
+
+STEP 1: Count gas molecules on each side
+Left side: 2SO₂ + 1O₂ = 3 gas molecules
+Right side: 2SO₃ = 2 gas molecules
+
+STEP 2: Apply Le Châtelier's Principle
+• Increasing pressure = system under stress
+• System shifts to reduce pressure
+• Favors side with FEWER gas molecules
+
+STEP 3: Determine direction of shift
+• Right side has fewer molecules (2 vs 3)
+• Equilibrium shifts RIGHT (toward products)
+
+STEP 4: Result
+• More SO₃ formed
+• Less SO₂ and O₂ present
+• Equilibrium position shifts right
+
+PART C: EFFECT OF ADDING CATALYST (4 marks)
+
+STEP 1: Define catalyst function
+• Catalyst lowers activation energy
+• Increases rate of both forward AND reverse reactions
+• Does NOT affect equilibrium position
+
+STEP 2: Effect on reaction rates
+• Forward reaction rate increases
+• Reverse reaction rate increases equally
+• Equilibrium reached faster
+
+STEP 3: Effect on equilibrium position
+• NO CHANGE in equilibrium position
+• Same amounts of reactants and products at equilibrium
+• Only affects TIME to reach equilibrium
+
+STEP 4: Result
+• Equilibrium position: NO CHANGE
+• Time to reach equilibrium: DECREASES
+
+PART D: EFFECT OF REMOVING SO₃ (4 marks)
+
+STEP 1: Identify the disturbance
+• SO₃ is a product
+• Removing SO₃ decreases [SO₃]
+
+STEP 2: Apply Le Châtelier's Principle
+• System shifts to counteract disturbance
+• System shifts to replace removed SO₃
+• Equilibrium shifts toward products
+
+STEP 3: Determine direction of shift
+• Equilibrium shifts RIGHT
+• More SO₂ and O₂ react to form SO₃
+
+STEP 4: Result
+• More SO₃ produced (to replace what was removed)
+• Less SO₂ and O₂ present
+• Equilibrium position shifts right
+
+SUMMARY TABLE:
+Change          | Direction | Reason
+Temperature ↑   | Left      | Exothermic reaction
+Pressure ↑      | Right     | Fewer gas molecules
+Catalyst added  | No change | Affects rate only
+SO₃ removed     | Right     | Replace removed product`
         }
       ]
     };
+
+    // Show/Hide memo function
+    function toggleMemo(questionId) {
+      const memoSection = document.getElementById(`memo-${questionId}`);
+      const memoBtn = document.getElementById(`memo-btn-${questionId}`);
+      
+      if (memoSection.classList.contains('show')) {
+        memoSection.classList.remove('show');
+        memoBtn.textContent = '📖 Show Memo & Steps';
+      } else {
+        memoSection.classList.add('show');
+        memoBtn.textContent = '📖 Hide Memo';
+      }
+    }
 
     // Load practice questions
     function loadPracticeQuestions() {
@@ -1244,7 +1282,7 @@
           // MCQ
           return `
             <div class="question-card" data-topic="${q.topic}">
-              <div class="question-number">Question ${index + 1} (MCQ)</div>
+              <div class="question-number">Question ${index + 1} (MCQ) - ${getTopicName(q.topic)}</div>
               <div class="question-text">${q.question}</div>
               <div class="options">
                 ${q.options.map((option, i) => `
@@ -1253,8 +1291,17 @@
                   </div>
                 `).join('')}
               </div>
-              <div class="explanation" id="explanation-${index}" style="display: none; margin-top: 15px; padding: 15px; background: #e6fffa; border-radius: 8px; color: #234e52;">
-                <strong>Explanation:</strong> ${q.explanation}
+              <button id="memo-btn-${q.id}" class="btn btn-memo" onclick="toggleMemo(${q.id})">
+                📖 Show Memo & Steps
+              </button>
+              <div id="memo-${q.id}" class="memo-section">
+                <div class="memo-title">
+                  🎯 Step-by-Step Solution & Explanation
+                </div>
+                <div class="memo-content">${q.explanation}</div>
+                <div class="correct-answer">
+                  ✅ Correct Answer: ${q.options[q.correct]}
+                </div>
               </div>
             </div>
           `;
@@ -1262,7 +1309,7 @@
           // Long question
           return `
             <div class="question-card" data-topic="${q.topic}">
-              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks)</div>
+              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks) - ${getTopicName(q.topic)}</div>
               <div class="question-text">${q.question}</div>
               <div style="margin-top: 15px;">
                 <strong>Marking Scheme:</strong>
@@ -1270,12 +1317,40 @@
                   ${q.markingScheme.map(point => `<li>${point}</li>`).join('')}
                 </ul>
               </div>
+              <button id="memo-btn-${q.id}" class="btn btn-memo" onclick="toggleMemo(${q.id})">
+                📖 Show Complete Answer & Steps
+              </button>
+              <div id="memo-${q.id}" class="memo-section">
+                <div class="memo-title">
+                  🎯 Complete Step-by-Step Answer (${q.points} marks)
+                </div>
+                <div class="step-by-step">
+                  <div class="memo-content">${q.stepByStepAnswer}</div>
+                </div>
+              </div>
             </div>
           `;
         }
       }).join('');
       
       document.getElementById('practice-score').style.display = 'none';
+    }
+
+    // Get topic display name
+    function getTopicName(topic) {
+      const topicNames = {
+        'representing-change': 'Representing Chemical Change',
+        'quantitative': 'Quantitative Aspects',
+        'imf': 'Intermolecular Forces',
+        'organic-chemistry': 'Organic Chemistry',
+        'organic-reactions': 'Organic Reactions',
+        'energy-heats': 'Energy & Heats',
+        'reaction-rates': 'Reaction Rates',
+        'equilibrium': 'Chemical Equilibrium',
+        'acids-bases': 'Acids & Bases',
+        'electrochemistry': 'Electrochemistry'
+      };
+      return topicNames[topic] || topic;
     }
 
     // Load MCQ questions
@@ -1296,7 +1371,7 @@
       
       container.innerHTML = currentQuestions.map((q, index) => `
         <div class="question-card" data-topic="${q.topic}">
-          <div class="question-number">Question ${index + 1}</div>
+          <div class="question-number">Question ${index + 1} - ${getTopicName(q.topic)}</div>
           <div class="question-text">${q.question}</div>
           <div class="options">
             ${q.options.map((option, i) => `
@@ -1305,8 +1380,17 @@
               </div>
             `).join('')}
           </div>
-          <div class="explanation" id="mcq-explanation-${index}" style="display: none; margin-top: 15px; padding: 15px; background: #e6fffa; border-radius: 8px; color: #234e52;">
-            <strong>Explanation:</strong> ${q.explanation}
+          <button id="memo-btn-${q.id}" class="btn btn-memo" onclick="toggleMemo(${q.id})">
+            📖 Show Memo & Steps
+          </button>
+          <div id="memo-${q.id}" class="memo-section">
+            <div class="memo-title">
+              🎯 Step-by-Step Solution & Explanation
+            </div>
+            <div class="memo-content">${q.explanation}</div>
+            <div class="correct-answer">
+              ✅ Correct Answer: ${q.options[q.correct]}
+            </div>
           </div>
         </div>
       `).join('');
@@ -1332,7 +1416,7 @@
         }
       });
       
-      // Show explanation after selection
+      // Show result after selection
       setTimeout(() => {
         options.forEach((opt, i) => {
           if (i === question.correct) {
@@ -1342,7 +1426,6 @@
           }
         });
         
-        document.getElementById(`explanation-${questionIndex}`).style.display = 'block';
         updatePracticeScore();
       }, 500);
     }
@@ -1363,7 +1446,7 @@
         }
       });
       
-      // Show explanation after selection
+      // Show result after selection
       setTimeout(() => {
         options.forEach((opt, i) => {
           if (i === question.correct) {
@@ -1373,7 +1456,6 @@
           }
         });
         
-        document.getElementById(`mcq-explanation-${questionIndex}`).style.display = 'block';
         updateMCQScore();
       }, 500);
     }
@@ -1389,7 +1471,7 @@
       
       if (answered > 0) {
         const scoreElement = document.getElementById('practice-score');
-        scoreElement.innerHTML = `Score: ${correct}/${answered} MCQs answered correctly (${Math.round(correct/answered*100)}%)`;
+        scoreElement.innerHTML = `🎯 Score: ${correct}/${answered} MCQs answered correctly (${Math.round(correct/answered*100)}%) - Keep practicing, Mpumi!`;
         scoreElement.style.display = 'block';
       }
     }
@@ -1403,7 +1485,7 @@
       
       if (answered > 0) {
         const scoreElement = document.getElementById('mcq-score');
-        scoreElement.innerHTML = `Score: ${correct}/${answered} correct (${Math.round(correct/answered*100)}%)`;
+        scoreElement.innerHTML = `🎯 Score: ${correct}/${answered} correct (${Math.round(correct/answered*100)}%) - Great work, Mpumi!`;
         scoreElement.style.display = 'block';
       }
     }
@@ -1466,16 +1548,12 @@
 
     // Mock exam functions
     function startMockExam() {
-      // Select random questions for exam
-      const examMCQ = questionBank.mcq.sort(() => 0.5 - Math.random()).slice(0, 20);
-      const examLong = questionBank.longQuestions.sort(() => 0.5 - Math.random()).slice(0, 4);
+      // Select random questions for exam (representing real exam proportions)
+      const examMCQ = questionBank.mcq.sort(() => 0.5 - Math.random()).slice(0, 12);
+      const examLong = questionBank.longQuestions.sort(() => 0.5 - Math.random()).slice(0, 3);
       
       currentQuestions = [...examMCQ, ...examLong];
       currentAnswers = {};
-      isExamMode = true;
-      
-      // Show exam back button and hide regular back button
-      document.getElementById('exam-back-button').style.display = 'block';
       
       // Start timer (180 minutes)
       startTimer(180 * 60);
@@ -1486,7 +1564,7 @@
         if (q.options) {
           return `
             <div class="question-card">
-              <div class="question-number">Question ${index + 1} (MCQ - 2 marks)</div>
+              <div class="question-number">Question ${index + 1} (MCQ - 2 marks) - ${getTopicName(q.topic)}</div>
               <div class="question-text">${q.question}</div>
               <div class="options">
                 ${q.options.map((option, i) => `
@@ -1500,9 +1578,9 @@
         } else {
           return `
             <div class="question-card">
-              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks)</div>
+              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks) - ${getTopicName(q.topic)}</div>
               <div class="question-text">${q.question}</div>
-              <textarea placeholder="Write your answer here..." style="width: 100%; min-height: 150px; margin-top: 15px; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit;"></textarea>
+              <textarea placeholder="Write your detailed answer here following the marking scheme..." style="width: 100%; min-height: 200px; margin-top: 15px; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 14px;"></textarea>
             </div>
           `;
         }
@@ -1511,7 +1589,7 @@
       // Add submit button
       container.innerHTML += `
         <div style="text-align: center; margin-top: 30px;">
-          <button class="btn btn-primary" onclick="submitExam()">Submit Exam</button>
+          <button class="btn btn-primary" onclick="submitExam()">📝 Submit Exam</button>
         </div>
       `;
       
@@ -1534,9 +1612,6 @@
         examTimer = null;
       }
       
-      isExamMode = false;
-      document.getElementById('exam-back-button').style.display = 'none';
-      
       // Calculate score for MCQ questions only
       const mcqQuestions = currentQuestions.filter(q => q.options);
       const mcqAnswered = Object.entries(currentAnswers).filter(([index]) => {
@@ -1552,10 +1627,11 @@
       const longQuestionMarks = currentQuestions.filter(q => !q.options).reduce((sum, q) => sum + q.points, 0);
       
       document.getElementById('exam-score').innerHTML = `
-        <h3>Exam Completed!</h3>
-        <p>MCQ Score: ${mcqScore}/${totalMCQ * 2} marks (${correct}/${totalMCQ} correct)</p>
-        <p>Long Questions: ${longQuestionMarks} marks (to be marked manually)</p>
-        <p>Total Possible: ${totalMCQ * 2 + longQuestionMarks} marks</p>
+        <h3>🎉 Mock Exam Completed, Mpumi!</h3>
+        <p><strong>MCQ Score:</strong> ${mcqScore}/${totalMCQ * 2} marks (${correct}/${totalMCQ} correct)</p>
+        <p><strong>Long Questions:</strong> ${longQuestionMarks} marks (to be marked manually)</p>
+        <p><strong>Total Possible:</strong> ${totalMCQ * 2 + longQuestionMarks} marks</p>
+        <p style="margin-top: 15px; color: #2d3748;">Excellent effort! Review the official exam guidelines and keep practicing. You're well-prepared! 💪</p>
       `;
       document.getElementById('exam-score').style.display = 'block';
       document.getElementById('timer').style.display = 'none';
@@ -1570,15 +1646,17 @@
       timerElement.style.display = 'block';
       
       examTimer = setInterval(() => {
-        const minutes = Math.floor(timeLeft / 60);
+        const hours = Math.floor(timeLeft / 3600);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
         const secs = timeLeft % 60;
-        timeDisplay.textContent = `${minutes}:${secs.toString().padStart(2, '0')}`;
+        
+        timeDisplay.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         
         if (timeLeft <= 0) {
           clearInterval(examTimer);
           examTimer = null;
           submitExam();
-          alert('Time\'s up! Exam submitted automatically.');
+          alert('⏰ Time\'s up! Your exam has been automatically submitted. Great job, Mpumi!');
         }
         
         timeLeft--;
