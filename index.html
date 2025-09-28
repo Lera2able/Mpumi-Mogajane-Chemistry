@@ -1,1535 +1,2175 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
-  <title>Chemistry Practice Hub</title>
-  <meta name="description" content="Grade 12 Chemistry Practice Questions" />
-  <meta name="author" content="MGX" />
-
-  <meta property="og:title" content="Chemistry Practice Hub" />
-  <meta property="og:description" content="Grade 12 Chemistry Practice Questions" />
-  <meta property="og:type" content="website" />
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .page {
-      display: none;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      padding: 30px;
-      margin: 20px 0;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .header h1 {
-      color: #4a5568;
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .header p {
-      color: #718096;
-      font-size: 1.1em;
-    }
-
-    .nav-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    .btn-secondary {
-      background: #e2e8f0;
-      color: #4a5568;
-    }
-
-    .btn-secondary:hover {
-      background: #cbd5e0;
-    }
-
-    .btn-back {
-      background: #f7fafc;
-      color: #4a5568;
-      border: 2px solid #e2e8f0;
-      margin-bottom: 20px;
-    }
-
-    .btn-back:hover {
-      background: #edf2f7;
-      border-color: #cbd5e0;
-    }
-
-    .question-card {
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 20px;
-      border-left: 4px solid #667eea;
-    }
-
-    .question-number {
-      font-weight: 700;
-      color: #667eea;
-      margin-bottom: 10px;
-    }
-
-    .question-text {
-      font-size: 1.1em;
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-
-    .options {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    .option {
-      padding: 12px;
-      background: white;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .option:hover {
-      border-color: #667eea;
-      background: #f0f4ff;
-    }
-
-    .option.selected {
-      border-color: #667eea;
-      background: #667eea;
-      color: white;
-    }
-
-    .option.correct {
-      border-color: #48bb78;
-      background: #48bb78;
-      color: white;
-    }
-
-    .option.incorrect {
-      border-color: #f56565;
-      background: #f56565;
-      color: white;
-    }
-
-    .timer {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.95);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      font-weight: 600;
-      color: #4a5568;
-    }
-
-    .score {
-      text-align: center;
-      font-size: 1.2em;
-      margin: 20px 0;
-      padding: 15px;
-      background: #e6fffa;
-      border-radius: 10px;
-      color: #234e52;
-    }
-
-    .filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    .filter-btn {
-      padding: 8px 16px;
-      background: #f7fafc;
-      border: 2px solid #e2e8f0;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: all 0.3s ease;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-      background: #667eea;
-      color: white;
-      border-color: #667eea;
-    }
-
-    .guidelines {
-      background: #f0f4ff;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 30px;
-    }
-
-    .guidelines h3 {
-      color: #667eea;
-      margin-bottom: 15px;
-    }
-
-    .guidelines ul {
-      list-style-position: inside;
-      color: #4a5568;
-    }
-
-    .guidelines li {
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 10px;
-      }
-
-      .page {
-        padding: 20px;
-      }
-
-      .header h1 {
-        font-size: 2em;
-      }
-
-      .nav-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .btn {
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .timer {
-        position: static;
-        margin-bottom: 20px;
-        text-align: center;
-      }
-    }
-
-    .hidden {
-      display: none !important;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Mastery - Grade 12 Matric Exam Preparation</title>
+    <meta name="description" content="Comprehensive Grade 12 Chemistry practice website for Matric exam preparation. CAPS curriculum aligned with practice questions, mock exams, and detailed solutions.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        .gradient-text {
+            background: linear-gradient(to right, #2563eb, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .animate-in {
+            animation: slideInFromBottom 0.7s ease-out;
+        }
+        
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(32px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .show {
+            display: block !important;
+        }
+        
+        .timer-text {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(to right, #2563eb, #4f46e5);
+            color: white;
+        }
+        
+        .section-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .section-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
+    
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg">
+                        <i data-lucide="atom" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold gradient-text">Chemistry Mastery</h1>
+                        <p class="text-sm text-gray-600">Grade 12 Matric Exam Preparation</p>
+                    </div>
+                </div>
+                
+                <!-- Main Navigation -->
+                <nav class="hidden md:flex space-x-2">
+                    <button onclick="showPage('home')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="home" class="w-4 h-4 mr-1 inline"></i>Home
+                    </button>
+                    <button onclick="showPage('guidelines')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="book-open" class="w-4 h-4 mr-1 inline"></i>Guidelines
+                    </button>
+                    <button onclick="showPage('practice')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="pen-tool" class="w-4 h-4 mr-1 inline"></i>Practice
+                    </button>
+                    <button onclick="showPage('mcq-only')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="check-square" class="w-4 h-4 mr-1 inline"></i>MCQ Only
+                    </button>
+                    <button onclick="showPage('mock-exam')" class="nav-btn px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="clock" class="w-4 h-4 mr-1 inline"></i>Mock Exam
+                    </button>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
+                <div class="flex flex-col space-y-2 mt-4">
+                    <button onclick="showPage('home')" class="nav-btn text-left px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="home" class="w-4 h-4 mr-2 inline"></i>Home
+                    </button>
+                    <button onclick="showPage('guidelines')" class="nav-btn text-left px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="book-open" class="w-4 h-4 mr-2 inline"></i>Guidelines
+                    </button>
+                    <button onclick="showPage('practice')" class="nav-btn text-left px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="pen-tool" class="w-4 h-4 mr-2 inline"></i>Practice
+                    </button>
+                    <button onclick="showPage('mcq-only')" class="nav-btn text-left px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="check-square" class="w-4 h-4 mr-2 inline"></i>MCQ Only
+                    </button>
+                    <button onclick="showPage('mock-exam')" class="nav-btn text-left px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="clock" class="w-4 h-4 mr-2 inline"></i>Mock Exam
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<body>
-  <div class="container">
-    <!-- Main Menu Page -->
-    <div id="main-page" class="page active">
-      <div class="header">
-        <h1>🧪 Chemistry Practice Hub</h1>
-        <p>Master Grade 12 Chemistry with comprehensive practice questions</p>
-      </div>
-
-      <div class="guidelines">
-        <h3>📋 Study Guidelines</h3>
-        <ul>
-          <li>Practice regularly with different question types</li>
-          <li>Focus on understanding concepts, not just memorizing</li>
-          <li>Review incorrect answers to identify knowledge gaps</li>
-          <li>Use the timer to simulate exam conditions</li>
-          <li>Cover all topics: Atomic Structure, Chemical Bonding, Acids & Bases, etc.</li>
-        </ul>
-      </div>
-
-      <div class="nav-buttons">
-        <button class="btn btn-primary" onclick="showPage('practice-page')">📚 Practice Questions</button>
-        <button class="btn btn-primary" onclick="showPage('mcq-page')">✅ MCQ Only</button>
-        <button class="btn btn-primary" onclick="showPage('mock-exam-page')">⏰ Mock Exam</button>
-      </div>
+    <!-- Section Navigation (appears on non-home pages) -->
+    <div id="section-nav" class="hidden bg-gradient-to-r from-blue-600 to-indigo-600 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap gap-2 justify-center">
+                <button onclick="filterByTopic('all')" class="section-btn bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    All Topics
+                </button>
+                <button onclick="filterByTopic('Atomic Structure')" class="section-btn bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Atomic Structure
+                </button>
+                <button onclick="filterByTopic('Chemical Bonding')" class="section-btn bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Chemical Bonding
+                </button>
+                <button onclick="filterByTopic('Acids and Bases')" class="section-btn bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Acids & Bases
+                </button>
+                <button onclick="filterByTopic('Organic Chemistry')" class="section-btn bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Organic Chemistry
+                </button>
+                <button onclick="filterByTopic('Redox Reactions')" class="section-btn bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Redox Reactions
+                </button>
+                <button onclick="filterByTopic('Gas Laws')" class="section-btn bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Gas Laws
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- Practice Questions Page -->
-    <div id="practice-page" class="page">
-      <button class="btn btn-back" onclick="showPage('main-page')">← Back to Main</button>
-      
-      <div class="header">
-        <h1>📚 Practice Questions</h1>
-        <p>Mixed question types with detailed explanations</p>
-      </div>
+    <!-- Home Page -->
+    <div id="home-page" class="page">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-indigo-100 px-4 py-2 rounded-full mb-6">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-blue-600"></i>
+                    <span class="text-blue-800 font-medium">CAPS Curriculum Aligned</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Master Chemistry with
+                    <span class="block gradient-text">Confidence & Excellence</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Comprehensive practice questions, detailed solutions, and timed mock exams 
+                    designed specifically for the South African Grade 12 Chemistry curriculum.
+                </p>
+                <div class="mt-8 text-right">
+                    <p class="text-lg font-semibold text-gray-800">Welcome, Mpumi! 🎓</p>
+                    <p class="text-sm text-gray-600">Ready to ace your chemistry exam?</p>
+                </div>
+            </div>
 
-      <div class="filter-buttons">
-        <button class="filter-btn active" onclick="filterQuestions('all')">All Topics</button>
-        <button class="filter-btn" onclick="filterQuestions('atomic-structure')">Atomic Structure</button>
-        <button class="filter-btn" onclick="filterQuestions('chemical-bonding')">Chemical Bonding</button>
-        <button class="filter-btn" onclick="filterQuestions('acids-bases')">Acids & Bases</button>
-        <button class="filter-btn" onclick="filterQuestions('organic')">Organic Chemistry</button>
-        <button class="filter-btn" onclick="filterQuestions('physical')">Physical Chemistry</button>
-        <button class="filter-btn" onclick="filterQuestions('electrochemistry')">Electrochemistry</button>
-        <button class="filter-btn" onclick="filterQuestions('industrial')">Industrial Chemistry</button>
-      </div>
+            <!-- Feature Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="card-hover bg-white rounded-xl shadow-lg border-0 bg-gradient-to-br from-white to-blue-50">
+                    <div class="p-6 text-center">
+                        <div class="mx-auto w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="book-open" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-3">Study Guidelines</h3>
+                        <p class="text-gray-600 mb-4 text-sm">CAPS curriculum overview and study strategies</p>
+                        <button onclick="showPage('guidelines')" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2 rounded-lg transition-all text-sm">
+                            Explore Guidelines
+                        </button>
+                    </div>
+                </div>
 
-      <div id="practice-questions"></div>
-      <div class="score" id="practice-score" style="display: none;"></div>
+                <div class="card-hover bg-white rounded-xl shadow-lg border-0 bg-gradient-to-br from-white to-green-50">
+                    <div class="p-6 text-center">
+                        <div class="mx-auto w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="pen-tool" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-3">Practice Questions</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Mixed MCQ and long questions with explanations</p>
+                        <button onclick="showPage('practice')" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-2 rounded-lg transition-all text-sm">
+                            Start Practice
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl shadow-lg border-0 bg-gradient-to-br from-white to-yellow-50">
+                    <div class="p-6 text-center">
+                        <div class="mx-auto w-14 h-14 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="check-square" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-3">MCQ Only</h3>
+                        <p class="text-gray-600 mb-4 text-sm">50+ multiple choice questions for quick practice</p>
+                        <button onclick="showPage('mcq-only')" class="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white font-semibold py-2 rounded-lg transition-all text-sm">
+                            Practice MCQ
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl shadow-lg border-0 bg-gradient-to-br from-white to-purple-50">
+                    <div class="p-6 text-center">
+                        <div class="mx-auto w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="clock" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-3">Mock Exam</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Timed exams simulating real Matric conditions</p>
+                        <button onclick="showPage('mock-exam')" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-2 rounded-lg transition-all text-sm">
+                            Take Mock Exam
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-2">Your Success Toolkit</h3>
+                    <p class="text-gray-300">Everything you need to excel in your chemistry exam</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="space-y-2">
+                        <div class="text-3xl font-bold text-blue-400">60+</div>
+                        <div class="text-sm text-gray-300">Practice Questions</div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-3xl font-bold text-green-400">8</div>
+                        <div class="text-sm text-gray-300">Key Topics Covered</div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-3xl font-bold text-purple-400">180min</div>
+                        <div class="text-sm text-gray-300">Mock Exam Duration</div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-3xl font-bold text-yellow-400">100%</div>
+                        <div class="text-sm text-gray-300">CAPS Aligned</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Guidelines Page -->
+    <div id="guidelines-page" class="page hidden">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Your Path to <span class="gradient-text">Chemistry Excellence</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Master the CAPS curriculum with our comprehensive study guidelines designed specifically for Grade 12 Chemistry success.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- CAPS Overview -->
+                <div class="bg-white rounded-xl shadow-lg border-0">
+                    <div class="bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-100 p-6 rounded-t-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg">
+                                <i data-lucide="book-open" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">CAPS Chemistry Curriculum Overview</h3>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            The Grade 12 Chemistry curriculum follows the Curriculum and Assessment Policy Statement (CAPS) framework, covering essential topics that build on Grade 10 and 11 knowledge.
+                        </p>
+                        <div class="space-y-3">
+                            <h4 class="font-semibold text-gray-800 text-lg mb-4 flex items-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-2"></i>
+                                Key Points & Tips:
+                            </h4>
+                            <div class="grid gap-3">
+                                <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">1</div>
+                                    <p class="text-gray-700 leading-relaxed">Focus on understanding concepts rather than memorizing</p>
+                                </div>
+                                <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">2</div>
+                                    <p class="text-gray-700 leading-relaxed">Practice calculations regularly - they make up 40% of the exam</p>
+                                </div>
+                                <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">3</div>
+                                    <p class="text-gray-700 leading-relaxed">Master chemical equations and balancing - essential for redox and organic chemistry</p>
+                                </div>
+                                <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">4</div>
+                                    <p class="text-gray-700 leading-relaxed">Understand periodic table trends - atomic radius, ionization energy, electronegativity</p>
+                                </div>
+                                <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">5</div>
+                                    <p class="text-gray-700 leading-relaxed">Practice drawing Lewis structures and predicting molecular geometry using VSEPR theory</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exam Structure -->
+                <div class="bg-white rounded-xl shadow-lg border-0">
+                    <div class="bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-100 p-6 rounded-t-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg">
+                                <i data-lucide="target" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Matric Chemistry Exam Structure</h3>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            The Grade 12 Chemistry exam consists of two papers: Paper 1 (theoretical) and Paper 2 (practical and theory). Each paper is 3 hours long and worth 150 marks.
+                        </p>
+                        <div class="grid gap-3">
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">1</div>
+                                <p class="text-gray-700 leading-relaxed"><strong>Paper 1:</strong> Atomic structure, chemical bonding, molecular structure, intermolecular forces, gas laws, solutions and solubility</p>
+                            </div>
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">2</div>
+                                <p class="text-gray-700 leading-relaxed"><strong>Paper 2:</strong> Organic chemistry, acids and bases, redox reactions, chemical equilibrium, reaction rates, and practical investigations</p>
+                            </div>
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">3</div>
+                                <p class="text-gray-700 leading-relaxed">Both papers include multiple choice questions (20-30 marks) and structured questions</p>
+                            </div>
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">4</div>
+                                <p class="text-gray-700 leading-relaxed">Time management is crucial - allocate 1.2 minutes per mark (e.g., 6 minutes for a 5-mark question)</p>
+                            </div>
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">5</div>
+                                <p class="text-gray-700 leading-relaxed">Show all working for calculations - partial marks are awarded for correct method even if final answer is wrong</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Topics -->
+                <div class="bg-white rounded-xl shadow-lg border-0">
+                    <div class="bg-gradient-to-r from-gray-50 to-green-50 border-b border-gray-100 p-6 rounded-t-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg">
+                                <i data-lucide="check-circle" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">High-Priority Topics for Exam Success</h3>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-3">Paper 1 Focus Areas:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>• Electron configuration and periodic trends</li>
+                                    <li>• Lewis structures and molecular geometry</li>
+                                    <li>• Intermolecular forces and boiling points</li>
+                                    <li>• Gas law calculations (PV=nRT)</li>
+                                    <li>• Molarity and solution concentration</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-3">Paper 2 Focus Areas:</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>• Organic functional groups and reactions</li>
+                                    <li>• pH calculations and titration curves</li>
+                                    <li>• Balancing redox equations</li>
+                                    <li>• Le Chatelier's principle applications</li>
+                                    <li>• Reaction rate factors and mechanisms</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Practice Page -->
+    <div id="practice-page" class="page hidden">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Practice Questions</h2>
+                <p class="text-gray-600">Test your knowledge with our comprehensive question bank (MCQ + Long Questions)</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <div class="flex flex-wrap gap-4 items-center justify-between">
+                    <div class="flex gap-4">
+                        <button onclick="shuffleQuestions('practice')" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i data-lucide="shuffle" class="w-4 h-4"></i>
+                            <span>Shuffle Questions</span>
+                        </button>
+                        <button onclick="resetPractice()" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                    <div class="flex gap-4">
+                        <button id="submit-practice-btn" onclick="submitPractice()" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            <span>Submit Answers</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Score Display -->
+            <div id="practice-score" class="hidden bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-xl p-6 mb-8">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-4">Practice Complete!</h3>
+                    <div id="score-display" class="text-4xl font-bold text-green-400 mb-2"></div>
+                    <p class="text-gray-300">Review the explanations below to improve your understanding</p>
+                </div>
+            </div>
+
+            <!-- Questions Container -->
+            <div id="practice-questions-container"></div>
+        </main>
     </div>
 
     <!-- MCQ Only Page -->
-    <div id="mcq-page" class="page">
-      <button class="btn btn-back" onclick="showPage('main-page')">← Back to Main</button>
-      
-      <div class="header">
-        <h1>✅ Multiple Choice Questions</h1>
-        <p>Quick MCQ practice with instant feedback</p>
-      </div>
+    <div id="mcq-only-page" class="page hidden">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Multiple Choice Questions</h2>
+                <p class="text-gray-600">Practice with 50+ multiple choice questions - perfect for quick revision</p>
+            </div>
 
-      <div class="filter-buttons">
-        <button class="filter-btn active" onclick="filterMCQ('all')">All Topics</button>
-        <button class="filter-btn" onclick="filterMCQ('atomic-structure')">Atomic Structure</button>
-        <button class="filter-btn" onclick="filterMCQ('chemical-bonding')">Chemical Bonding</button>
-        <button class="filter-btn" onclick="filterMCQ('acids-bases')">Acids & Bases</button>
-        <button class="filter-btn" onclick="filterMCQ('organic')">Organic Chemistry</button>
-        <button class="filter-btn" onclick="filterMCQ('physical')">Physical Chemistry</button>
-        <button class="filter-btn" onclick="filterMCQ('electrochemistry')">Electrochemistry</button>
-        <button class="filter-btn" onclick="filterMCQ('industrial')">Industrial Chemistry</button>
-      </div>
+            <!-- MCQ Controls -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <div class="flex flex-wrap gap-4 items-center justify-between">
+                    <div class="flex gap-4">
+                        <button onclick="shuffleQuestions('mcq')" class="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i data-lucide="shuffle" class="w-4 h-4"></i>
+                            <span>Shuffle MCQs</span>
+                        </button>
+                        <button onclick="loadMoreMCQs()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Load More</span>
+                        </button>
+                        <button onclick="resetMCQ()" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                    <div class="flex gap-4">
+                        <button id="submit-mcq-btn" onclick="submitMCQ()" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            <span>Submit MCQs</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-      <div style="text-align: center; margin-bottom: 20px;">
-        <button class="btn btn-secondary" onclick="shuffleMCQ()">🔀 Shuffle Questions</button>
-        <button class="btn btn-secondary" onclick="loadMoreMCQ()">➕ Load More (5)</button>
-      </div>
+            <!-- MCQ Score Display -->
+            <div id="mcq-score" class="hidden bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-xl p-6 mb-8">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-4">MCQ Practice Complete!</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+                        <div class="bg-white/10 rounded-lg p-4">
+                            <div id="mcq-score-display" class="text-3xl font-bold text-green-400 mb-1"></div>
+                            <div class="text-sm text-gray-300">Correct Answers</div>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-4">
+                            <div id="mcq-percentage-display" class="text-3xl font-bold text-blue-400 mb-1"></div>
+                            <div class="text-sm text-gray-300">Accuracy</div>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-4">
+                            <div id="mcq-total-display" class="text-3xl font-bold text-purple-400 mb-1"></div>
+                            <div class="text-sm text-gray-300">Total Questions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <div id="mcq-questions"></div>
-      <div class="score" id="mcq-score" style="display: none;"></div>
+            <!-- MCQ Questions Container -->
+            <div id="mcq-questions-container"></div>
+        </main>
     </div>
 
     <!-- Mock Exam Page -->
-    <div id="mock-exam-page" class="page">
-      <button class="btn btn-back" onclick="showPage('main-page')">← Back to Main</button>
-      
-      <div class="header">
-        <h1>⏰ Mock Examination</h1>
-        <p>Timed practice exam (180 minutes)</p>
-      </div>
+    <div id="mock-exam-page" class="page hidden">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Exam Setup -->
+            <div id="exam-setup" class="text-center">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                    Ready for Your <span class="gradient-text">Chemistry Mock Exam?</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+                    This mock exam simulates real Matric conditions with a 3-hour timer and carefully selected questions covering all key topics.
+                </p>
+                
+                <!-- Exam Info -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8 max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-4 flex items-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-purple-600 mr-2"></i>
+                                Exam Structure
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 text-left">
+                                <li>• <strong>Duration:</strong> 3 hours (180 minutes)</li>
+                                <li>• <strong>Questions:</strong> 15 total questions</li>
+                                <li>• <strong>MCQ:</strong> 10 multiple choice</li>
+                                <li>• <strong>Long Questions:</strong> 5 detailed answers</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-4 flex items-center">
+                                <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-600 mr-2"></i>
+                                Exam Rules
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 text-left">
+                                <li>• Timer starts when you begin the exam</li>
+                                <li>• You can pause and resume the timer</li>
+                                <li>• Exam auto-submits when time expires</li>
+                                <li>• Review all questions before submitting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-      <div style="text-align: center; margin-bottom: 30px;">
-        <button class="btn btn-primary" onclick="startMockExam()">🚀 Start Mock Exam</button>
-      </div>
+                <button onclick="startMockExam()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-12 py-4 text-lg rounded-lg">
+                    <i data-lucide="play" class="w-5 h-5 mr-2 inline"></i>
+                    Start Mock Exam
+                </button>
+                <p class="text-sm text-gray-600 mt-4">Good luck, Mpumi! Remember to manage your time wisely. 🍀</p>
+            </div>
 
-      <div id="exam-questions"></div>
-      <div class="score" id="exam-score" style="display: none;"></div>
+            <!-- Exam Interface -->
+            <div id="exam-interface" class="hidden">
+                <!-- Timer -->
+                <div class="bg-white rounded-xl shadow-lg p-4 mb-6 sticky top-24 z-40">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div id="timer-display" class="text-3xl font-mono font-bold text-green-600 timer-text">3:00:00</div>
+                            <div class="text-sm text-gray-600">Time remaining</div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button id="timer-toggle" onclick="toggleTimer()" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-3 py-1 rounded flex items-center space-x-1">
+                                <i data-lucide="pause" class="w-4 h-4"></i>
+                                <span>Pause</span>
+                            </button>
+                            <button onclick="resetTimer()" class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-3 py-1 rounded flex items-center space-x-1">
+                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3 w-full bg-gray-200 rounded-full h-2">
+                        <div id="timer-progress" class="h-2 rounded-full bg-green-500 transition-all duration-1000" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-gray-600">Make sure to answer all questions before submitting your exam.</div>
+                        <button id="submit-exam-btn" onclick="submitExam()" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-4 py-2 rounded-lg">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 inline"></i>
+                            Submit Exam
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Exam Questions Container -->
+                <div id="exam-questions-container"></div>
+
+                <!-- Exam Results -->
+                <div id="exam-results" class="hidden bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-xl p-8 mt-8">
+                    <div class="text-center">
+                        <h3 class="text-3xl font-bold mb-8">Exam Complete!</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+                            <div class="bg-white/10 rounded-lg p-6">
+                                <div id="exam-score" class="text-2xl font-bold text-blue-400 mb-2">0/0</div>
+                                <div class="text-sm text-gray-300">MCQ Questions Correct</div>
+                            </div>
+                            <div class="bg-white/10 rounded-lg p-6">
+                                <div id="exam-percentage" class="text-2xl font-bold text-green-400 mb-2">0%</div>
+                                <div class="text-sm text-gray-300">MCQ Accuracy</div>
+                            </div>
+                            <div class="bg-white/10 rounded-lg p-6">
+                                <div class="text-2xl font-bold text-purple-400 mb-2">5</div>
+                                <div class="text-sm text-gray-300">Long Questions to Review</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="resetMockExam()" class="border border-white text-white hover:bg-white hover:text-gray-800 px-6 py-2 rounded-lg transition-colors">
+                                Take Another Mock Exam
+                            </button>
+                            <button onclick="showPage('practice')" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-2 rounded-lg">
+                                Practice More Questions
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Timer Display -->
-    <div id="timer" class="timer" style="display: none;">
-      Time: <span id="time-display">180:00</span>
-    </div>
-  </div>
-
-  <script>
-    // Global variables
-    let currentQuestions = [];
-    let currentAnswers = {};
-    let examTimer = null;
-    let currentFilter = 'all';
-    let mcqDisplayCount = 5;
-
-    // Navigation function
-    function showPage(pageId) {
-      // Hide all pages
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
-      
-      // Show selected page
-      document.getElementById(pageId).classList.add('active');
-      
-      // Reset any running timers when going back to main
-      if (pageId === 'main-page' && examTimer) {
-        clearInterval(examTimer);
-        examTimer = null;
-        document.getElementById('timer').style.display = 'none';
-      }
-      
-      // Load content based on page
-      if (pageId === 'practice-page') {
-        loadPracticeQuestions();
-      } else if (pageId === 'mcq-page') {
-        loadMCQQuestions();
-      }
-    }
-
-    // Question data
-    const questionBank = {
-      mcq: [
-        {
-          id: 1,
-          topic: 'atomic-structure',
-          question: "Which of the following represents the electron configuration of a chlorine atom (Cl, atomic number 17)?",
-          options: [
-            "1s² 2s² 2p⁶ 3s² 3p⁵",
-            "1s² 2s² 2p⁶ 3s² 3p³",
-            "1s² 2s² 2p⁶ 3s¹ 3p⁶",
-            "1s² 2s² 2p⁵ 3s² 3p⁶"
-          ],
-          correct: 0,
-          explanation: "Chlorine has 17 electrons. Following the aufbau principle: 1s² 2s² 2p⁶ 3s² 3p⁵"
-        },
-        {
-          id: 2,
-          topic: 'chemical-bonding',
-          question: "What type of bond is formed between sodium and chlorine in NaCl?",
-          options: [
-            "Covalent bond",
-            "Ionic bond", 
-            "Metallic bond",
-            "Hydrogen bond"
-          ],
-          correct: 1,
-          explanation: "Sodium loses an electron to chlorine, forming Na⁺ and Cl⁻ ions held together by electrostatic attraction (ionic bond)."
-        },
-        {
-          id: 3,
-          topic: 'acids-bases',
-          question: "What is the pH of a 0.01 M HCl solution?",
-          options: [
-            "1",
-            "2",
-            "12", 
-            "14"
-          ],
-          correct: 1,
-          explanation: "HCl is a strong acid that completely dissociates. [H⁺] = 0.01 M = 10⁻² M, so pH = -log(10⁻²) = 2"
-        },
-        {
-          id: 4,
-          topic: 'organic',
-          question: "Which functional group is present in alcohols?",
-          options: [
-            "-COOH",
-            "-OH",
-            "-CHO",
-            "-NH₂"
-          ],
-          correct: 1,
-          explanation: "Alcohols contain the hydroxyl functional group (-OH) attached to a carbon atom."
-        },
-        {
-          id: 5,
-          topic: 'physical',
-          question: "According to Le Chatelier's principle, increasing pressure will favor the formation of:",
-          options: [
-            "Products with more gas molecules",
-            "Products with fewer gas molecules",
-            "Only endothermic reactions",
-            "Only exothermic reactions"
-          ],
-          correct: 1,
-          explanation: "Increasing pressure favors the side with fewer gas molecules to reduce the pressure stress on the system."
-        },
-        {
-          id: 6,
-          topic: 'electrochemistry',
-          question: "In an electrochemical cell, reduction occurs at the:",
-          options: [
-            "Anode",
-            "Cathode",
-            "Salt bridge",
-            "External circuit"
-          ],
-          correct: 1,
-          explanation: "Reduction (gain of electrons) always occurs at the cathode in electrochemical cells."
-        },
-        {
-          id: 7,
-          topic: 'atomic-structure',
-          question: "How many neutrons are in an atom of carbon-14?",
-          options: [
-            "6",
-            "8",
-            "12",
-            "14"
-          ],
-          correct: 1,
-          explanation: "Carbon-14 has mass number 14 and atomic number 6. Neutrons = 14 - 6 = 8"
-        },
-        {
-          id: 8,
-          topic: 'chemical-bonding',
-          question: "Which molecule has a bent molecular geometry?",
-          options: [
-            "CO₂",
-            "H₂O",
-            "BeCl₂",
-            "BF₃"
-          ],
-          correct: 1,
-          explanation: "H₂O has 2 bonding pairs and 2 lone pairs on oxygen, resulting in a bent molecular geometry."
-        },
-        {
-          id: 9,
-          topic: 'acids-bases',
-          question: "Which of the following is a Lewis acid?",
-          options: [
-            "NH₃",
-            "BF₃",
-            "OH⁻",
-            "H₂O"
-          ],
-          correct: 1,
-          explanation: "BF₃ can accept electron pairs (Lewis acid) due to boron's incomplete octet."
-        },
-        {
-          id: 10,
-          topic: 'organic',
-          question: "What is the IUPAC name for CH₃CH₂CH₂OH?",
-          options: [
-            "Propanol",
-            "1-Propanol",
-            "2-Propanol",
-            "Propyl alcohol"
-          ],
-          correct: 1,
-          explanation: "This is a 3-carbon chain with -OH on carbon 1, so it's 1-propanol (or propan-1-ol)."
-        },
-        {
-          id: 11,
-          topic: 'physical',
-          question: "The rate of a chemical reaction generally increases with temperature because:",
-          options: [
-            "More molecules have sufficient activation energy",
-            "The equilibrium shifts to products",
-            "Pressure increases",
-            "Concentration increases"
-          ],
-          correct: 0,
-          explanation: "Higher temperature means more molecules have kinetic energy ≥ activation energy, increasing reaction rate."
-        },
-        {
-          id: 12,
-          topic: 'electrochemistry',
-          question: "Which metal would be most easily oxidized?",
-          options: [
-            "Gold (Au)",
-            "Copper (Cu)",
-            "Zinc (Zn)",
-            "Silver (Ag)"
-          ],
-          correct: 2,
-          explanation: "Zinc has the most negative standard reduction potential, making it most easily oxidized."
-        },
-        {
-          id: 13,
-          topic: 'industrial',
-          question: "In the Haber process, nitrogen and hydrogen combine to form:",
-          options: [
-            "Nitric acid",
-            "Ammonia",
-            "Ammonium nitrate",
-            "Nitrogen dioxide"
-          ],
-          correct: 1,
-          explanation: "The Haber process: N₂ + 3H₂ ⇌ 2NH₃ (ammonia production)"
-        },
-        {
-          id: 14,
-          topic: 'atomic-structure',
-          question: "Which quantum number describes the shape of an orbital?",
-          options: [
-            "Principal (n)",
-            "Azimuthal (l)",
-            "Magnetic (mₗ)",
-            "Spin (mₛ)"
-          ],
-          correct: 1,
-          explanation: "The azimuthal quantum number (l) determines the shape of the orbital (s, p, d, f)."
-        },
-        {
-          id: 15,
-          topic: 'chemical-bonding',
-          question: "Which type of intermolecular force is strongest?",
-          options: [
-            "London dispersion forces",
-            "Dipole-dipole interactions",
-            "Hydrogen bonding",
-            "Ion-dipole interactions"
-          ],
-          correct: 3,
-          explanation: "Ion-dipole interactions are the strongest intermolecular forces, followed by hydrogen bonding."
-        },
-        {
-          id: 16,
-          topic: 'acids-bases',
-          question: "What is the conjugate base of H₂SO₄?",
-          options: [
-            "SO₄²⁻",
-            "HSO₄⁻",
-            "H₃SO₄⁺",
-            "SO₃"
-          ],
-          correct: 1,
-          explanation: "When H₂SO₄ loses one proton (H⁺), it forms HSO₄⁻ (hydrogen sulfate ion)."
-        },
-        {
-          id: 17,
-          topic: 'organic',
-          question: "Which type of reaction converts an alkene to an alkane?",
-          options: [
-            "Substitution",
-            "Addition",
-            "Elimination",
-            "Condensation"
-          ],
-          correct: 1,
-          explanation: "Addition reactions add hydrogen (hydrogenation) across the double bond, converting alkenes to alkanes."
-        },
-        {
-          id: 18,
-          topic: 'physical',
-          question: "At equilibrium, the rate of the forward reaction is:",
-          options: [
-            "Greater than the reverse reaction",
-            "Less than the reverse reaction", 
-            "Equal to the reverse reaction",
-            "Zero"
-          ],
-          correct: 2,
-          explanation: "At equilibrium, forward and reverse reaction rates are equal, maintaining constant concentrations."
-        },
-        {
-          id: 19,
-          topic: 'electrochemistry',
-          question: "During electrolysis of water, oxygen gas is produced at the:",
-          options: [
-            "Cathode",
-            "Anode",
-            "Salt bridge",
-            "Both electrodes"
-          ],
-          correct: 1,
-          explanation: "Oxygen is produced by oxidation of water at the anode: 2H₂O → O₂ + 4H⁺ + 4e⁻"
-        },
-        {
-          id: 20,
-          topic: 'industrial',
-          question: "The Contact process is used to manufacture:",
-          options: [
-            "Ammonia",
-            "Sulfuric acid",
-            "Nitric acid",
-            "Hydrochloric acid"
-          ],
-          correct: 1,
-          explanation: "The Contact process converts SO₂ to SO₃, which then forms H₂SO₄ (sulfuric acid)."
-        },
-        {
-          id: 21,
-          topic: 'atomic-structure',
-          question: "Which element has the electron configuration [Ne] 3s²?",
-          options: [
-            "Sodium",
-            "Magnesium",
-            "Aluminum", 
-            "Silicon"
-          ],
-          correct: 1,
-          explanation: "Magnesium (atomic number 12) has configuration [Ne] 3s², where [Ne] represents 1s² 2s² 2p⁶."
-        },
-        {
-          id: 22,
-          topic: 'chemical-bonding',
-          question: "In which molecule are all bonds polar but the molecule is nonpolar?",
-          options: [
-            "H₂O",
-            "NH₃",
-            "CCl₄",
-            "HCl"
-          ],
-          correct: 2,
-          explanation: "CCl₄ has polar C-Cl bonds, but the tetrahedral geometry makes the molecule nonpolar due to symmetry."
-        },
-        {
-          id: 23,
-          topic: 'acids-bases',
-          question: "Which indicator would be most suitable for titrating a weak acid with a strong base?",
-          options: [
-            "Methyl orange (pH 3.1-4.4)",
-            "Bromothymol blue (pH 6.0-7.6)",
-            "Phenolphthalein (pH 8.2-10.0)",
-            "Litmus (pH 4.5-8.3)"
-          ],
-          correct: 2,
-          explanation: "Weak acid + strong base has equivalence point around pH 8-9, so phenolphthalein is ideal."
-        },
-        {
-          id: 24,
-          topic: 'organic',
-          question: "Which compound is an isomer of butane (C₄H₁₀)?",
-          options: [
-            "Propane",
-            "Pentane",
-            "2-methylpropane",
-            "Butene"
-          ],
-          correct: 2,
-          explanation: "2-methylpropane (isobutane) has the same molecular formula (C₄H₁₀) but different structure."
-        },
-        {
-          id: 25,
-          topic: 'physical',
-          question: "For the reaction N₂ + 3H₂ ⇌ 2NH₃ + heat, which change will increase NH₃ production?",
-          options: [
-            "Increasing temperature",
-            "Decreasing pressure",
-            "Removing NH₃",
-            "Adding a catalyst"
-          ],
-          correct: 2,
-          explanation: "Removing NH₃ shifts equilibrium right to replace it. Catalyst doesn't affect position, only rate."
-        },
-        {
-          id: 26,
-          topic: 'electrochemistry',
-          question: "What is the oxidation number of sulfur in SO₄²⁻?",
-          options: [
-            "+4",
-            "+6",
-            "-2",
-            "+8"
-          ],
-          correct: 1,
-          explanation: "In SO₄²⁻: 4 oxygens × (-2) + S = -2, so S = +6"
-        },
-        {
-          id: 27,
-          topic: 'atomic-structure',
-          question: "Which of the following has the largest atomic radius?",
-          options: [
-            "Li",
-            "Na", 
-            "K",
-            "Rb"
-          ],
-          correct: 3,
-          explanation: "Atomic radius increases down a group due to additional electron shells. Rb is lowest in Group 1."
-        },
-        {
-          id: 28,
-          topic: 'chemical-bonding',
-          question: "How many lone pairs are on the central atom in NH₃?",
-          options: [
-            "0",
-            "1",
-            "2",
-            "3"
-          ],
-          correct: 1,
-          explanation: "Nitrogen in NH₃ has 5 valence electrons: 3 used in N-H bonds, 2 remain as 1 lone pair."
-        },
-        {
-          id: 29,
-          topic: 'acids-bases',
-          question: "Which solution has the highest pH?",
-          options: [
-            "0.1 M HCl",
-            "0.1 M CH₃COOH",
-            "0.1 M NaOH",
-            "0.1 M NH₃"
-          ],
-          correct: 2,
-          explanation: "NaOH is a strong base with complete dissociation, giving the highest [OH⁻] and pH."
-        },
-        {
-          id: 30,
-          topic: 'organic',
-          question: "What is the product when ethene reacts with hydrogen bromide?",
-          options: [
-            "Bromoethane",
-            "1,2-dibromoethane",
-            "Ethyl bromide",
-            "Both A and C"
-          ],
-          correct: 3,
-          explanation: "CH₂=CH₂ + HBr → CH₃CH₂Br (bromoethane = ethyl bromide). Both names are correct."
-        },
-        {
-          id: 31,
-          topic: 'physical',
-          question: "Which factor does NOT affect reaction rate?",
-          options: [
-            "Temperature",
-            "Concentration",
-            "Enthalpy change",
-            "Catalyst"
-          ],
-          correct: 2,
-          explanation: "Enthalpy change (ΔH) affects whether a reaction is favorable but not the rate of reaction."
-        },
-        {
-          id: 32,
-          topic: 'electrochemistry',
-          question: "In a galvanic cell, electrons flow from:",
-          options: [
-            "Cathode to anode through external circuit",
-            "Anode to cathode through external circuit",
-            "Positive to negative electrode",
-            "High to low potential inside the cell"
-          ],
-          correct: 1,
-          explanation: "Electrons flow from anode (oxidation site) to cathode (reduction site) through the external circuit."
-        },
-        {
-          id: 33,
-          topic: 'industrial',
-          question: "Which catalyst is used in the Haber process?",
-          options: [
-            "Platinum",
-            "Iron",
-            "Vanadium pentoxide",
-            "Nickel"
-          ],
-          correct: 1,
-          explanation: "Iron catalyst (often with promoters) is used in the Haber process for ammonia synthesis."
-        },
-        {
-          id: 34,
-          topic: 'atomic-structure',
-          question: "What is the maximum number of electrons in the 3d subshell?",
-          options: [
-            "2",
-            "6",
-            "10",
-            "14"
-          ],
-          correct: 2,
-          explanation: "The d subshell has 5 orbitals, each holding 2 electrons maximum: 5 × 2 = 10 electrons."
-        },
-        {
-          id: 35,
-          topic: 'chemical-bonding',
-          question: "Which compound exhibits hydrogen bonding?",
-          options: [
-            "CH₄",
-            "HF",
-            "H₂S",
-            "PH₃"
-          ],
-          correct: 1,
-          explanation: "HF exhibits hydrogen bonding because H is bonded to highly electronegative F."
-        },
-        {
-          id: 36,
-          topic: 'acids-bases',
-          question: "What is the Kw value for water at 25°C?",
-          options: [
-            "1.0 × 10⁻¹²",
-            "1.0 × 10⁻¹⁴",
-            "1.0 × 10⁻⁷",
-            "1.0 × 10⁻¹"
-          ],
-          correct: 1,
-          explanation: "Kw = [H⁺][OH⁻] = 1.0 × 10⁻¹⁴ at 25°C for pure water."
-        },
-        {
-          id: 37,
-          topic: 'organic',
-          question: "Which functional group is present in ketones?",
-          options: [
-            "C=O (at end of chain)",
-            "C=O (in middle of chain)",
-            "-OH",
-            "-COOH"
-          ],
-          correct: 1,
-          explanation: "Ketones have C=O group bonded to two carbon atoms (in middle of chain)."
-        },
-        {
-          id: 38,
-          topic: 'physical',
-          question: "What happens to Kc when temperature increases for an exothermic reaction?",
-          options: [
-            "Increases",
-            "Decreases", 
-            "Remains constant",
-            "Becomes zero"
-          ],
-          correct: 1,
-          explanation: "For exothermic reactions, increasing temperature shifts equilibrium left, decreasing Kc."
-        },
-        {
-          id: 39,
-          topic: 'electrochemistry',
-          question: "Which half-reaction occurs at the cathode during electrolysis of molten NaCl?",
-          options: [
-            "Na⁺ + e⁻ → Na",
-            "2Cl⁻ → Cl₂ + 2e⁻",
-            "2H₂O → O₂ + 4H⁺ + 4e⁻",
-            "Na → Na⁺ + e⁻"
-          ],
-          correct: 0,
-          explanation: "At cathode, reduction occurs: Na⁺ + e⁻ → Na (sodium metal is produced)."
-        },
-        {
-          id: 40,
-          topic: 'industrial',
-          question: "What is the main environmental concern with the Haber process?",
-          options: [
-            "High energy consumption",
-            "Toxic ammonia production",
-            "Greenhouse gas emissions",
-            "All of the above"
-          ],
-          correct: 3,
-          explanation: "The Haber process requires high energy, produces potentially toxic NH₃, and generates CO₂."
-        },
-        {
-          id: 41,
-          topic: 'atomic-structure',
-          question: "Which ion has the same electron configuration as neon?",
-          options: [
-            "Na⁺",
-            "Mg²⁺",
-            "F⁻",
-            "All of the above"
-          ],
-          correct: 3,
-          explanation: "Na⁺, Mg²⁺, and F⁻ all have 10 electrons, same as neon (isoelectronic)."
-        },
-        {
-          id: 42,
-          topic: 'chemical-bonding',
-          question: "What is the hybridization of carbon in methane (CH₄)?",
-          options: [
-            "sp",
-            "sp²",
-            "sp³",
-            "sp³d"
-          ],
-          correct: 2,
-          explanation: "Carbon in CH₄ forms 4 equivalent bonds in tetrahedral geometry, requiring sp³ hybridization."
-        },
-        {
-          id: 43,
-          topic: 'acids-bases',
-          question: "Which is the strongest acid?",
-          options: [
-            "HF",
-            "HCl",
-            "HBr", 
-            "HI"
-          ],
-          correct: 3,
-          explanation: "Acid strength increases down the halogen group: HI > HBr > HCl > HF."
-        },
-        {
-          id: 44,
-          topic: 'organic',
-          question: "What type of reaction is: CH₃CH₂Br + OH⁻ → CH₃CH₂OH + Br⁻?",
-          options: [
-            "Addition",
-            "Elimination",
-            "Substitution",
-            "Condensation"
-          ],
-          correct: 2,
-          explanation: "This is nucleophilic substitution where OH⁻ replaces Br⁻."
-        },
-        {
-          id: 45,
-          topic: 'physical',
-          question: "Which statement about catalysts is correct?",
-          options: [
-            "They are consumed in the reaction",
-            "They change the equilibrium position",
-            "They lower activation energy",
-            "They increase reaction enthalpy"
-          ],
-          correct: 2,
-          explanation: "Catalysts lower activation energy, increasing reaction rate without being consumed."
-        },
-        {
-          id: 46,
-          topic: 'electrochemistry',
-          question: "What is the standard hydrogen electrode potential?",
-          options: [
-            "-1.0 V",
-            "0.0 V",
-            "+1.0 V",
-            "+2.0 V"
-          ],
-          correct: 1,
-          explanation: "The standard hydrogen electrode is defined as 0.0 V reference point."
-        },
-        {
-          id: 47,
-          topic: 'atomic-structure',
-          question: "Which element has the highest first ionization energy?",
-          options: [
-            "Lithium",
-            "Fluorine",
-            "Helium",
-            "Neon"
-          ],
-          correct: 2,
-          explanation: "Helium has the highest first ionization energy due to its complete, stable electron configuration."
-        },
-        {
-          id: 48,
-          topic: 'chemical-bonding',
-          question: "Which molecule has the shortest bond length?",
-          options: [
-            "H-H",
-            "C-C",
-            "C=C",
-            "C≡C"
-          ],
-          correct: 3,
-          explanation: "Triple bonds (C≡C) are shorter than double bonds (C=C), which are shorter than single bonds."
-        },
-        {
-          id: 49,
-          topic: 'acids-bases',
-          question: "What is the pH of a buffer solution containing equal molar amounts of CH₃COOH and CH₃COONa?",
-          options: [
-            "Equal to pKa",
-            "Equal to pKb",
-            "Equal to 7",
-            "Equal to pKw"
-          ],
-          correct: 0,
-          explanation: "For a buffer with equal concentrations of weak acid and conjugate base, pH = pKa."
-        },
-        {
-          id: 50,
-          topic: 'organic',
-          question: "Which compound can exhibit optical isomerism?",
-          options: [
-            "CH₃CH₂CH₃",
-            "CH₃CHClCH₃", 
-            "CHCl₃",
-            "CH₃CH(OH)CH₂CH₃"
-          ],
-          correct: 3,
-          explanation: "CH₃CH(OH)CH₂CH₃ has a chiral carbon (attached to 4 different groups), showing optical isomerism."
-        }
-      ],
-      longQuestions: [
-        {
-          id: 101,
-          topic: 'atomic-structure',
-          question: "Explain the concept of atomic orbitals and describe how electrons are arranged in atoms according to the Aufbau principle, Hund's rule, and Pauli exclusion principle.",
-          points: 15,
-          markingScheme: [
-            "Definition of atomic orbitals (3 marks)",
-            "Aufbau principle explanation (4 marks)",
-            "Hund's rule explanation (4 marks)", 
-            "Pauli exclusion principle (4 marks)"
-          ]
-        },
-        {
-          id: 102,
-          topic: 'chemical-bonding',
-          question: "Compare and contrast ionic and covalent bonding. Include in your answer: formation mechanisms, properties of compounds formed, and examples.",
-          points: 20,
-          markingScheme: [
-            "Ionic bonding mechanism (5 marks)",
-            "Covalent bonding mechanism (5 marks)",
-            "Properties comparison (6 marks)",
-            "Relevant examples (4 marks)"
-          ]
-        },
-        {
-          id: 103,
-          topic: 'acids-bases',
-          question: "A student titrates 25.0 mL of 0.100 M NaOH with 0.150 M HCl. Calculate the pH at the equivalence point and explain why this pH value is obtained.",
-          points: 12,
-          markingScheme: [
-            "Balanced equation (2 marks)",
-            "Moles calculation (3 marks)",
-            "Volume at equivalence point (3 marks)",
-            "pH calculation (3 marks)",
-            "Explanation of pH value (1 mark)"
-          ]
-        },
-        {
-          id: 104,
-          topic: 'organic',
-          question: "Describe the mechanism of nucleophilic substitution reactions. Compare SN1 and SN2 mechanisms, including factors that favor each mechanism.",
-          points: 18,
-          markingScheme: [
-            "SN1 mechanism steps (5 marks)",
-            "SN2 mechanism steps (5 marks)",
-            "Factors favoring SN1 (4 marks)",
-            "Factors favoring SN2 (4 marks)"
-          ]
-        },
-        {
-          id: 105,
-          topic: 'physical',
-          question: "For the reaction: N₂(g) + 3H₂(g) ⇌ 2NH₃(g) ΔH = -92 kJ/mol. Explain how changes in temperature, pressure, and concentration affect the equilibrium position using Le Chatelier's principle.",
-          points: 16,
-          markingScheme: [
-            "Le Chatelier's principle statement (2 marks)",
-            "Effect of temperature increase (4 marks)",
-            "Effect of pressure increase (4 marks)",
-            "Effect of concentration changes (4 marks)",
-            "Industrial applications (2 marks)"
-          ]
-        },
-        {
-          id: 106,
-          topic: 'electrochemistry',
-          question: "Design an electrochemical cell using copper and zinc electrodes. Calculate the standard cell potential and determine the direction of electron flow. Include half-reactions and overall cell reaction.",
-          points: 14,
-          markingScheme: [
-            "Cell diagram (3 marks)",
-            "Half-reactions (4 marks)",
-            "Overall reaction (2 marks)",
-            "Standard cell potential calculation (3 marks)",
-            "Electron flow direction (2 marks)"
-          ]
-        },
-        {
-          id: 107,
-          topic: 'industrial',
-          question: "Discuss the Haber process for ammonia production. Include reaction conditions, catalyst used, and explain why these specific conditions are chosen from both kinetic and thermodynamic perspectives.",
-          points: 20,
-          markingScheme: [
-            "Balanced chemical equation (2 marks)",
-            "Reaction conditions (temperature, pressure) (4 marks)",
-            "Catalyst and promoters (3 marks)",
-            "Kinetic considerations (5 marks)",
-            "Thermodynamic considerations (4 marks)",
-            "Industrial importance (2 marks)"
-          ]
-        },
-        {
-          id: 108,
-          topic: 'physical',
-          question: "Explain the concept of reaction mechanisms and rate-determining steps. How do catalysts affect reaction rates and mechanisms? Use a specific example to illustrate your answer.",
-          points: 17,
-          markingScheme: [
-            "Definition of reaction mechanism (3 marks)",
-            "Rate-determining step concept (4 marks)",
-            "How catalysts work (5 marks)",
-            "Specific example with mechanism (5 marks)"
-          ]
-        }
-      ]
-    };
-
-    // Load practice questions
-    function loadPracticeQuestions() {
-      const container = document.getElementById('practice-questions');
-      const allQuestions = [...questionBank.mcq, ...questionBank.longQuestions];
-      
-      let filteredQuestions = allQuestions;
-      if (currentFilter !== 'all') {
-        filteredQuestions = allQuestions.filter(q => q.topic === currentFilter);
-      }
-      
-      currentQuestions = filteredQuestions;
-      currentAnswers = {};
-      
-      container.innerHTML = filteredQuestions.map((q, index) => {
-        if (q.options) {
-          // MCQ
-          return `
-            <div class="question-card" data-topic="${q.topic}">
-              <div class="question-number">Question ${index + 1} (MCQ)</div>
-              <div class="question-text">${q.question}</div>
-              <div class="options">
-                ${q.options.map((option, i) => `
-                  <div class="option" onclick="selectOption(${index}, ${i})" data-option="${i}">
-                    ${String.fromCharCode(65 + i)}. ${option}
-                  </div>
-                `).join('')}
-              </div>
-              <div class="explanation" id="explanation-${index}" style="display: none; margin-top: 15px; padding: 15px; background: #e6fffa; border-radius: 8px; color: #234e52;">
-                <strong>Explanation:</strong> ${q.explanation}
-              </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <p class="text-gray-600">© 2024 Chemistry Mastery - Designed for Grade 12 Matric Success</p>
+                <p class="text-sm text-gray-500 mt-2">Good luck with your chemistry exam, Mpumi! You've got this! 🧪✨</p>
             </div>
-          `;
-        } else {
-          // Long question
-          return `
-            <div class="question-card" data-topic="${q.topic}">
-              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks)</div>
-              <div class="question-text">${q.question}</div>
-              <div style="margin-top: 15px;">
-                <strong>Marking Scheme:</strong>
-                <ul style="margin-top: 10px; padding-left: 20px;">
-                  ${q.markingScheme.map(point => `<li>${point}</li>`).join('')}
-                </ul>
-              </div>
-            </div>
-          `;
-        }
-      }).join('');
-      
-      document.getElementById('practice-score').style.display = 'none';
-    }
-
-    // Load MCQ questions
-    function loadMCQQuestions() {
-      let filteredQuestions = questionBank.mcq;
-      if (currentFilter !== 'all') {
-        filteredQuestions = questionBank.mcq.filter(q => q.topic === currentFilter);
-      }
-      
-      currentQuestions = filteredQuestions.slice(0, mcqDisplayCount);
-      currentAnswers = {};
-      
-      displayMCQQuestions();
-    }
-
-    function displayMCQQuestions() {
-      const container = document.getElementById('mcq-questions');
-      
-      container.innerHTML = currentQuestions.map((q, index) => `
-        <div class="question-card" data-topic="${q.topic}">
-          <div class="question-number">Question ${index + 1}</div>
-          <div class="question-text">${q.question}</div>
-          <div class="options">
-            ${q.options.map((option, i) => `
-              <div class="option" onclick="selectMCQOption(${index}, ${i})" data-option="${i}">
-                ${String.fromCharCode(65 + i)}. ${option}
-              </div>
-            `).join('')}
-          </div>
-          <div class="explanation" id="mcq-explanation-${index}" style="display: none; margin-top: 15px; padding: 15px; background: #e6fffa; border-radius: 8px; color: #234e52;">
-            <strong>Explanation:</strong> ${q.explanation}
-          </div>
         </div>
-      `).join('');
-      
-      document.getElementById('mcq-score').style.display = 'none';
-    }
+    </footer>
 
-    // Select option for practice questions
-    function selectOption(questionIndex, optionIndex) {
-      const question = currentQuestions[questionIndex];
-      if (!question.options) return; // Skip long questions
-      
-      currentAnswers[questionIndex] = optionIndex;
-      
-      // Update UI
-      const questionCard = document.querySelectorAll('#practice-questions .question-card')[questionIndex];
-      const options = questionCard.querySelectorAll('.option');
-      
-      options.forEach((opt, i) => {
-        opt.classList.remove('selected', 'correct', 'incorrect');
-        if (i === optionIndex) {
-          opt.classList.add('selected');
-        }
-      });
-      
-      // Show explanation after selection
-      setTimeout(() => {
-        options.forEach((opt, i) => {
-          if (i === question.correct) {
-            opt.classList.add('correct');
-          } else if (i === optionIndex && i !== question.correct) {
-            opt.classList.add('incorrect');
-          }
+    <script>
+        // Extended Question Bank with 60+ questions
+        const allQuestions = [
+            // Original MCQ Questions
+            {
+                id: 'mcq1',
+                type: 'mcq',
+                question: 'What is the atomic number of carbon?',
+                options: ['4', '6', '8', '12'],
+                answer: '6',
+                explanation: 'Carbon has 6 protons in its nucleus, which defines its atomic number.',
+                topic: 'Atomic Structure',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq2',
+                type: 'mcq',
+                question: 'Which of the following is a noble gas?',
+                options: ['Oxygen', 'Nitrogen', 'Argon', 'Chlorine'],
+                answer: 'Argon',
+                explanation: 'Argon is a noble gas in Group 18 of the periodic table with a complete outer electron shell.',
+                topic: 'Periodic Table',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq3',
+                type: 'mcq',
+                question: 'What type of bond is formed between sodium and chlorine in NaCl?',
+                options: ['Covalent bond', 'Ionic bond', 'Metallic bond', 'Hydrogen bond'],
+                answer: 'Ionic bond',
+                explanation: 'Sodium transfers an electron to chlorine, forming Na⁺ and Cl⁻ ions held together by electrostatic forces.',
+                topic: 'Chemical Bonding',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq4',
+                type: 'mcq',
+                question: 'According to Le Chatelier\'s principle, what happens when pressure is increased in the reaction N₂ + 3H₂ ⇌ 2NH₃?',
+                options: ['Equilibrium shifts left', 'Equilibrium shifts right', 'No change in equilibrium', 'Reaction stops'],
+                answer: 'Equilibrium shifts right',
+                explanation: 'Increasing pressure favors the side with fewer gas molecules. The right side has 2 molecules vs 4 on the left.',
+                topic: 'Chemical Equilibrium',
+                difficulty: 'hard'
+            },
+            {
+                id: 'mcq5',
+                type: 'mcq',
+                question: 'What is the pH of a 0.01 M HCl solution?',
+                options: ['1', '2', '12', '14'],
+                answer: '2',
+                explanation: 'HCl is a strong acid that completely dissociates. pH = -log[H⁺] = -log(0.01) = 2',
+                topic: 'Acids and Bases',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq6',
+                type: 'mcq',
+                question: 'Which functional group is present in alcohols?',
+                options: ['-COOH', '-OH', '-CHO', '-NH₂'],
+                answer: '-OH',
+                explanation: 'Alcohols contain the hydroxyl functional group (-OH) attached to a carbon atom.',
+                topic: 'Organic Chemistry',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq7',
+                type: 'mcq',
+                question: 'What is the oxidation state of sulfur in SO₄²⁻?',
+                options: ['+4', '+6', '-2', '+2'],
+                answer: '+6',
+                explanation: 'In SO₄²⁻: 4 oxygen atoms each with -2 charge = -8, overall charge is -2, so sulfur must be +6.',
+                topic: 'Redox Reactions',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq8',
+                type: 'mcq',
+                question: 'Which gas law relates pressure and volume at constant temperature?',
+                options: ['Charles\'s Law', 'Boyle\'s Law', 'Gay-Lussac\'s Law', 'Avogadro\'s Law'],
+                answer: 'Boyle\'s Law',
+                explanation: 'Boyle\'s Law states that P₁V₁ = P₂V₂ at constant temperature and amount of gas.',
+                topic: 'Gas Laws',
+                difficulty: 'easy'
+            },
+
+            // Additional MCQ Questions (42 more to reach 50+)
+            {
+                id: 'mcq9',
+                type: 'mcq',
+                question: 'What is the electron configuration of oxygen (O)?',
+                options: ['1s² 2s² 2p⁴', '1s² 2s² 2p⁶', '1s² 2s² 2p²', '1s² 2s⁴'],
+                answer: '1s² 2s² 2p⁴',
+                explanation: 'Oxygen has 8 electrons: 2 in 1s, 2 in 2s, and 4 in 2p orbitals.',
+                topic: 'Atomic Structure',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq10',
+                type: 'mcq',
+                question: 'Which element has the highest electronegativity?',
+                options: ['Oxygen', 'Fluorine', 'Nitrogen', 'Chlorine'],
+                answer: 'Fluorine',
+                explanation: 'Fluorine has the highest electronegativity (4.0 on the Pauling scale) of all elements.',
+                topic: 'Periodic Table',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq11',
+                type: 'mcq',
+                question: 'What is the molecular geometry of methane (CH₄)?',
+                options: ['Linear', 'Trigonal planar', 'Tetrahedral', 'Bent'],
+                answer: 'Tetrahedral',
+                explanation: 'Methane has 4 bonding pairs around carbon with no lone pairs, giving it tetrahedral geometry.',
+                topic: 'Chemical Bonding',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq12',
+                type: 'mcq',
+                question: 'Which intermolecular force is strongest?',
+                options: ['London dispersion forces', 'Dipole-dipole forces', 'Hydrogen bonding', 'Ion-dipole forces'],
+                answer: 'Ion-dipole forces',
+                explanation: 'Ion-dipole forces are the strongest intermolecular forces, followed by hydrogen bonding.',
+                topic: 'Intermolecular Forces',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq13',
+                type: 'mcq',
+                question: 'What is the conjugate base of HNO₃?',
+                options: ['NO₃⁻', 'HNO₂', 'NO₂⁻', 'H₂NO₃⁺'],
+                answer: 'NO₃⁻',
+                explanation: 'The conjugate base is formed by removing a proton (H⁺) from the acid. HNO₃ → NO₃⁻ + H⁺',
+                topic: 'Acids and Bases',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq14',
+                type: 'mcq',
+                question: 'Which of the following is an aldehyde?',
+                options: ['CH₃COOH', 'CH₃CHO', 'CH₃OH', 'CH₃COCH₃'],
+                answer: 'CH₃CHO',
+                explanation: 'CH₃CHO (acetaldehyde) contains the aldehyde functional group (-CHO).',
+                topic: 'Organic Chemistry',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq15',
+                type: 'mcq',
+                question: 'In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, which species is oxidized?',
+                options: ['Zn', 'Cu²⁺', 'Zn²⁺', 'Cu'],
+                answer: 'Zn',
+                explanation: 'Zn loses electrons (oxidation number increases from 0 to +2), so it is oxidized.',
+                topic: 'Redox Reactions',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq16',
+                type: 'mcq',
+                question: 'At STP, what volume does 1 mole of any gas occupy?',
+                options: ['22.4 L', '24.5 L', '20.0 L', '25.0 L'],
+                answer: '22.4 L',
+                explanation: 'At standard temperature and pressure (STP), 1 mole of any ideal gas occupies 22.4 L.',
+                topic: 'Gas Laws',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq17',
+                type: 'mcq',
+                question: 'Which quantum number describes the shape of an orbital?',
+                options: ['Principal (n)', 'Angular momentum (l)', 'Magnetic (mₗ)', 'Spin (mₛ)'],
+                answer: 'Angular momentum (l)',
+                explanation: 'The angular momentum quantum number (l) determines the shape of the orbital (s, p, d, f).',
+                topic: 'Atomic Structure',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq18',
+                type: 'mcq',
+                question: 'Which group contains the alkali metals?',
+                options: ['Group 1', 'Group 2', 'Group 17', 'Group 18'],
+                answer: 'Group 1',
+                explanation: 'Group 1 elements (Li, Na, K, Rb, Cs, Fr) are the alkali metals.',
+                topic: 'Periodic Table',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq19',
+                type: 'mcq',
+                question: 'What type of hybridization does carbon have in ethene (C₂H₄)?',
+                options: ['sp³', 'sp²', 'sp', 'sp³d'],
+                answer: 'sp²',
+                explanation: 'Carbon in ethene forms 3 sigma bonds and 1 pi bond, requiring sp² hybridization.',
+                topic: 'Chemical Bonding',
+                difficulty: 'hard'
+            },
+            {
+                id: 'mcq20',
+                type: 'mcq',
+                question: 'Which substance has the highest boiling point?',
+                options: ['CH₄', 'NH₃', 'H₂O', 'HF'],
+                answer: 'H₂O',
+                explanation: 'Water has extensive hydrogen bonding and the highest boiling point among these compounds.',
+                topic: 'Intermolecular Forces',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq21',
+                type: 'mcq',
+                question: 'What is the pH of pure water at 25°C?',
+                options: ['0', '7', '14', '1'],
+                answer: '7',
+                explanation: 'Pure water is neutral with [H⁺] = [OH⁻] = 1×10⁻⁷ M, giving pH = 7.',
+                topic: 'Acids and Bases',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq22',
+                type: 'mcq',
+                question: 'Which functional group is present in ketones?',
+                options: ['-OH', '-CHO', '-CO-', '-COOH'],
+                answer: '-CO-',
+                explanation: 'Ketones contain the carbonyl group (-CO-) bonded to two carbon atoms.',
+                topic: 'Organic Chemistry',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq23',
+                type: 'mcq',
+                question: 'In electrochemical cells, reduction occurs at the:',
+                options: ['Anode', 'Cathode', 'Salt bridge', 'External circuit'],
+                answer: 'Cathode',
+                explanation: 'Reduction (gain of electrons) always occurs at the cathode in electrochemical cells.',
+                topic: 'Redox Reactions',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq24',
+                type: 'mcq',
+                question: 'Which gas law is represented by V₁/T₁ = V₂/T₂?',
+                options: ['Boyle\'s Law', 'Charles\'s Law', 'Gay-Lussac\'s Law', 'Combined Gas Law'],
+                answer: 'Charles\'s Law',
+                explanation: 'Charles\'s Law states that volume is directly proportional to temperature at constant pressure.',
+                topic: 'Gas Laws',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq25',
+                type: 'mcq',
+                question: 'How many electrons can the 3d subshell hold?',
+                options: ['2', '6', '10', '14'],
+                answer: '10',
+                explanation: 'The d subshell has 5 orbitals, each can hold 2 electrons, so 3d can hold 10 electrons total.',
+                topic: 'Atomic Structure',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq26',
+                type: 'mcq',
+                question: 'Which element has the largest atomic radius in Period 3?',
+                options: ['Na', 'Mg', 'Al', 'Cl'],
+                answer: 'Na',
+                explanation: 'Atomic radius decreases across a period due to increasing nuclear charge. Na is leftmost in Period 3.',
+                topic: 'Periodic Table',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq27',
+                type: 'mcq',
+                question: 'What is the bond angle in ammonia (NH₃)?',
+                options: ['90°', '107°', '109.5°', '120°'],
+                answer: '107°',
+                explanation: 'NH₃ has trigonal pyramidal geometry with bond angles slightly less than tetrahedral due to lone pair repulsion.',
+                topic: 'Chemical Bonding',
+                difficulty: 'hard'
+            },
+            {
+                id: 'mcq28',
+                type: 'mcq',
+                question: 'Which compound exhibits hydrogen bonding?',
+                options: ['CH₄', 'CO₂', 'NH₃', 'CCl₄'],
+                answer: 'NH₃',
+                explanation: 'NH₃ can form hydrogen bonds because N is highly electronegative and bonded to H.',
+                topic: 'Intermolecular Forces',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq29',
+                type: 'mcq',
+                question: 'What is the molarity of a solution containing 0.5 mol of solute in 2 L of solution?',
+                options: ['0.25 M', '0.5 M', '1.0 M', '2.0 M'],
+                answer: '0.25 M',
+                explanation: 'Molarity = moles of solute / liters of solution = 0.5 mol / 2 L = 0.25 M',
+                topic: 'Solutions',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq30',
+                type: 'mcq',
+                question: 'Which is the strongest acid?',
+                options: ['HF', 'HCl', 'HBr', 'HI'],
+                answer: 'HI',
+                explanation: 'Acid strength increases down the halogen group. HI is the strongest haloacid.',
+                topic: 'Acids and Bases',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq31',
+                type: 'mcq',
+                question: 'What is the IUPAC name for CH₃CH₂OH?',
+                options: ['Methanol', 'Ethanol', 'Propanol', 'Butanol'],
+                answer: 'Ethanol',
+                explanation: 'CH₃CH₂OH has 2 carbon atoms with an -OH group, making it ethanol.',
+                topic: 'Organic Chemistry',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq32',
+                type: 'mcq',
+                question: 'In a galvanic cell, electrons flow from:',
+                options: ['Cathode to anode', 'Anode to cathode', 'Positive to negative', 'Salt bridge to electrodes'],
+                answer: 'Anode to cathode',
+                explanation: 'In galvanic cells, electrons flow from the anode (oxidation site) to the cathode (reduction site).',
+                topic: 'Redox Reactions',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq33',
+                type: 'mcq',
+                question: 'What happens to gas pressure when temperature increases at constant volume?',
+                options: ['Decreases', 'Increases', 'Stays the same', 'Becomes zero'],
+                answer: 'Increases',
+                explanation: 'Gay-Lussac\'s Law: pressure is directly proportional to temperature at constant volume.',
+                topic: 'Gas Laws',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq34',
+                type: 'mcq',
+                question: 'Which orbital is filled first according to the Aufbau principle?',
+                options: ['4s', '3d', '4p', '3p'],
+                answer: '4s',
+                explanation: 'The 4s orbital has lower energy than 3d and fills first according to the Aufbau principle.',
+                topic: 'Atomic Structure',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq35',
+                type: 'mcq',
+                question: 'Which element has the highest first ionization energy in Period 2?',
+                options: ['Li', 'C', 'N', 'Ne'],
+                answer: 'Ne',
+                explanation: 'Ionization energy increases across a period. Neon has the highest first ionization energy in Period 2.',
+                topic: 'Periodic Table',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq36',
+                type: 'mcq',
+                question: 'What is the hybridization of carbon in acetylene (C₂H₂)?',
+                options: ['sp³', 'sp²', 'sp', 'sp³d'],
+                answer: 'sp',
+                explanation: 'Carbon in acetylene forms 2 sigma bonds and 2 pi bonds, requiring sp hybridization.',
+                topic: 'Chemical Bonding',
+                difficulty: 'hard'
+            },
+            {
+                id: 'mcq37',
+                type: 'mcq',
+                question: 'Which has the strongest London dispersion forces?',
+                options: ['He', 'Ne', 'Ar', 'Kr'],
+                answer: 'Kr',
+                explanation: 'London dispersion forces increase with molecular size and number of electrons. Kr is largest.',
+                topic: 'Intermolecular Forces',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq38',
+                type: 'mcq',
+                question: 'What is the concentration of OH⁻ ions in a solution with pH = 3?',
+                options: ['1×10⁻³ M', '1×10⁻¹¹ M', '1×10⁻¹¹ M', '3×10⁻¹ M'],
+                answer: '1×10⁻¹¹ M',
+                explanation: 'pOH = 14 - pH = 14 - 3 = 11, so [OH⁻] = 1×10⁻¹¹ M',
+                topic: 'Acids and Bases',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq39',
+                type: 'mcq',
+                question: 'Which compound is an ester?',
+                options: ['CH₃COOH', 'CH₃COOCH₃', 'CH₃CHO', 'CH₃OH'],
+                answer: 'CH₃COOCH₃',
+                explanation: 'CH₃COOCH₃ (methyl acetate) contains the ester functional group (-COO-).',
+                topic: 'Organic Chemistry',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq40',
+                type: 'mcq',
+                question: 'What is the standard cell potential if E°cathode = +0.80 V and E°anode = -0.76 V?',
+                options: ['+0.04 V', '+1.56 V', '-0.04 V', '-1.56 V'],
+                answer: '+1.56 V',
+                explanation: 'E°cell = E°cathode - E°anode = 0.80 - (-0.76) = +1.56 V',
+                topic: 'Redox Reactions',
+                difficulty: 'hard'
+            },
+            {
+                id: 'mcq41',
+                type: 'mcq',
+                question: 'How many moles of gas are in a 44.8 L container at STP?',
+                options: ['1 mol', '2 mol', '0.5 mol', '4 mol'],
+                answer: '2 mol',
+                explanation: 'At STP, 1 mole = 22.4 L, so 44.8 L = 44.8/22.4 = 2 moles',
+                topic: 'Gas Laws',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq42',
+                type: 'mcq',
+                question: 'Which subshell is being filled in the transition metals?',
+                options: ['s', 'p', 'd', 'f'],
+                answer: 'd',
+                explanation: 'Transition metals are characterized by the filling of d orbitals.',
+                topic: 'Atomic Structure',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq43',
+                type: 'mcq',
+                question: 'Which property decreases down a group in the periodic table?',
+                options: ['Atomic radius', 'Ionization energy', 'Atomic mass', 'Number of electron shells'],
+                answer: 'Ionization energy',
+                explanation: 'Ionization energy decreases down a group as electrons are farther from the nucleus.',
+                topic: 'Periodic Table',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq44',
+                type: 'mcq',
+                question: 'What is the molecular geometry of SF₆?',
+                options: ['Tetrahedral', 'Trigonal bipyramidal', 'Octahedral', 'Square planar'],
+                answer: 'Octahedral',
+                explanation: 'SF₆ has 6 bonding pairs around sulfur with no lone pairs, giving octahedral geometry.',
+                topic: 'Chemical Bonding',
+                difficulty: 'hard'
+            },
+            {
+                id: 'mcq45',
+                type: 'mcq',
+                question: 'Which substance is most soluble in water?',
+                options: ['CCl₄', 'CH₃OH', 'C₆H₆', 'C₈H₁₈'],
+                answer: 'CH₃OH',
+                explanation: 'Methanol (CH₃OH) can form hydrogen bonds with water, making it highly soluble.',
+                topic: 'Solutions',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq46',
+                type: 'mcq',
+                question: 'What is the pH of a 0.001 M NaOH solution?',
+                options: ['3', '11', '1', '13'],
+                answer: '11',
+                explanation: 'pOH = -log(0.001) = 3, so pH = 14 - 3 = 11',
+                topic: 'Acids and Bases',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq47',
+                type: 'mcq',
+                question: 'Which reaction represents addition polymerization?',
+                options: ['nCH₂=CH₂ → (-CH₂-CH₂-)ₙ', 'Condensation', 'Hydrolysis', 'Substitution'],
+                answer: 'nCH₂=CH₂ → (-CH₂-CH₂-)ₙ',
+                explanation: 'Addition polymerization involves monomers with double bonds joining without losing atoms.',
+                topic: 'Organic Chemistry',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq48',
+                type: 'mcq',
+                question: 'In which direction do electrons flow in an electrolytic cell?',
+                options: ['From cathode to anode', 'From anode to cathode', 'No electron flow', 'Random direction'],
+                answer: 'From anode to cathode',
+                explanation: 'Even in electrolytic cells, electrons flow from anode to cathode through the external circuit.',
+                topic: 'Redox Reactions',
+                difficulty: 'medium'
+            },
+            {
+                id: 'mcq49',
+                type: 'mcq',
+                question: 'What is the relationship between pressure and volume in Boyle\'s Law?',
+                options: ['Directly proportional', 'Inversely proportional', 'No relationship', 'Exponential'],
+                answer: 'Inversely proportional',
+                explanation: 'Boyle\'s Law: P ∝ 1/V at constant temperature. As pressure increases, volume decreases.',
+                topic: 'Gas Laws',
+                difficulty: 'easy'
+            },
+            {
+                id: 'mcq50',
+                type: 'mcq',
+                question: 'Which element has the electron configuration [Ne] 3s¹?',
+                options: ['Na', 'Mg', 'Al', 'Si'],
+                answer: 'Na',
+                explanation: 'Sodium (Na) has 11 electrons: [Ne] represents the first 10, plus 1 electron in 3s.',
+                topic: 'Atomic Structure',
+                difficulty: 'medium'
+            },
+
+            // Long Questions with detailed step-by-step explanations
+            {
+                id: 'long1',
+                type: 'long',
+                question: 'Calculate the molarity of a solution prepared by dissolving 5.85 g of NaCl in 250 mL of water. Show all your working. (Molar mass of NaCl = 58.5 g/mol)',
+                answer: '0.4 M',
+                explanation: `**STEP-BY-STEP SOLUTION:**
+
+**STEP 1: Identify what we know**
+• Mass of NaCl = 5.85 g
+• Volume of solution = 250 mL
+• Molar mass of NaCl = 58.5 g/mol
+• We need to find: Molarity (M)
+
+**STEP 2: Write the molarity formula**
+Molarity (M) = moles of solute ÷ volume of solution (in L)
+
+**STEP 3: Calculate moles of NaCl**
+moles = mass ÷ molar mass
+moles of NaCl = 5.85 g ÷ 58.5 g/mol = 0.1 mol
+
+**STEP 4: Convert volume to liters**
+Volume = 250 mL = 250 ÷ 1000 = 0.25 L
+
+**STEP 5: Calculate molarity**
+Molarity = 0.1 mol ÷ 0.25 L = 0.4 M
+
+**FINAL ANSWER: The molarity of the NaCl solution is 0.4 M**
+
+**KEY POINTS TO REMEMBER:**
+• Always convert mL to L by dividing by 1000
+• Molarity = mol/L (moles per liter)
+• Check your units throughout the calculation`,
+                topic: 'Solutions and Concentration',
+                difficulty: 'medium'
+            },
+            {
+                id: 'long2',
+                type: 'long',
+                question: 'Balance the following redox equation and identify the oxidizing and reducing agents: Fe²⁺ + MnO₄⁻ → Fe³⁺ + Mn²⁺ (in acidic solution)',
+                answer: '5Fe²⁺ + MnO₄⁻ + 8H⁺ → 5Fe³⁺ + Mn²⁺ + 4H₂O',
+                explanation: `**STEP-BY-STEP SOLUTION FOR REDOX BALANCING:**
+
+**STEP 1: Write the unbalanced equation**
+Fe²⁺ + MnO₄⁻ → Fe³⁺ + Mn²⁺
+
+**STEP 2: Identify what's being oxidized and reduced**
+• Fe²⁺ → Fe³⁺ (loses 1 electron = OXIDATION)
+• MnO₄⁻ → Mn²⁺ (gains 5 electrons = REDUCTION)
+
+**STEP 3: Write separate half-reactions**
+Oxidation half-reaction: Fe²⁺ → Fe³⁺ + e⁻
+Reduction half-reaction: MnO₄⁻ → Mn²⁺
+
+**STEP 4: Balance the reduction half-reaction**
+• Balance Mn: MnO₄⁻ → Mn²⁺ ✓ (already balanced)
+• Balance O by adding H₂O: MnO₄⁻ → Mn²⁺ + 4H₂O
+• Balance H by adding H⁺: MnO₄⁻ + 8H⁺ → Mn²⁺ + 4H₂O
+• Balance charge by adding electrons: MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O
+
+**STEP 5: Balance electrons between half-reactions**
+• Oxidation: Fe²⁺ → Fe³⁺ + e⁻ (multiply by 5)
+• 5Fe²⁺ → 5Fe³⁺ + 5e⁻
+• Reduction: MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O
+
+**STEP 6: Add the half-reactions**
+5Fe²⁺ + MnO₄⁻ + 8H⁺ + 5e⁻ → 5Fe³⁺ + 5e⁻ + Mn²⁺ + 4H₂O
+
+**STEP 7: Cancel electrons and write final equation**
+**5Fe²⁺ + MnO₄⁻ + 8H⁺ → 5Fe³⁺ + Mn²⁺ + 4H₂O**
+
+**STEP 8: Identify agents**
+• **Oxidizing agent: MnO₄⁻** (causes oxidation, gets reduced)
+• **Reducing agent: Fe²⁺** (causes reduction, gets oxidized)
+
+**MEMORY TIP:** "OIL RIG" - Oxidation Involves Loss (of electrons), Reduction Involves Gain (of electrons)`,
+                topic: 'Redox Reactions',
+                difficulty: 'hard'
+            },
+            {
+                id: 'long3',
+                type: 'long',
+                question: 'Explain the trend in atomic radius across Period 3 of the periodic table. Include the underlying reason for this trend.',
+                answer: 'Atomic radius decreases from left to right across Period 3',
+                explanation: `**STEP-BY-STEP EXPLANATION:**
+
+**STEP 1: State the trend**
+Atomic radius **decreases** from left to right across Period 3
+Na > Mg > Al > Si > P > S > Cl > Ar
+
+**STEP 2: Identify what stays the same**
+All elements in Period 3 have the **same number of electron shells (3 shells)**
+• 1st shell: 2 electrons
+• 2nd shell: 8 electrons  
+• 3rd shell: varies from 1 to 8 electrons
+
+**STEP 3: Identify what changes**
+As we move from left to right, the **nuclear charge increases**:
+• Na: 11 protons
+• Mg: 12 protons
+• Al: 13 protons
+• Si: 14 protons
+• P: 15 protons
+• S: 16 protons
+• Cl: 17 protons
+• Ar: 18 protons
+
+**STEP 4: Explain the mechanism**
+1. **More protons = stronger positive charge** in the nucleus
+2. **Same electron shells = same shielding effect** from inner electrons
+3. **Stronger nuclear charge pulls electrons closer** to the nucleus
+4. **Result: atomic radius decreases**
+
+**STEP 5: Use a specific example**
+Compare Na and Cl:
+• Na (11 protons): larger atomic radius
+• Cl (17 protons): smaller atomic radius
+• Both have 3 electron shells, but Cl's nucleus has 6 more protons pulling the electrons inward
+
+**STEP 6: Consider the exception**
+Ar (noble gas) has a slightly larger radius than expected due to:
+• Complete electron shell stability
+• Electron-electron repulsion in filled orbitals
+
+**KEY CONCEPT:** Nuclear charge increases → Stronger attraction → Electrons pulled closer → Smaller atomic radius`,
+                topic: 'Periodic Trends',
+                difficulty: 'medium'
+            },
+            {
+                id: 'long4',
+                type: 'long',
+                question: 'A 2.5 L container holds nitrogen gas at 25°C and 2.0 atm pressure. Calculate the number of moles of nitrogen gas present. (R = 0.0821 L·atm/mol·K)',
+                answer: '0.203 mol',
+                explanation: `**STEP-BY-STEP GAS LAW CALCULATION:**
+
+**STEP 1: Identify the given information**
+• Volume (V) = 2.5 L
+• Temperature (T) = 25°C
+• Pressure (P) = 2.0 atm
+• Gas constant (R) = 0.0821 L·atm/mol·K
+• Find: number of moles (n)
+
+**STEP 2: Choose the correct gas law**
+We use the **Ideal Gas Law: PV = nRT**
+This relates pressure, volume, moles, and temperature.
+
+**STEP 3: Convert temperature to Kelvin**
+T(K) = T(°C) + 273
+T = 25°C + 273 = 298 K
+
+**Why Kelvin?** Gas laws require absolute temperature (Kelvin) because they're based on kinetic energy, which is proportional to absolute temperature.
+
+**STEP 4: Rearrange the ideal gas law to solve for n**
+PV = nRT
+n = PV ÷ RT
+
+**STEP 5: Substitute the values**
+n = (P × V) ÷ (R × T)
+n = (2.0 atm × 2.5 L) ÷ (0.0821 L·atm/mol·K × 298 K)
+
+**STEP 6: Calculate step by step**
+• Numerator: 2.0 × 2.5 = 5.0 atm·L
+• Denominator: 0.0821 × 298 = 24.46 L·atm/mol
+• n = 5.0 ÷ 24.46 = 0.203 mol
+
+**STEP 7: Check units**
+atm·L ÷ (L·atm/mol·K × K) = atm·L ÷ (L·atm/mol) = mol ✓
+
+**FINAL ANSWER: 0.203 moles of nitrogen gas**
+
+**COMMON MISTAKES TO AVOID:**
+• Forgetting to convert °C to K
+• Using wrong gas constant (R value must match units)
+• Incorrect rearrangement of PV = nRT`,
+                topic: 'Gas Laws',
+                difficulty: 'medium'
+            },
+            {
+                id: 'long5',
+                type: 'long',
+                question: 'Draw the Lewis structure for water (H₂O) and explain its molecular geometry using VSEPR theory.',
+                answer: 'Bent/Angular geometry with bond angle ~104.5°',
+                explanation: `**STEP-BY-STEP LEWIS STRUCTURE AND VSEPR ANALYSIS:**
+
+**STEP 1: Count total valence electrons**
+• Oxygen (O): 6 valence electrons
+• Hydrogen (H): 1 valence electron each × 2 = 2 electrons
+• **Total: 6 + 2 = 8 valence electrons**
+
+**STEP 2: Draw the Lewis structure**
+\`\`\`
+    H
+    |
+O - H
+\`\`\`
+With 2 lone pairs on oxygen:
+\`\`\`
+  : :
+H-O-H
+\`\`\`
+
+**STEP 3: Apply VSEPR theory**
+VSEPR = Valence Shell Electron Pair Repulsion Theory
+**Key principle:** Electron pairs repel each other and arrange to minimize repulsion.
+
+**STEP 4: Count electron pairs around central atom (O)**
+• **Bonding pairs:** 2 (two O-H bonds)
+• **Lone pairs:** 2 (remaining electrons on oxygen)
+• **Total electron pairs:** 4
+
+**STEP 5: Determine electron geometry**
+4 electron pairs → **Tetrahedral electron geometry**
+(electron pairs arrange in 3D tetrahedral pattern)
+
+**STEP 6: Determine molecular geometry**
+Molecular geometry considers **only atoms, not lone pairs**:
+• 2 atoms bonded to central O
+• 2 lone pairs (invisible in molecular shape)
+• **Molecular geometry: Bent/Angular**
+
+**STEP 7: Predict bond angle**
+• Perfect tetrahedral angle = 109.5°
+• Lone pairs take up more space than bonding pairs
+• Lone pair-bonding pair repulsion > bonding pair-bonding pair repulsion
+• **Actual H-O-H bond angle ≈ 104.5°** (compressed from 109.5°)
+
+**STEP 8: Explain the shape**
+The bent shape results from:
+1. **Tetrahedral arrangement** of 4 electron pairs
+2. **Two lone pairs** "pushing down" on the H-O-H bond
+3. **Lone pair repulsion** compressing the bond angle
+
+**VISUAL REPRESENTATION:**
+\`\`\`
+    Lone pair
+        ↑
+H ← O → H  (bent, not linear)
+        ↑
+    Lone pair
+\`\`\`
+
+**WHY NOT LINEAR?** If H₂O were linear (H-O-H at 180°), the lone pairs would be too close together, creating high repulsion energy.
+
+**REAL-WORLD IMPORTANCE:** The bent shape of water molecules enables hydrogen bonding, which explains water's unique properties like high boiling point and surface tension.`,
+                topic: 'Chemical Bonding',
+                difficulty: 'hard'
+            },
+            {
+                id: 'long6',
+                type: 'long',
+                question: 'Calculate the pH of a buffer solution containing 0.1 M CH₃COOH and 0.1 M CH₃COONa. (Ka for CH₃COOH = 1.8 × 10⁻⁵)',
+                answer: 'pH = 4.74',
+                explanation: `**STEP-BY-STEP BUFFER CALCULATION:**
+
+**STEP 1: Identify the buffer system**
+• **Weak acid:** CH₃COOH (acetic acid)
+• **Conjugate base:** CH₃COO⁻ (from CH₃COONa)
+• This is an **acidic buffer** (weak acid + conjugate base)
+
+**STEP 2: Choose the appropriate equation**
+For buffers, use the **Henderson-Hasselbalch equation:**
+**pH = pKa + log([A⁻]/[HA])**
+
+Where:
+• [A⁻] = concentration of conjugate base
+• [HA] = concentration of weak acid
+
+**STEP 3: Calculate pKa from Ka**
+pKa = -log(Ka)
+pKa = -log(1.8 × 10⁻⁵)
+
+**How to calculate log(1.8 × 10⁻⁵):**
+log(1.8 × 10⁻⁵) = log(1.8) + log(10⁻⁵)
+log(1.8) ≈ 0.26
+log(10⁻⁵) = -5
+So: log(1.8 × 10⁻⁵) = 0.26 + (-5) = -4.74
+
+Therefore: pKa = -(-4.74) = 4.74
+
+**STEP 4: Identify concentrations**
+• [HA] = [CH₃COOH] = 0.1 M
+• [A⁻] = [CH₃COO⁻] = 0.1 M (from complete dissociation of CH₃COONa)
+
+**STEP 5: Apply Henderson-Hasselbalch equation**
+pH = pKa + log([A⁻]/[HA])
+pH = 4.74 + log(0.1/0.1)
+pH = 4.74 + log(1)
+pH = 4.74 + 0
+**pH = 4.74**
+
+**STEP 6: Understand why log(1) = 0**
+log(1) = 0 because 10⁰ = 1
+
+**STEP 7: Special case insight**
+When [A⁻] = [HA] (equal concentrations):
+• The ratio [A⁻]/[HA] = 1
+• log(1) = 0
+• **pH = pKa exactly**
+
+**BUFFER PRINCIPLES:**
+1. **Buffers resist pH change** when small amounts of acid/base are added
+2. **Best buffering occurs when pH ≈ pKa** (within ±1 pH unit)
+3. **Equal concentrations give pH = pKa** (maximum buffer capacity)
+
+**REAL-WORLD APPLICATION:** This acetate buffer (pH 4.74) is used in:
+• Food preservation
+• Biochemical experiments
+• Pharmaceutical formulations
+
+**FINAL ANSWER: pH = 4.74**`,
+                topic: 'Acids and Bases',
+                difficulty: 'hard'
+            },
+            {
+                id: 'long7',
+                type: 'long',
+                question: 'Explain the mechanism of nucleophilic substitution in the reaction between CH₃Br and OH⁻ to form CH₃OH.',
+                answer: 'SN2 mechanism with backside attack',
+                explanation: `**STEP-BY-STEP SN2 MECHANISM EXPLANATION:**
+
+**STEP 1: Identify the reaction type**
+CH₃Br + OH⁻ → CH₃OH + Br⁻
+This is a **nucleophilic substitution** reaction where OH⁻ replaces Br⁻.
+
+**STEP 2: Determine the mechanism type**
+This follows an **SN2 mechanism** because:
+• **Primary carbon** (CH₃-) - no steric hindrance
+• **Strong nucleophile** (OH⁻) - high electron density
+• **Good leaving group** (Br⁻) - stable when it leaves
+
+**STEP 3: Understand SN2 characteristics**
+**SN2 = Substitution, Nucleophilic, Bimolecular**
+• **Substitution:** One group replaces another
+• **Nucleophilic:** Electron-rich species attacks electron-poor carbon
+• **Bimolecular:** Rate depends on both reactant concentrations
+
+**STEP 4: Describe the mechanism step-by-step**
+
+**Stage 1: Nucleophilic approach**
+• OH⁻ approaches the carbon atom from the **backside** (opposite to Br⁻)
+• This minimizes electron repulsion between OH⁻ and Br⁻
+
+**Stage 2: Transition state formation**
+• OH⁻ starts forming a bond with carbon
+• C-Br bond starts breaking simultaneously
+• **Concerted process** - happens in one step
+• Transition state: [HO···C···Br]⁻
+
+**Stage 3: Product formation**
+• OH⁻ fully bonds to carbon
+• Br⁻ completely leaves
+• **Inversion of configuration** occurs at carbon center
+
+**STEP 5: Draw the mechanism**
+\`\`\`
+HO⁻ + H₃C-Br → [HO···CH₃···Br]⁻ → HO-CH₃ + Br⁻
+     (reactants)    (transition state)    (products)
+\`\`\`
+
+**STEP 6: Explain key features**
+
+**Backside Attack:**
+• Nucleophile attacks from opposite side of leaving group
+• Prevents electron repulsion
+• Causes stereochemical inversion
+
+**Concerted Mechanism:**
+• Bond formation and bond breaking happen simultaneously
+• No intermediate formed
+• Single transition state
+
+**Rate Law:**
+Rate = k[CH₃Br][OH⁻]
+• **Bimolecular** - rate depends on both concentrations
+• **Second-order kinetics**
+
+**STEP 7: Factors favoring SN2**
+1. **Primary carbons** (like CH₃-) - less steric hindrance
+2. **Strong nucleophiles** (like OH⁻) - high reactivity
+3. **Polar aprotic solvents** - don't solvate nucleophile
+4. **Good leaving groups** (like Br⁻) - stable when leaving
+
+**STEP 8: Compare with SN1**
+**SN2 vs SN1:**
+• SN2: One step, backside attack, inversion
+• SN1: Two steps, carbocation intermediate, racemization
+
+**REAL-WORLD IMPORTANCE:**
+SN2 reactions are crucial in:
+• Organic synthesis
+• Drug metabolism
+• Biochemical processes (enzyme reactions)
+
+**MEMORY AID:** "SN2 = **S**imultaneous **N**ucleophilic attack with **2** molecules involved"`,
+                topic: 'Organic Chemistry',
+                difficulty: 'hard'
+            },
+            {
+                id: 'long8',
+                type: 'long',
+                question: 'Calculate the standard enthalpy change for the reaction: 2H₂(g) + O₂(g) → 2H₂O(l) using bond enthalpies. (Bond enthalpies: H-H = 436 kJ/mol, O=O = 498 kJ/mol, O-H = 463 kJ/mol)',
+                answer: 'ΔH° = -482 kJ/mol',
+                explanation: `**STEP-BY-STEP BOND ENTHALPY CALCULATION:**
+
+**STEP 1: Understand the concept**
+**Bond enthalpy method:** ΔH = Energy required to break bonds - Energy released when bonds form
+**ΔH = Bonds broken - Bonds formed**
+
+**STEP 2: Write the balanced equation**
+2H₂(g) + O₂(g) → 2H₂O(l)
+
+**STEP 3: Identify bonds in reactants (bonds to break)**
+**In 2H₂ molecules:**
+• Each H₂ has 1 H-H bond
+• 2 H₂ molecules = 2 H-H bonds
+• Energy required = 2 × 436 kJ/mol = 872 kJ
+
+**In 1 O₂ molecule:**
+• 1 O=O double bond
+• Energy required = 1 × 498 kJ/mol = 498 kJ
+
+**Total energy required to break bonds = 872 + 498 = 1370 kJ**
+
+**STEP 4: Identify bonds in products (bonds formed)**
+**In 2H₂O molecules:**
+• Each H₂O has 2 O-H bonds
+• 2 H₂O molecules = 4 O-H bonds total
+• Energy released = 4 × 463 kJ/mol = 1852 kJ
+
+**STEP 5: Apply the bond enthalpy formula**
+ΔH = Energy required - Energy released
+ΔH = 1370 kJ - 1852 kJ = -482 kJ
+
+**STEP 6: Interpret the sign**
+**ΔH = -482 kJ** (negative value)
+• **Negative ΔH = Exothermic reaction**
+• Energy is released to surroundings
+• Products are more stable than reactants
+
+**STEP 7: Express per mole of reaction**
+The balanced equation shows 2 moles of H₂O formed.
+**ΔH° = -482 kJ for the formation of 2 mol H₂O**
+
+Per mole of H₂O: ΔH° = -482 ÷ 2 = -241 kJ/mol H₂O
+
+**STEP 8: Verify with energy diagram**
+\`\`\`
+Energy
+  ↑
+  |  Reactants (2H₂ + O₂)
+  |     ↑ +1370 kJ (break bonds)
+  |  ────────────────────
+  |     ↓ -1852 kJ (form bonds)
+  |  Products (2H₂O)
+  |
+  └─────────────────────→ Reaction progress
+     Net: -482 kJ released
+\`\`\`
+
+**STEP 9: Check reasonableness**
+• Water formation is highly exothermic ✓
+• Strong O-H bonds formed vs weaker bonds broken ✓
+• Matches known combustion data ✓
+
+**KEY CONCEPTS:**
+1. **Bond breaking requires energy** (endothermic, +ΔH)
+2. **Bond formation releases energy** (exothermic, -ΔH)
+3. **Net energy change** determines if reaction is exothermic or endothermic
+4. **Stronger bonds release more energy** when formed
+
+**LIMITATIONS OF BOND ENTHALPY METHOD:**
+• Uses average bond energies (actual values vary)
+• Ignores phase changes and intermolecular forces
+• Less accurate than calorimetric measurements
+
+**FINAL ANSWER: ΔH° = -482 kJ for 2H₂(g) + O₂(g) → 2H₂O(l)**`,
+                topic: 'Thermochemistry',
+                difficulty: 'hard'
+            }
+        ];
+
+        // Global variables
+        let currentQuestions = [];
+        let mcqQuestions = [];
+        let selectedAnswers = {};
+        let isSubmitted = false;
+        let examTimer = null;
+        let examTimeLeft = 180 * 60; // 3 hours in seconds
+        let isTimerActive = false;
+        let currentPage = 'home';
+        let currentTopic = 'all';
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            showPage('home');
+            initializeQuestionBanks();
         });
-        
-        document.getElementById(`explanation-${questionIndex}`).style.display = 'block';
-        updatePracticeScore();
-      }, 500);
-    }
 
-    // Select option for MCQ questions
-    function selectMCQOption(questionIndex, optionIndex) {
-      const question = currentQuestions[questionIndex];
-      currentAnswers[questionIndex] = optionIndex;
-      
-      // Update UI
-      const questionCard = document.querySelectorAll('#mcq-questions .question-card')[questionIndex];
-      const options = questionCard.querySelectorAll('.option');
-      
-      options.forEach((opt, i) => {
-        opt.classList.remove('selected', 'correct', 'incorrect');
-        if (i === optionIndex) {
-          opt.classList.add('selected');
+        // Initialize question banks
+        function initializeQuestionBanks() {
+            mcqQuestions = allQuestions.filter(q => q.type === 'mcq');
+            currentQuestions = [...allQuestions];
         }
-      });
-      
-      // Show explanation after selection
-      setTimeout(() => {
-        options.forEach((opt, i) => {
-          if (i === question.correct) {
-            opt.classList.add('correct');
-          } else if (i === optionIndex && i !== question.correct) {
-            opt.classList.add('incorrect');
-          }
-        });
-        
-        document.getElementById(`mcq-explanation-${questionIndex}`).style.display = 'block';
-        updateMCQScore();
-      }, 500);
-    }
 
-    // Update practice score
-    function updatePracticeScore() {
-      const mcqQuestions = currentQuestions.filter(q => q.options);
-      const answered = Object.keys(currentAnswers).length;
-      const correct = Object.entries(currentAnswers).filter(([index, answer]) => {
-        const question = currentQuestions[index];
-        return question.options && answer === question.correct;
-      }).length;
-      
-      if (answered > 0) {
-        const scoreElement = document.getElementById('practice-score');
-        scoreElement.innerHTML = `Score: ${correct}/${answered} MCQs answered correctly (${Math.round(correct/answered*100)}%)`;
-        scoreElement.style.display = 'block';
-      }
-    }
-
-    // Update MCQ score
-    function updateMCQScore() {
-      const answered = Object.keys(currentAnswers).length;
-      const correct = Object.entries(currentAnswers).filter(([index, answer]) => {
-        return answer === currentQuestions[index].correct;
-      }).length;
-      
-      if (answered > 0) {
-        const scoreElement = document.getElementById('mcq-score');
-        scoreElement.innerHTML = `Score: ${correct}/${answered} correct (${Math.round(correct/answered*100)}%)`;
-        scoreElement.style.display = 'block';
-      }
-    }
-
-    // Filter functions
-    function filterQuestions(topic) {
-      currentFilter = topic;
-      
-      // Update active filter button
-      document.querySelectorAll('#practice-page .filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      
-      loadPracticeQuestions();
-    }
-
-    function filterMCQ(topic) {
-      currentFilter = topic;
-      mcqDisplayCount = 5; // Reset display count
-      
-      // Update active filter button
-      document.querySelectorAll('#mcq-page .filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      
-      loadMCQQuestions();
-    }
-
-    // MCQ utility functions
-    function shuffleMCQ() {
-      let filteredQuestions = questionBank.mcq;
-      if (currentFilter !== 'all') {
-        filteredQuestions = questionBank.mcq.filter(q => q.topic === currentFilter);
-      }
-      
-      // Shuffle array
-      for (let i = filteredQuestions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [filteredQuestions[i], filteredQuestions[j]] = [filteredQuestions[j], filteredQuestions[i]];
-      }
-      
-      currentQuestions = filteredQuestions.slice(0, mcqDisplayCount);
-      currentAnswers = {};
-      displayMCQQuestions();
-    }
-
-    function loadMoreMCQ() {
-      let filteredQuestions = questionBank.mcq;
-      if (currentFilter !== 'all') {
-        filteredQuestions = questionBank.mcq.filter(q => q.topic === currentFilter);
-      }
-      
-      mcqDisplayCount = Math.min(mcqDisplayCount + 5, filteredQuestions.length);
-      currentQuestions = filteredQuestions.slice(0, mcqDisplayCount);
-      
-      displayMCQQuestions();
-    }
-
-    // Mock exam functions
-    function startMockExam() {
-      // Select random questions for exam
-      const examMCQ = questionBank.mcq.sort(() => 0.5 - Math.random()).slice(0, 20);
-      const examLong = questionBank.longQuestions.sort(() => 0.5 - Math.random()).slice(0, 4);
-      
-      currentQuestions = [...examMCQ, ...examLong];
-      currentAnswers = {};
-      
-      // Start timer (180 minutes)
-      startTimer(180 * 60);
-      
-      // Display questions
-      const container = document.getElementById('exam-questions');
-      container.innerHTML = currentQuestions.map((q, index) => {
-        if (q.options) {
-          return `
-            <div class="question-card">
-              <div class="question-number">Question ${index + 1} (MCQ - 2 marks)</div>
-              <div class="question-text">${q.question}</div>
-              <div class="options">
-                ${q.options.map((option, i) => `
-                  <div class="option" onclick="selectExamOption(${index}, ${i})" data-option="${i}">
-                    ${String.fromCharCode(65 + i)}. ${option}
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `;
-        } else {
-          return `
-            <div class="question-card">
-              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks)</div>
-              <div class="question-text">${q.question}</div>
-              <textarea placeholder="Write your answer here..." style="width: 100%; min-height: 150px; margin-top: 15px; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit;"></textarea>
-            </div>
-          `;
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
         }
-      }).join('');
-      
-      // Add submit button
-      container.innerHTML += `
-        <div style="text-align: center; margin-top: 30px;">
-          <button class="btn btn-primary" onclick="submitExam()">Submit Exam</button>
-        </div>
-      `;
-      
-      document.getElementById('exam-score').style.display = 'none';
-    }
 
-    function selectExamOption(questionIndex, optionIndex) {
-      currentAnswers[questionIndex] = optionIndex;
-      
-      const questionCard = document.querySelectorAll('#exam-questions .question-card')[questionIndex];
-      const options = questionCard.querySelectorAll('.option');
-      
-      options.forEach(opt => opt.classList.remove('selected'));
-      options[optionIndex].classList.add('selected');
-    }
-
-    function submitExam() {
-      if (examTimer) {
-        clearInterval(examTimer);
-        examTimer = null;
-      }
-      
-      // Calculate score for MCQ questions only
-      const mcqQuestions = currentQuestions.filter(q => q.options);
-      const mcqAnswered = Object.entries(currentAnswers).filter(([index]) => {
-        return currentQuestions[index].options;
-      });
-      
-      const correct = mcqAnswered.filter(([index, answer]) => {
-        return answer === currentQuestions[index].correct;
-      }).length;
-      
-      const totalMCQ = mcqQuestions.length;
-      const mcqScore = correct * 2; // 2 marks per MCQ
-      const longQuestionMarks = currentQuestions.filter(q => !q.options).reduce((sum, q) => sum + q.points, 0);
-      
-      document.getElementById('exam-score').innerHTML = `
-        <h3>Exam Completed!</h3>
-        <p>MCQ Score: ${mcqScore}/${totalMCQ * 2} marks (${correct}/${totalMCQ} correct)</p>
-        <p>Long Questions: ${longQuestionMarks} marks (to be marked manually)</p>
-        <p>Total Possible: ${totalMCQ * 2 + longQuestionMarks} marks</p>
-      `;
-      document.getElementById('exam-score').style.display = 'block';
-      document.getElementById('timer').style.display = 'none';
-    }
-
-    // Timer functions
-    function startTimer(seconds) {
-      let timeLeft = seconds;
-      const timerElement = document.getElementById('timer');
-      const timeDisplay = document.getElementById('time-display');
-      
-      timerElement.style.display = 'block';
-      
-      examTimer = setInterval(() => {
-        const minutes = Math.floor(timeLeft / 60);
-        const secs = timeLeft % 60;
-        timeDisplay.textContent = `${minutes}:${secs.toString().padStart(2, '0')}`;
-        
-        if (timeLeft <= 0) {
-          clearInterval(examTimer);
-          examTimer = null;
-          submitExam();
-          alert('Time\'s up! Exam submitted automatically.');
+        // Navigation
+        function showPage(pageId) {
+            currentPage = pageId;
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId + '-page').classList.remove('hidden');
+            
+            // Show/hide section navigation
+            const sectionNav = document.getElementById('section-nav');
+            if (pageId === 'home') {
+                sectionNav.classList.add('hidden');
+            } else {
+                sectionNav.classList.remove('hidden');
+            }
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to current page button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(pageId.replace('-', ' '))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Initialize page content
+            if (pageId === 'practice') {
+                initializePractice();
+            } else if (pageId === 'mcq-only') {
+                initializeMCQ();
+            } else if (pageId === 'mock-exam') {
+                resetMockExam();
+            }
+            
+            // Hide mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Recreate icons after content changes
+            setTimeout(() => lucide.createIcons(), 100);
         }
-        
-        timeLeft--;
-      }, 1000);
-    }
 
-    // Initialize the app
-    document.addEventListener('DOMContentLoaded', function() {
-      // Show main page by default
-      showPage('main-page');
-    });
-  </script>
+        // Topic filtering
+        function filterByTopic(topic) {
+            currentTopic = topic;
+            
+            if (currentPage === 'practice') {
+                if (topic === 'all') {
+                    currentQuestions = [...allQuestions];
+                } else {
+                    currentQuestions = allQuestions.filter(q => q.topic === topic);
+                }
+                selectedAnswers = {};
+                isSubmitted = false;
+                renderPracticeQuestions();
+                document.getElementById('practice-score').classList.add('hidden');
+            } else if (currentPage === 'mcq-only') {
+                if (topic === 'all') {
+                    mcqQuestions = allQuestions.filter(q => q.type === 'mcq');
+                } else {
+                    mcqQuestions = allQuestions.filter(q => q.type === 'mcq' && q.topic === topic);
+                }
+                selectedAnswers = {};
+                isSubmitted = false;
+                renderMCQQuestions();
+                document.getElementById('mcq-score').classList.add('hidden');
+            }
+        }
+
+        // Shuffle array utility
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Practice Questions Functions
+        function initializePractice() {
+            if (currentTopic === 'all') {
+                currentQuestions = [...allQuestions];
+            } else {
+                currentQuestions = allQuestions.filter(q => q.topic === currentTopic);
+            }
+            selectedAnswers = {};
+            isSubmitted = false;
+            renderPracticeQuestions();
+            document.getElementById('practice-score').classList.add('hidden');
+        }
+
+        function shuffleQuestions(context) {
+            if (context === 'practice' && !isSubmitted) {
+                currentQuestions = shuffleArray(currentQuestions);
+                selectedAnswers = {};
+                renderPracticeQuestions();
+            } else if (context === 'mcq' && !isSubmitted) {
+                mcqQuestions = shuffleArray(mcqQuestions);
+                selectedAnswers = {};
+                renderMCQQuestions();
+            }
+        }
+
+        function resetPractice() {
+            initializePractice();
+        }
+
+        function submitPractice() {
+            isSubmitted = true;
+            renderPracticeQuestions();
+            showPracticeScore();
+        }
+
+        function showPracticeScore() {
+            const mcqInPractice = currentQuestions.filter(q => q.type === 'mcq');
+            const correctAnswers = mcqInPractice.filter(q => selectedAnswers[q.id] === q.answer).length;
+            const percentage = mcqInPractice.length > 0 ? Math.round((correctAnswers / mcqInPractice.length) * 100) : 0;
+            
+            document.getElementById('score-display').textContent = `${percentage}%`;
+            document.getElementById('practice-score').classList.remove('hidden');
+        }
+
+        function renderPracticeQuestions() {
+            const container = document.getElementById('practice-questions-container');
+            container.innerHTML = '';
+
+            currentQuestions.forEach((question, index) => {
+                const questionCard = createQuestionCard(question, index + 1, 'practice');
+                container.appendChild(questionCard);
+            });
+
+            lucide.createIcons();
+        }
+
+        // MCQ Only Functions
+        function initializeMCQ() {
+            if (currentTopic === 'all') {
+                mcqQuestions = allQuestions.filter(q => q.type === 'mcq');
+            } else {
+                mcqQuestions = allQuestions.filter(q => q.type === 'mcq' && q.topic === currentTopic);
+            }
+            selectedAnswers = {};
+            isSubmitted = false;
+            renderMCQQuestions();
+            document.getElementById('mcq-score').classList.add('hidden');
+        }
+
+        function loadMoreMCQs() {
+            // Shuffle and show different MCQs
+            const allMCQs = allQuestions.filter(q => q.type === 'mcq');
+            if (currentTopic !== 'all') {
+                mcqQuestions = shuffleArray(allMCQs.filter(q => q.topic === currentTopic));
+            } else {
+                mcqQuestions = shuffleArray(allMCQs);
+            }
+            selectedAnswers = {};
+            isSubmitted = false;
+            renderMCQQuestions();
+            document.getElementById('mcq-score').classList.add('hidden');
+        }
+
+        function resetMCQ() {
+            initializeMCQ();
+        }
+
+        function submitMCQ() {
+            isSubmitted = true;
+            renderMCQQuestions();
+            showMCQScore();
+        }
+
+        function showMCQScore() {
+            const correctAnswers = mcqQuestions.filter(q => selectedAnswers[q.id] === q.answer).length;
+            const percentage = mcqQuestions.length > 0 ? Math.round((correctAnswers / mcqQuestions.length) * 100) : 0;
+            
+            document.getElementById('mcq-score-display').textContent = `${correctAnswers}/${mcqQuestions.length}`;
+            document.getElementById('mcq-percentage-display').textContent = `${percentage}%`;
+            document.getElementById('mcq-total-display').textContent = mcqQuestions.length;
+            document.getElementById('mcq-score').classList.remove('hidden');
+        }
+
+        function renderMCQQuestions() {
+            const container = document.getElementById('mcq-questions-container');
+            container.innerHTML = '';
+
+            mcqQuestions.forEach((question, index) => {
+                const questionCard = createQuestionCard(question, index + 1, 'mcq');
+                container.appendChild(questionCard);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Mock Exam Functions
+        function startMockExam() {
+            // Select balanced questions for exam
+            const examMCQs = shuffleArray(allQuestions.filter(q => q.type === 'mcq')).slice(0, 10);
+            const examLongs = shuffleArray(allQuestions.filter(q => q.type === 'long')).slice(0, 5);
+            
+            currentQuestions = shuffleArray([...examMCQs, ...examLongs]);
+            selectedAnswers = {};
+            isSubmitted = false;
+            
+            document.getElementById('exam-setup').classList.add('hidden');
+            document.getElementById('exam-interface').classList.remove('hidden');
+            
+            startTimer();
+            renderExamQuestions();
+        }
+
+        function resetMockExam() {
+            document.getElementById('exam-setup').classList.remove('hidden');
+            document.getElementById('exam-interface').classList.add('hidden');
+            document.getElementById('exam-results').classList.add('hidden');
+            
+            examTimeLeft = 180 * 60;
+            isTimerActive = false;
+            if (examTimer) clearInterval(examTimer);
+            
+            selectedAnswers = {};
+            isSubmitted = false;
+        }
+
+        function submitExam() {
+            isSubmitted = true;
+            isTimerActive = false;
+            if (examTimer) clearInterval(examTimer);
+            
+            renderExamQuestions();
+            showExamResults();
+        }
+
+        function showExamResults() {
+            const mcqInExam = currentQuestions.filter(q => q.type === 'mcq');
+            const correctAnswers = mcqInExam.filter(q => selectedAnswers[q.id] === q.answer).length;
+            const percentage = mcqInExam.length > 0 ? Math.round((correctAnswers / mcqInExam.length) * 100) : 0;
+            
+            document.getElementById('exam-score').textContent = `${correctAnswers}/${mcqInExam.length}`;
+            document.getElementById('exam-percentage').textContent = `${percentage}%`;
+            document.getElementById('exam-results').classList.remove('hidden');
+        }
+
+        function renderExamQuestions() {
+            const container = document.getElementById('exam-questions-container');
+            container.innerHTML = '';
+
+            currentQuestions.forEach((question, index) => {
+                const questionCard = createQuestionCard(question, index + 1, 'exam');
+                container.appendChild(questionCard);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Timer Functions
+        function startTimer() {
+            isTimerActive = true;
+            examTimer = setInterval(updateTimer, 1000);
+        }
+
+        function toggleTimer() {
+            isTimerActive = !isTimerActive;
+            const toggleBtn = document.getElementById('timer-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const text = toggleBtn.querySelector('span');
+            
+            if (isTimerActive) {
+                icon.setAttribute('data-lucide', 'pause');
+                text.textContent = 'Pause';
+                if (!examTimer) {
+                    examTimer = setInterval(updateTimer, 1000);
+                }
+            } else {
+                icon.setAttribute('data-lucide', 'play');
+                text.textContent = 'Start';
+            }
+            
+            lucide.createIcons();
+        }
+
+        function resetTimer() {
+            examTimeLeft = 180 * 60;
+            isTimerActive = false;
+            if (examTimer) {
+                clearInterval(examTimer);
+                examTimer = null;
+            }
+            updateTimerDisplay();
+        }
+
+        function updateTimer() {
+            if (!isTimerActive) return;
+            
+            examTimeLeft--;
+            updateTimerDisplay();
+            
+            if (examTimeLeft <= 0) {
+                clearInterval(examTimer);
+                submitExam();
+                alert('Time\'s up! Your exam has been automatically submitted.');
+            }
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(examTimeLeft / 3600);
+            const minutes = Math.floor((examTimeLeft % 3600) / 60);
+            const seconds = examTimeLeft % 60;
+            
+            const timeString = hours > 0 
+                ? `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+                : `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            const timerDisplay = document.getElementById('timer-display');
+            const timerProgress = document.getElementById('timer-progress');
+            
+            if (timerDisplay) {
+                timerDisplay.textContent = timeString;
+                
+                // Update color based on time remaining
+                const percentage = (examTimeLeft / (180 * 60)) * 100;
+                if (percentage > 50) {
+                    timerDisplay.className = 'text-3xl font-mono font-bold text-green-600 timer-text';
+                } else if (percentage > 25) {
+                    timerDisplay.className = 'text-3xl font-mono font-bold text-yellow-600 timer-text';
+                } else {
+                    timerDisplay.className = 'text-3xl font-mono font-bold text-red-600 timer-text';
+                }
+            }
+            
+            if (timerProgress) {
+                const progressPercentage = (examTimeLeft / (180 * 60)) * 100;
+                timerProgress.style.width = `${progressPercentage}%`;
+                
+                if (progressPercentage > 50) {
+                    timerProgress.className = 'h-2 rounded-full bg-green-500 transition-all duration-1000';
+                } else if (progressPercentage > 25) {
+                    timerProgress.className = 'h-2 rounded-full bg-yellow-500 transition-all duration-1000';
+                } else {
+                    timerProgress.className = 'h-2 rounded-full bg-red-500 transition-all duration-1000';
+                }
+            }
+        }
+
+        // Question Card Creation
+        function createQuestionCard(question, questionNumber, context) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow-lg mb-6';
+            
+            const difficultyColors = {
+                easy: 'bg-green-100 text-green-800',
+                medium: 'bg-yellow-100 text-yellow-800',
+                hard: 'bg-red-100 text-red-800'
+            };
+
+            let optionsHtml = '';
+            if (question.type === 'mcq' && question.options) {
+                optionsHtml = question.options.map((option, index) => {
+                    const optionLetter = String.fromCharCode(65 + index);
+                    const isSelected = selectedAnswers[question.id] === option;
+                    const isCorrect = option === question.answer;
+                    
+                    let buttonClass = 'w-full text-left justify-start h-auto p-3 border rounded-lg mb-2 transition-all ';
+                    let iconHtml = '';
+                    
+                    if (isSubmitted) {
+                        if (isCorrect) {
+                            buttonClass += 'bg-green-100 border-green-500 text-green-800';
+                            iconHtml = '<i data-lucide="check-circle" class="w-4 h-4 text-green-600 ml-2"></i>';
+                        } else if (isSelected && !isCorrect) {
+                            buttonClass += 'bg-red-100 border-red-500 text-red-800';
+                            iconHtml = '<i data-lucide="x-circle" class="w-4 h-4 text-red-600 ml-2"></i>';
+                        } else {
+                            buttonClass += 'bg-gray-50 border-gray-300 text-gray-600';
+                        }
+                    } else if (isSelected) {
+                        buttonClass += 'bg-blue-100 border-blue-500 text-blue-800';
+                    } else {
+                        buttonClass += 'bg-white border-gray-300 hover:bg-gray-50';
+                    }
+
+                    return `
+                        <button 
+                            class="${buttonClass}" 
+                            onclick="selectAnswer('${question.id}', '${option}')"
+                            ${isSubmitted ? 'disabled' : ''}
+                        >
+                            <div class="flex items-center justify-between w-full">
+                                <span><strong>${optionLetter}.</strong> ${option}</span>
+                                ${iconHtml}
+                            </div>
+                        </button>
+                    `;
+                }).join('');
+            }
+
+            let memoHtml = '';
+            const showMemo = isSubmitted || question.showMemo;
+            if (showMemo) {
+                memoHtml = `
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                        <h4 class="font-semibold text-blue-800 mb-2">Solution & Explanation:</h4>
+                        <div class="text-blue-700 whitespace-pre-line">${question.explanation}</div>
+                        ${question.type === 'mcq' ? `
+                            <div class="mt-2 p-2 bg-blue-100 rounded">
+                                <strong>Correct Answer: ${question.answer}</strong>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            let resultBadge = '';
+            if (isSubmitted && question.type === 'mcq') {
+                const isCorrect = selectedAnswers[question.id] === question.answer;
+                resultBadge = `
+                    <div class="flex items-center space-x-2">
+                        <span class="px-3 py-1 rounded-full text-sm font-medium ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                            <i data-lucide="${isCorrect ? 'check-circle' : 'x-circle'}" class="w-3 h-3 mr-1 inline"></i>
+                            ${isCorrect ? 'Correct' : 'Incorrect'}
+                        </span>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-t-xl">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-lg font-semibold text-gray-800">Question ${questionNumber}</h3>
+                        <div class="flex space-x-2">
+                            <span class="px-2 py-1 text-xs border border-gray-300 rounded">${question.topic}</span>
+                            <span class="px-2 py-1 text-xs rounded ${difficultyColors[question.difficulty]}">${question.difficulty}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="mb-4">
+                        <p class="text-gray-700 leading-relaxed whitespace-pre-line">${question.question}</p>
+                    </div>
+
+                    ${optionsHtml}
+
+                    ${question.type === 'long' && !isSubmitted ? `
+                        <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600 italic">
+                                This is a long-answer question. Write your solution on paper and then check the memo for the complete answer.
+                            </p>
+                        </div>
+                    ` : ''}
+
+                    <div class="flex justify-between items-center">
+                        <button 
+                            onclick="toggleMemo('${question.id}')" 
+                            class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                            <i data-lucide="${showMemo ? 'eye-off' : 'eye'}" class="w-4 h-4"></i>
+                            <span>${showMemo ? 'Hide Memo' : 'Show Memo'}</span>
+                        </button>
+                        ${resultBadge}
+                    </div>
+
+                    ${memoHtml}
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Answer Selection
+        function selectAnswer(questionId, answer) {
+            if (!isSubmitted) {
+                selectedAnswers[questionId] = answer;
+                
+                // Re-render based on current context
+                if (currentPage === 'practice') {
+                    renderPracticeQuestions();
+                } else if (currentPage === 'mcq-only') {
+                    renderMCQQuestions();
+                } else if (currentPage === 'mock-exam') {
+                    renderExamQuestions();
+                }
+            }
+        }
+
+        // Memo Toggle
+        function toggleMemo(questionId) {
+            let targetQuestions;
+            if (currentPage === 'mcq-only') {
+                targetQuestions = mcqQuestions;
+            } else {
+                targetQuestions = currentQuestions;
+            }
+            
+            const question = targetQuestions.find(q => q.id === questionId);
+            if (question) {
+                question.showMemo = !question.showMemo;
+                
+                if (currentPage === 'practice') {
+                    renderPracticeQuestions();
+                } else if (currentPage === 'mcq-only') {
+                    renderMCQQuestions();
+                } else if (currentPage === 'mock-exam') {
+                    renderExamQuestions();
+                }
+            }
+        }
+    </script>
 </body>
-
 </html>
