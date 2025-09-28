@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
   <title>Chemistry Practice Hub - Grade 12 Matric Prep</title>
-  <meta name="description" content="Official Grade 12 Physical Sciences Chemistry practice website aligned with exam guidelines" />
+  <meta name="description" content="Comprehensive Grade 12 Chemistry practice website for Matric exam preparation with step-by-step solutions" />
   <meta name="author" content="MGX" />
 
   <style>
@@ -126,6 +126,20 @@
       border-color: #319795;
     }
 
+    .btn-reshuffle {
+      background: #fff5f5;
+      color: #c53030;
+      border: 2px solid #fc8181;
+      padding: 10px 20px;
+      font-size: 14px;
+      margin: 10px 5px;
+    }
+
+    .btn-reshuffle:hover {
+      background: #fed7d7;
+      border-color: #e53e3e;
+    }
+
     .question-card {
       background: #f8fafc;
       border-radius: 12px;
@@ -224,51 +238,12 @@
       white-space: pre-line;
     }
 
-    .guidelines-section {
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 25px;
-      border-left: 4px solid #667eea;
-    }
-
-    .guidelines-section h3 {
-      color: #667eea;
-      margin-bottom: 15px;
-      font-size: 1.3em;
-    }
-
-    .guidelines-section h4 {
-      color: #4a5568;
-      margin: 15px 0 10px 0;
-      font-size: 1.1em;
-    }
-
-    .guidelines-section ul {
-      margin-left: 20px;
-      color: #4a5568;
-    }
-
-    .guidelines-section li {
-      margin-bottom: 8px;
-    }
-
-    .exam-info {
-      background: linear-gradient(135deg, #fed7e2 0%, #fbb6ce 100%);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 25px;
-      border-left: 4px solid #e53e3e;
-    }
-
-    .exam-info h3 {
-      color: #742a2a;
-      margin-bottom: 10px;
-    }
-
-    .exam-info p {
-      color: #742a2a;
-      font-weight: 500;
+    .step-by-step {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border: 1px solid #cbd5e0;
     }
 
     .timer {
@@ -348,6 +323,85 @@
       color: #2f855a;
     }
 
+    .exam-topic {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid #667eea;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .exam-topic h3 {
+      color: #667eea;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .exam-topic ul {
+      margin-left: 20px;
+      color: #4a5568;
+    }
+
+    .exam-topic li {
+      margin-bottom: 5px;
+    }
+
+    .priority-high {
+      border-left-color: #f56565;
+    }
+
+    .priority-medium {
+      border-left-color: #ed8936;
+    }
+
+    .priority-low {
+      border-left-color: #48bb78;
+    }
+
+    .exam-memo-section {
+      margin-top: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+      border-radius: 12px;
+      border-left: 4px solid #e53e3e;
+      display: none;
+    }
+
+    .exam-memo-section.show {
+      display: block;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    .exam-memo-title {
+      color: #742a2a;
+      font-weight: 700;
+      font-size: 1.3em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .exam-question-memo {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 3px solid #667eea;
+    }
+
+    .exam-question-memo h4 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .control-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 10px;
@@ -376,6 +430,16 @@
         margin-bottom: 20px;
         text-align: center;
       }
+
+      .control-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-reshuffle {
+        width: 100%;
+        max-width: 250px;
+      }
     }
 
     .hidden {
@@ -390,31 +454,24 @@
     <div id="main-page" class="page active">
       <div class="header">
         <h1>🧪 Chemistry Practice Hub</h1>
-        <p>Official Grade 12 Physical Sciences (Chemistry - Paper 2) Exam Preparation</p>
-      </div>
-
-      <div class="exam-info">
-        <h3>📋 Official Exam Information</h3>
-        <p><strong>Subject:</strong> Physical Sciences - Chemistry Paper 2</p>
-        <p><strong>Grade:</strong> 12 (Matric Final Exam)</p>
-        <p><strong>Aligned with:</strong> Official Exam Guidelines</p>
+        <p>Master Grade 12 Physical Sciences (Chemistry Paper 2) with comprehensive practice &amp; step-by-step solutions</p>
       </div>
 
       <div class="guidelines">
-        <h3>📚 Study Guidelines for Mpumi</h3>
+        <h3>📋 Study Guidelines for Mpumi</h3>
         <ul>
-          <li>Focus on the 9 main exam topics as per official guidelines</li>
+          <li>Practice regularly with different question types</li>
           <li>Use the "Show Memo" button to see step-by-step solutions</li>
-          <li>Practice calculations using the correct formulas (n = m/M, C = n/V)</li>
-          <li>Master equation balancing and chemical representations</li>
-          <li>Understand intermolecular forces and their effects on properties</li>
-          <li>Practice organic chemistry naming and reactions</li>
+          <li>Focus on understanding concepts, not just memorizing</li>
+          <li>Review the official exam guidelines for Paper 2 topics</li>
+          <li>Use the timer to simulate exam conditions</li>
+          <li>Master mole calculations, organic chemistry, and equilibrium</li>
         </ul>
       </div>
 
       <div class="nav-buttons">
-        <button class="btn btn-primary" onclick="showPage('guidelines-page')">📖 Final Exam Guidelines</button>
-        <button class="btn btn-primary" onclick="showPage('practice-page')">📚 Practice Questions</button>
+        <button class="btn btn-primary" onclick="showPage('guidelines-page')">📚 Final Exam Guidelines</button>
+        <button class="btn btn-primary" onclick="showPage('practice-page')">📝 Practice Questions</button>
         <button class="btn btn-primary" onclick="showPage('mcq-page')">✅ MCQ Only</button>
         <button class="btn btn-primary" onclick="showPage('mock-exam-page')">⏰ Mock Exam</button>
       </div>
@@ -425,188 +482,131 @@
       <button class="btn btn-back" onclick="showPage('main-page')">← Back to Main</button>
       
       <div class="header">
-        <h1>📖 Official Final Exam Guidelines</h1>
-        <p>Grade 12 Physical Sciences - Chemistry Paper 2</p>
+        <h1>📚 Official Grade 12 Physical Sciences Guidelines</h1>
+        <p>Chemistry Paper 2 - Final Exam Topics &amp; Focus Areas</p>
       </div>
 
-      <div class="exam-info">
-        <h3>🎯 Exam Focus Areas</h3>
-        <p>These are the 9 main topics Mpumi must master for the final Chemistry exam, as per official guidelines.</p>
-      </div>
-
-      <div class="guidelines-section">
-        <h3>1. Representing Chemical Change</h3>
-        <h4>Key Focus Areas:</h4>
+      <div class="exam-topic priority-high">
+        <h3>🔥 HIGH PRIORITY: Representing Chemical Change</h3>
         <ul>
           <li>Writing and balancing chemical equations</li>
           <li>Conservation of atoms and mass</li>
-          <li>Use of state symbols: (s), (l), (g), (aq)</li>
-          <li>Identifying reactants and products</li>
+          <li>Use of state symbols (s), (l), (g), (aq)</li>
+          <li>Molecular, ionic, and net ionic equations</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>2. Quantitative Aspects of Chemical Change</h3>
-        <h4>Essential Calculations:</h4>
+      <div class="exam-topic priority-high">
+        <h3>🔥 HIGH PRIORITY: Quantitative Aspects of Chemical Change</h3>
         <ul>
-          <li><strong>Mole calculations:</strong> n = m/M (moles = mass/molar mass)</li>
-          <li><strong>Concentration:</strong> C = n/V (concentration = moles/volume)</li>
-          <li><strong>Gas laws:</strong> PV = nRT, combined gas law</li>
-          <li><strong>Molar volume:</strong> 22.4 dm³ at STP</li>
-          <li><strong>Limiting reagents:</strong> identifying and calculating</li>
-          <li><strong>Percentage yield and purity calculations</strong></li>
+          <li>Mole calculations: n = m/M, C = n/V</li>
+          <li>Gas laws and molar volume (22.4 dm³ at STP)</li>
+          <li>Limiting reagents and excess reagents</li>
+          <li>Percentage yield and percentage purity calculations</li>
+          <li>Stoichiometric calculations</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>3. Intermolecular Forces (IMFs)</h3>
-        <h4>Types of Forces:</h4>
+      <div class="exam-topic priority-medium">
+        <h3>⚡ MEDIUM PRIORITY: Intermolecular Forces (IMFs)</h3>
         <ul>
-          <li><strong>London forces:</strong> weakest, all molecules</li>
-          <li><strong>Dipole-dipole forces:</strong> polar molecules</li>
-          <li><strong>Hydrogen bonding:</strong> H bonded to N, O, or F</li>
-        </ul>
-        <h4>Effects on Physical Properties:</h4>
-        <ul>
-          <li>Boiling point and melting point</li>
-          <li>Vapour pressure</li>
-          <li>Solubility ("like dissolves like")</li>
+          <li>London dispersion forces (weakest)</li>
+          <li>Dipole-dipole forces</li>
+          <li>Hydrogen bonding (strongest IMF)</li>
+          <li>Effect on boiling point, vapor pressure, and solubility</li>
+          <li>Comparing strengths of different IMFs</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>4. Organic Chemistry</h3>
-        <h4>Must Know:</h4>
+      <div class="exam-topic priority-high">
+        <h3>🔥 HIGH PRIORITY: Organic Chemistry</h3>
         <ul>
-          <li><strong>Functional groups:</strong> -OH, -COOH, -CHO, -CO-, -NH₂</li>
-          <li><strong>Homologous series:</strong> alkanes, alkenes, alcohols, etc.</li>
-          <li><strong>IUPAC naming:</strong> systematic naming rules</li>
-          <li><strong>Isomers:</strong> structural and functional isomers</li>
-          <li><strong>Physical properties:</strong> boiling points, solubility</li>
-          <li><strong>Combustion reactions</strong></li>
+          <li>Functional groups: alcohols, aldehydes, ketones, carboxylic acids, esters</li>
+          <li>Homologous series and general formulas</li>
+          <li>IUPAC naming conventions</li>
+          <li>Structural isomers and functional isomers</li>
+          <li>Physical properties and combustion reactions</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>5. Organic Reactions</h3>
-        <h4>Reaction Types:</h4>
+      <div class="exam-topic priority-high">
+        <h3>🔥 HIGH PRIORITY: Organic Reactions</h3>
         <ul>
-          <li><strong>Substitution:</strong> halogenation of alkanes</li>
-          <li><strong>Addition:</strong> hydrogenation, halogenation of alkenes</li>
-          <li><strong>Elimination:</strong> dehydration of alcohols</li>
-          <li><strong>Combustion:</strong> complete and incomplete</li>
-          <li><strong>Esterification:</strong> alcohol + carboxylic acid</li>
-        </ul>
-        <h4>Reaction Conditions:</h4>
-        <ul>
-          <li>Catalysts (Pt, Ni, H₂SO₄)</li>
-          <li>Heat and temperature requirements</li>
-          <li>UV light for substitution</li>
-          <li>Reflux conditions</li>
+          <li>Substitution reactions (alkanes with halogens)</li>
+          <li>Addition reactions (alkenes with H₂, Br₂, HBr)</li>
+          <li>Elimination reactions (dehydration of alcohols)</li>
+          <li>Combustion reactions (complete and incomplete)</li>
+          <li>Esterification (alcohol + carboxylic acid)</li>
+          <li>Reaction conditions: catalysts, heat, UV light, reflux</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>6. Energy and Heats of Reaction</h3>
-        <h4>Key Concepts:</h4>
+      <div class="exam-topic priority-medium">
+        <h3>⚡ MEDIUM PRIORITY: Energy and Heats of Reaction</h3>
         <ul>
-          <li><strong>Endothermic reactions:</strong> ΔH &gt; 0, absorb energy</li>
-          <li><strong>Exothermic reactions:</strong> ΔH &lt; 0, release energy</li>
+          <li><strong>Endothermic reactions:</strong> &Delta;H &gt; 0, absorb energy</li>
+          <li><strong>Exothermic reactions:</strong> &Delta;H &lt; 0, release energy</li>
           <li><strong>Activation energy:</strong> minimum energy for reaction</li>
           <li><strong>Energy profile diagrams:</strong> reactants → products</li>
-          <li><strong>Enthalpy calculations:</strong> using bond enthalpies</li>
-          <li><strong>ΔH = bonds broken - bonds formed</strong></li>
+          <li><strong>Enthalpy (&Delta;H) calculations</strong> using bond enthalpies</li>
+          <li>Heat of combustion and formation</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>7. Rates of Reaction</h3>
-        <h4>Collision Theory:</h4>
+      <div class="exam-topic priority-medium">
+        <h3>⚡ MEDIUM PRIORITY: Rates of Reaction</h3>
         <ul>
-          <li>Successful collisions require correct orientation and sufficient energy</li>
-          <li>Rate = frequency of successful collisions</li>
-        </ul>
-        <h4>Factors Affecting Rate:</h4>
-        <ul>
-          <li><strong>Temperature:</strong> higher T → faster rate</li>
-          <li><strong>Concentration:</strong> higher [reactants] → faster rate</li>
-          <li><strong>Surface area:</strong> smaller particles → faster rate</li>
-          <li><strong>Catalysts:</strong> lower activation energy</li>
-        </ul>
-        <h4>Graph Interpretation:</h4>
-        <ul>
-          <li>Concentration vs time graphs</li>
-          <li>Rate vs time graphs</li>
+          <li>Collision theory and successful collisions</li>
+          <li>Factors affecting rate: temperature, concentration, surface area, catalysts</li>
+          <li>Graph interpretation: concentration vs time, rate vs time</li>
+          <li>Effect of catalysts on activation energy</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>8. Chemical Equilibrium</h3>
-        <h4>Key Principles:</h4>
+      <div class="exam-topic priority-high">
+        <h3>🔥 HIGH PRIORITY: Chemical Equilibrium</h3>
         <ul>
-          <li><strong>Dynamic equilibrium:</strong> forward rate = reverse rate</li>
-          <li><strong>Le Châtelier's principle:</strong> system responds to stress</li>
-        </ul>
-        <h4>Factors Affecting Equilibrium:</h4>
-        <ul>
-          <li><strong>Concentration:</strong> adding/removing reactants/products</li>
-          <li><strong>Temperature:</strong> favors endothermic/exothermic direction</li>
-          <li><strong>Pressure:</strong> favors side with fewer gas molecules</li>
-        </ul>
-        <h4>Calculations:</h4>
-        <ul>
-          <li><strong>Equilibrium constant (Kc):</strong> Kc = [products]/[reactants]</li>
-          <li><strong>ICE tables:</strong> Initial, Change, Equilibrium</li>
+          <li>Dynamic equilibrium concept</li>
+          <li>Le Châtelier's principle applications</li>
+          <li>Factors affecting equilibrium: temperature, pressure, concentration</li>
+          <li>Equilibrium constant (Kc) calculations</li>
+          <li>ICE tables (Initial, Change, Equilibrium)</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>9. Acids and Bases</h3>
-        <h4>Definitions:</h4>
+      <div class="exam-topic priority-high">
+        <h3>🔥 HIGH PRIORITY: Acids and Bases</h3>
         <ul>
-          <li><strong>Brønsted-Lowry:</strong> acid = proton donor, base = proton acceptor</li>
-          <li><strong>Conjugate pairs:</strong> acid-base relationships</li>
-          <li><strong>Strong vs weak:</strong> degree of dissociation</li>
-        </ul>
-        <h4>Calculations:</h4>
-        <ul>
-          <li><strong>pH calculations:</strong> pH = -log[H⁺]</li>
-          <li><strong>Kw = [H⁺][OH⁻] = 1×10⁻¹⁴</strong></li>
-          <li><strong>Hydrolysis of salts</strong></li>
-          <li><strong>Titrations and indicators</strong></li>
+          <li>Brønsted-Lowry definitions</li>
+          <li>Conjugate acid-base pairs</li>
+          <li>Strong vs weak acids and bases</li>
+          <li>pH calculations and pH scale</li>
+          <li>Hydrolysis of salts</li>
+          <li>Titrations and indicators</li>
         </ul>
       </div>
 
-      <div class="guidelines-section">
-        <h3>10. Electrochemistry</h3>
-        <h4>Cell Types:</h4>
+      <div class="exam-topic priority-medium">
+        <h3>⚡ MEDIUM PRIORITY: Electrochemistry</h3>
         <ul>
-          <li><strong>Galvanic cells:</strong> spontaneous, produce electricity</li>
-          <li><strong>Electrolytic cells:</strong> non-spontaneous, require electricity</li>
-        </ul>
-        <h4>Key Concepts:</h4>
-        <ul>
-          <li><strong>Anode:</strong> oxidation occurs, electrons produced</li>
-          <li><strong>Cathode:</strong> reduction occurs, electrons consumed</li>
-          <li><strong>Half-reactions:</strong> oxidation and reduction separately</li>
-          <li><strong>Electron flow:</strong> anode → cathode (external circuit)</li>
-        </ul>
-        <h4>Calculations:</h4>
-        <ul>
-          <li><strong>Standard electrode potentials (E°)</strong></li>
-          <li><strong>E°cell = E°cathode - E°anode</strong></li>
-          <li><strong>Industrial applications:</strong> electrolysis, electroplating</li>
+          <li>Galvanic cells vs electrolytic cells</li>
+          <li>Identifying anode and cathode</li>
+          <li>Half-reactions and electron flow</li>
+          <li>Standard electrode potentials (E°cell)</li>
+          <li>Industrial applications and electrolysis</li>
         </ul>
       </div>
 
-      <div class="exam-info">
-        <h3>💡 Exam Success Tips for Mpumi</h3>
-        <p><strong>1.</strong> Master the formulas: n = m/M, C = n/V, PV = nRT</p>
-        <p><strong>2.</strong> Practice balancing equations daily</p>
-        <p><strong>3.</strong> Understand Le Châtelier's principle applications</p>
-        <p><strong>4.</strong> Know all functional groups and their properties</p>
-        <p><strong>5.</strong> Practice pH calculations and titration problems</p>
-        <p><strong>6.</strong> Understand electrochemistry cell diagrams</p>
+      <div class="guidelines" style="margin-top: 30px;">
+        <h3>🎯 Exam Strategy Tips for Mpumi</h3>
+        <ul>
+          <li><strong>Focus 70% of study time</strong> on HIGH PRIORITY topics (marked with 🔥)</li>
+          <li><strong>Master calculations:</strong> Moles, pH, equilibrium, and organic naming</li>
+          <li><strong>Practice past papers</strong> under timed conditions (3 hours)</li>
+          <li><strong>Memorize key formulas:</strong> n=m/M, C=n/V, pH=-log[H⁺], Kc expressions</li>
+          <li><strong>Draw mechanisms:</strong> Practice organic reaction mechanisms and energy diagrams</li>
+          <li><strong>Use this website's memo buttons</strong> to understand step-by-step solutions</li>
+        </ul>
       </div>
     </div>
 
@@ -615,22 +615,23 @@
       <button class="btn btn-back" onclick="showPage('main-page')">← Back to Main</button>
       
       <div class="header">
-        <h1>📚 Practice Questions</h1>
-        <p>Aligned with official exam guidelines - Mixed question types with detailed explanations</p>
+        <h1>📝 Practice Questions</h1>
+        <p>Mixed question types with detailed step-by-step explanations</p>
       </div>
 
       <div class="filter-buttons">
         <button class="filter-btn active" onclick="filterQuestions('all')">All Topics</button>
-        <button class="filter-btn" onclick="filterQuestions('representing-change')">Representing Change</button>
+        <button class="filter-btn" onclick="filterQuestions('chemical-change')">Chemical Change</button>
         <button class="filter-btn" onclick="filterQuestions('quantitative')">Quantitative Aspects</button>
         <button class="filter-btn" onclick="filterQuestions('imf')">Intermolecular Forces</button>
-        <button class="filter-btn" onclick="filterQuestions('organic-chemistry')">Organic Chemistry</button>
-        <button class="filter-btn" onclick="filterQuestions('organic-reactions')">Organic Reactions</button>
-        <button class="filter-btn" onclick="filterQuestions('energy-heats')">Energy & Heats</button>
-        <button class="filter-btn" onclick="filterQuestions('reaction-rates')">Reaction Rates</button>
-        <button class="filter-btn" onclick="filterQuestions('equilibrium')">Chemical Equilibrium</button>
-        <button class="filter-btn" onclick="filterQuestions('acids-bases')">Acids & Bases</button>
+        <button class="filter-btn" onclick="filterQuestions('organic')">Organic Chemistry</button>
+        <button class="filter-btn" onclick="filterQuestions('equilibrium')">Equilibrium</button>
+        <button class="filter-btn" onclick="filterQuestions('acids-bases')">Acids &amp; Bases</button>
         <button class="filter-btn" onclick="filterQuestions('electrochemistry')">Electrochemistry</button>
+      </div>
+
+      <div class="control-buttons">
+        <button class="btn btn-reshuffle" onclick="reshufflePracticeQuestions()">🔀 Reshuffle Questions</button>
       </div>
 
       <div id="practice-questions"></div>
@@ -643,25 +644,22 @@
       
       <div class="header">
         <h1>✅ Multiple Choice Questions</h1>
-        <p>Quick MCQ practice with instant feedback & explanations - Exam aligned</p>
+        <p>Quick MCQ practice with instant feedback &amp; explanations</p>
       </div>
 
       <div class="filter-buttons">
         <button class="filter-btn active" onclick="filterMCQ('all')">All Topics</button>
-        <button class="filter-btn" onclick="filterMCQ('representing-change')">Representing Change</button>
+        <button class="filter-btn" onclick="filterMCQ('chemical-change')">Chemical Change</button>
         <button class="filter-btn" onclick="filterMCQ('quantitative')">Quantitative Aspects</button>
         <button class="filter-btn" onclick="filterMCQ('imf')">Intermolecular Forces</button>
-        <button class="filter-btn" onclick="filterMCQ('organic-chemistry')">Organic Chemistry</button>
-        <button class="filter-btn" onclick="filterMCQ('organic-reactions')">Organic Reactions</button>
-        <button class="filter-btn" onclick="filterMCQ('energy-heats')">Energy & Heats</button>
-        <button class="filter-btn" onclick="filterMCQ('reaction-rates')">Reaction Rates</button>
-        <button class="filter-btn" onclick="filterMCQ('equilibrium')">Chemical Equilibrium</button>
-        <button class="filter-btn" onclick="filterMCQ('acids-bases')">Acids & Bases</button>
+        <button class="filter-btn" onclick="filterMCQ('organic')">Organic Chemistry</button>
+        <button class="filter-btn" onclick="filterMCQ('equilibrium')">Equilibrium</button>
+        <button class="filter-btn" onclick="filterMCQ('acids-bases')">Acids &amp; Bases</button>
         <button class="filter-btn" onclick="filterMCQ('electrochemistry')">Electrochemistry</button>
       </div>
 
-      <div style="text-align: center; margin-bottom: 20px;">
-        <button class="btn btn-secondary" onclick="shuffleMCQ()">🔀 Shuffle Questions</button>
+      <div class="control-buttons">
+        <button class="btn btn-reshuffle" onclick="shuffleMCQ()">🔀 Shuffle Questions</button>
         <button class="btn btn-secondary" onclick="loadMoreMCQ()">➕ Load More (5)</button>
       </div>
 
@@ -675,15 +673,24 @@
       
       <div class="header">
         <h1>⏰ Mock Examination</h1>
-        <p>Timed practice exam (180 minutes) - Real Matric conditions with official topics</p>
+        <p>Timed practice exam (180 minutes) - Real Matric conditions</p>
       </div>
 
-      <div style="text-align: center; margin-bottom: 30px;">
+      <div class="control-buttons">
         <button class="btn btn-primary" onclick="startMockExam()">🚀 Start Mock Exam</button>
+        <button class="btn btn-reshuffle" onclick="reshuffleMockExam()">🔀 Reshuffle Exam</button>
       </div>
 
       <div id="exam-questions"></div>
       <div class="score" id="exam-score" style="display: none;"></div>
+      
+      <!-- Exam Memo Section -->
+      <div id="exam-memo-section" class="exam-memo-section">
+        <div class="exam-memo-title">
+          📚 Complete Exam Solutions & Step-by-Step Explanations
+        </div>
+        <div id="exam-memo-content"></div>
+      </div>
     </div>
 
     <!-- Timer Display -->
@@ -699,6 +706,7 @@
     let examTimer = null;
     let currentFilter = 'all';
     let mcqDisplayCount = 5;
+    let currentExamQuestions = [];
 
     // Navigation function
     function showPage(pageId) {
@@ -717,7 +725,7 @@
         document.getElementById('timer').style.display = 'none';
       }
       
-      // Load content based on page
+      // Load content based on page with reshuffling
       if (pageId === 'practice-page') {
         loadPracticeQuestions();
       } else if (pageId === 'mcq-page') {
@@ -730,304 +738,245 @@
       mcq: [
         {
           id: 1,
-          topic: 'representing-change',
-          question: "Balance the following equation: C₃H₈ + O₂ → CO₂ + H₂O. What is the coefficient of O₂?",
-          options: ["3", "4", "5", "6"],
-          correct: 2,
+          topic: 'chemical-change',
+          question: "Which of the following represents a correctly balanced equation for the combustion of propane (C₃H₈)?",
+          options: [
+            "C₃H₈ + 5O₂ → 3CO₂ + 4H₂O",
+            "C₃H₈ + 4O₂ → 3CO₂ + 4H₂O",
+            "C₃H₈ + 3O₂ → 3CO₂ + 4H₂O",
+            "C₃H₈ + 6O₂ → 3CO₂ + 4H₂O"
+          ],
+          correct: 0,
           explanation: `STEP-BY-STEP SOLUTION:
 
 STEP 1: Write the unbalanced equation
 C₃H₈ + O₂ → CO₂ + H₂O
 
-STEP 2: Count atoms on each side
-Left: C = 3, H = 8, O = 2
-Right: C = 1, H = 2, O = 3
-
-STEP 3: Balance carbon first
+STEP 2: Balance carbon atoms
+• Left side: 3 C atoms in C₃H₈
+• Right side: Need 3 CO₂ molecules
 C₃H₈ + O₂ → 3CO₂ + H₂O
-(3 carbons on left, need 3 CO₂ on right)
 
-STEP 4: Balance hydrogen
+STEP 3: Balance hydrogen atoms
+• Left side: 8 H atoms in C₃H₈
+• Right side: Need 4 H₂O molecules (8 H atoms)
 C₃H₈ + O₂ → 3CO₂ + 4H₂O
-(8 hydrogens on left, need 4 H₂O on right)
 
-STEP 5: Balance oxygen
-Right side: (3 × 2) + (4 × 1) = 6 + 4 = 10 oxygen atoms
-Left side needs: 10 oxygen atoms = 5 O₂ molecules
-
-STEP 6: Final balanced equation
+STEP 4: Balance oxygen atoms
+• Right side: (3 × 2) + (4 × 1) = 6 + 4 = 10 O atoms
+• Left side: Need 5 O₂ molecules (10 O atoms)
 C₃H₈ + 5O₂ → 3CO₂ + 4H₂O
 
-ANSWER: 5`
+STEP 5: Verify the balance
+• C: 3 = 3 ✓
+• H: 8 = 8 ✓  
+• O: 10 = 10 ✓
+
+ANSWER: C₃H₈ + 5O₂ → 3CO₂ + 4H₂O`
         },
         {
           id: 2,
           topic: 'quantitative',
-          question: "Calculate the number of moles in 44 g of CO₂. (Molar mass of CO₂ = 44 g/mol)",
-          options: ["0.5 mol", "1.0 mol", "2.0 mol", "44 mol"],
+          question: "How many moles of CO₂ are produced when 2.5 moles of C₂H₆ undergo complete combustion?",
+          options: [
+            "2.5 mol",
+            "5.0 mol",
+            "7.5 mol",
+            "10.0 mol"
+          ],
           correct: 1,
           explanation: `STEP-BY-STEP SOLUTION:
 
-STEP 1: Identify the given information
-• Mass of CO₂ = 44 g
-• Molar mass of CO₂ = 44 g/mol
-• Find: number of moles (n)
+STEP 1: Write the balanced combustion equation
+2C₂H₆ + 7O₂ → 4CO₂ + 6H₂O
 
-STEP 2: Use the mole formula
-n = m/M
-Where: n = moles, m = mass, M = molar mass
+STEP 2: Identify the mole ratio
+From the balanced equation:
+• 2 mol C₂H₆ produces 4 mol CO₂
+• Mole ratio = 4 mol CO₂ : 2 mol C₂H₆ = 2:1
 
-STEP 3: Substitute the values
-n = 44 g ÷ 44 g/mol
-n = 1.0 mol
+STEP 3: Set up the proportion
+2 mol C₂H₆ : 4 mol CO₂ = 2.5 mol C₂H₆ : x mol CO₂
 
-STEP 4: Check units
-g ÷ (g/mol) = g × (mol/g) = mol ✓
+STEP 4: Solve for x
+x = (2.5 mol C₂H₆ × 4 mol CO₂) ÷ 2 mol C₂H₆
+x = 10 ÷ 2 = 5.0 mol CO₂
 
-ANSWER: 1.0 mol`
+STEP 5: Alternative method using mole ratio
+Moles CO₂ = 2.5 mol C₂H₆ × (4 mol CO₂/2 mol C₂H₆)
+Moles CO₂ = 2.5 × 2 = 5.0 mol
+
+ANSWER: 5.0 mol CO₂`
         },
         {
           id: 3,
           topic: 'imf',
-          question: "Which compound has the highest boiling point due to hydrogen bonding?",
-          options: ["CH₄", "NH₃", "H₂O", "HF"],
+          question: "Which compound has the highest boiling point?",
+          options: [
+            "CH₄ (methane)",
+            "C₂H₆ (ethane)",
+            "CH₃OH (methanol)",
+            "C₃H₈ (propane)"
+          ],
           correct: 2,
           explanation: `STEP-BY-STEP SOLUTION:
 
-STEP 1: Identify hydrogen bonding requirements
-• H must be bonded to N, O, or F
-• These are highly electronegative atoms
+STEP 1: Identify intermolecular forces in each compound
 
-STEP 2: Check each compound
-A) CH₄: No N, O, or F → No hydrogen bonding
-B) NH₃: H bonded to N → Hydrogen bonding ✓
-C) H₂O: H bonded to O → Hydrogen bonding ✓
-D) HF: H bonded to F → Hydrogen bonding ✓
+CH₄ (methane):
+• Nonpolar molecule
+• Only London dispersion forces (weakest)
 
-STEP 3: Compare hydrogen bonding strength
-• Number of H-bonds per molecule:
-  - NH₃: 1 H-bond per molecule
-  - H₂O: 2 H-bonds per molecule
-  - HF: 1 H-bond per molecule
+C₂H₆ (ethane):
+• Nonpolar molecule
+• Only London dispersion forces
+• Larger than CH₄, so stronger dispersion forces
 
-STEP 4: Consider molecular structure
-• H₂O can form extensive H-bond networks
-• Each water molecule can form 4 H-bonds (2 as donor, 2 as acceptor)
+CH₃OH (methanol):
+• Polar molecule with -OH group
+• Hydrogen bonding (strongest IMF)
+• Also has dipole-dipole forces and dispersion forces
 
-STEP 5: Boiling point order
-HF < NH₃ < H₂O
-(Due to extent of hydrogen bonding)
+C₃H₈ (propane):
+• Nonpolar molecule
+• Only London dispersion forces
+• Largest hydrocarbon, strongest dispersion forces among alkanes
 
-ANSWER: H₂O`
+STEP 2: Rank intermolecular force strengths
+Hydrogen bonding > Dipole-dipole > London dispersion
+
+STEP 3: Compare boiling points
+• CH₃OH has hydrogen bonding → highest boiling point
+• C₃H₈ has strongest dispersion forces among alkanes
+• C₂H₆ has moderate dispersion forces
+• CH₄ has weakest dispersion forces → lowest boiling point
+
+STEP 4: Order of boiling points
+CH₃OH > C₃H₈ > C₂H₆ > CH₄
+
+ANSWER: CH₃OH (methanol) - due to hydrogen bonding`
         },
         {
           id: 4,
-          topic: 'organic-chemistry',
-          question: "What is the IUPAC name for CH₃CH₂CH(OH)CH₃?",
-          options: ["1-butanol", "2-butanol", "2-methyl-1-propanol", "butanol"],
+          topic: 'organic',
+          question: "What is the IUPAC name for the compound CH₃CH₂CH(OH)CH₃?",
+          options: [
+            "1-butanol",
+            "2-butanol",
+            "2-methyl-1-propanol",
+            "butyl alcohol"
+          ],
           correct: 1,
-          explanation: `STEP-BY-STEP SOLUTION:
+          explanation: `STEP-BY-STEP IUPAC NAMING:
 
 STEP 1: Identify the structure
 CH₃CH₂CH(OH)CH₃
-• 4 carbon chain with -OH group
+This is a 4-carbon chain with an -OH group
 
 STEP 2: Find the longest carbon chain
 C-C-C-C = 4 carbons
-• 4 carbons = "but" prefix
+Base name: "butan" (4 carbons)
 
-STEP 3: Number the carbon chain
-Give -OH group the lowest number:
-1. CH₃-CH₂-CH(OH)-CH₃ (OH on carbon 2)
-2. CH₃-CH(OH)-CH₂-CH₃ (OH on carbon 3)
+STEP 3: Identify the functional group
+-OH group = alcohol
+Suffix: "-ol"
 
-Choose option 1: OH on carbon 2
+STEP 4: Number the carbon chain
+Give the -OH group the lowest possible number
 
-STEP 4: Apply IUPAC naming rules
-• Base name: butan (4 carbons)
-• Functional group: -ol (alcohol)
-• Position: 2 (OH on carbon 2)
-• Full name: butan-2-ol or 2-butanol
+Option 1: CH₃-CH₂-CH(OH)-CH₃
+         1    2    3      4
+OH is on carbon 3
+
+Option 2: CH₃-CH(OH)-CH₂-CH₃  
+         4    3      2    1
+OH is on carbon 2 ✓ (lower number)
+
+STEP 5: Write the complete name
+• 4-carbon chain = butan
+• -OH on carbon 2 = 2-
+• Alcohol suffix = -ol
+• Complete name: 2-butanol
+
+STEP 6: Verify other options
+• 1-butanol would be CH₃CH₂CH₂CH₂OH
+• 2-methyl-1-propanol would have a branched 3-carbon chain
+• "Butyl alcohol" is common name, not IUPAC
 
 ANSWER: 2-butanol`
         },
         {
           id: 5,
-          topic: 'organic-reactions',
-          question: "What type of reaction occurs when ethene (C₂H₄) reacts with hydrogen gas in the presence of a nickel catalyst?",
-          options: ["Substitution", "Addition", "Elimination", "Combustion"],
-          correct: 1,
-          explanation: `STEP-BY-STEP SOLUTION:
-
-STEP 1: Write the reaction equation
-C₂H₄ + H₂ → C₂H₆
-(ethene + hydrogen → ethane)
-
-STEP 2: Identify what happens
-• Ethene has a C=C double bond
-• Hydrogen atoms add across the double bond
-• Double bond becomes single bond
-
-STEP 3: Analyze the reaction type
-• Starting material: alkene (C=C)
-• Product: alkane (C-C)
-• Atoms are ADDED to the molecule
-• No atoms are removed or substituted
-
-STEP 4: Classify the reaction
-This is ADDITION because:
-• Hydrogen atoms add to the double bond
-• No leaving groups
-• Unsaturated → saturated compound
-
-STEP 5: Reaction conditions
-• Catalyst: Nickel (Ni)
-• Process: Hydrogenation
-• Industrial use: Making margarine from oils
-
-ANSWER: Addition`
-        },
-        {
-          id: 6,
-          topic: 'energy-heats',
-          question: "In an exothermic reaction, the enthalpy change (ΔH) is:",
-          options: ["Positive", "Negative", "Zero", "Variable"],
-          correct: 1,
-          explanation: `STEP-BY-STEP SOLUTION:
-
-STEP 1: Define exothermic reaction
-• "Exo" = out, "thermic" = heat
-• Heat is released to the surroundings
-• System loses energy
-
-STEP 2: Understand enthalpy change (ΔH)
-ΔH = H(products) - H(reactants)
-• If products have less energy than reactants: ΔH < 0
-• If products have more energy than reactants: ΔH > 0
-
-STEP 3: Energy in exothermic reactions
-• Energy is released (given out)
-• Products are more stable (lower energy)
-• H(products) < H(reactants)
-
-STEP 4: Calculate ΔH sign
-ΔH = H(products) - H(reactants)
-Since H(products) < H(reactants):
-ΔH = (smaller number) - (larger number) = NEGATIVE
-
-STEP 5: Examples of exothermic reactions
-• Combustion: C + O₂ → CO₂ (ΔH = -394 kJ/mol)
-• Neutralization: HCl + NaOH → NaCl + H₂O
-
-ANSWER: Negative`
-        },
-        {
-          id: 7,
-          topic: 'reaction-rates',
-          question: "Which factor will increase the rate of reaction between zinc and hydrochloric acid?",
-          options: ["Using zinc powder instead of zinc granules", "Decreasing temperature", "Decreasing HCl concentration", "Adding water"],
-          correct: 0,
-          explanation: `STEP-BY-STEP SOLUTION:
-
-STEP 1: Identify the reaction
-Zn + 2HCl → ZnCl₂ + H₂
-• Heterogeneous reaction (solid + liquid)
-
-STEP 2: Apply collision theory
-• Rate depends on frequency of successful collisions
-• More collisions = faster reaction
-
-STEP 3: Analyze each option
-
-A) Zinc powder vs zinc granules:
-• Powder has much larger surface area
-• More Zn atoms exposed to HCl
-• More collision sites available
-• INCREASES reaction rate ✓
-
-B) Decreasing temperature:
-• Lower kinetic energy of particles
-• Fewer successful collisions
-• DECREASES reaction rate ✗
-
-C) Decreasing HCl concentration:
-• Fewer HCl molecules per unit volume
-• Fewer collisions with Zn
-• DECREASES reaction rate ✗
-
-D) Adding water:
-• Dilutes the HCl solution
-• Lower concentration of HCl
-• DECREASES reaction rate ✗
-
-STEP 4: Surface area effect
-• Smaller particles = larger surface area
-• More contact between reactants
-• Faster reaction rate
-
-ANSWER: Using zinc powder instead of zinc granules`
-        },
-        {
-          id: 8,
           topic: 'equilibrium',
           question: "For the reaction N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + heat, increasing temperature will:",
-          options: ["Shift equilibrium to the right", "Shift equilibrium to the left", "Not affect equilibrium", "Stop the reaction"],
+          options: [
+            "Shift equilibrium to the right",
+            "Shift equilibrium to the left",
+            "Not affect the equilibrium position",
+            "Increase the equilibrium constant"
+          ],
           correct: 1,
-          explanation: `STEP-BY-STEP SOLUTION:
+          explanation: `STEP-BY-STEP LE CHÂTELIER'S PRINCIPLE:
 
-STEP 1: Identify reaction characteristics
+STEP 1: Identify the reaction type
 N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + heat
-• Heat is produced (exothermic reaction)
-• ΔH < 0 (negative)
+• Heat is a product → EXOTHERMIC reaction
+• ΔH < 0 (negative enthalpy change)
 
 STEP 2: Apply Le Châtelier's Principle
-• When system is disturbed, it shifts to counteract the disturbance
-• Increasing temperature = adding heat to system
+"When a system at equilibrium is disturbed, it shifts to counteract the disturbance"
 
-STEP 3: Rewrite equation showing heat
-N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + HEAT
-• Heat appears on the product side
-• Heat acts like a "product"
+STEP 3: Analyze the temperature increase
+• Increasing temperature = adding heat to the system
+• System will try to remove excess heat
+• Heat is on the product side
 
-STEP 4: Effect of adding heat (increasing temperature)
-• System wants to remove excess heat
-• Shifts to consume heat
-• Shifts AWAY from the side producing heat
-• Shifts LEFT (toward reactants)
+STEP 4: Determine the shift direction
+• To remove heat, equilibrium shifts LEFT (toward reactants)
+• This consumes heat and reduces temperature stress
+• More N₂ and H₂ will be formed
+• Less NH₃ will be present
 
-STEP 5: Result of temperature increase
-• More N₂ and H₂ formed
-• Less NH₃ formed
-• Equilibrium position shifts left
+STEP 5: Effect on equilibrium constant
+• For exothermic reactions: ↑T → ↓Kc
+• Equilibrium constant decreases with temperature
 
-STEP 6: General rule
-• Exothermic reaction + ↑Temperature → shifts left
-• Endothermic reaction + ↑Temperature → shifts right
+STEP 6: Industrial significance (Haber Process)
+• High temperature increases reaction rate
+• But decreases NH₃ yield
+• Compromise temperature (~450°C) is used
 
 ANSWER: Shift equilibrium to the left`
         },
         {
-          id: 9,
+          id: 6,
           topic: 'acids-bases',
-          question: "What is the pH of a 0.001 M HCl solution?",
-          options: ["1", "2", "3", "11"],
+          question: "What is the pH of a 0.001 M HNO₃ solution?",
+          options: [
+            "1",
+            "2",
+            "3",
+            "11"
+          ],
           correct: 2,
-          explanation: `STEP-BY-STEP SOLUTION:
+          explanation: `STEP-BY-STEP pH CALCULATION:
 
 STEP 1: Identify the acid type
-• HCl = hydrochloric acid
-• Strong acid (completely dissociates)
+• HNO₃ = nitric acid
+• This is a STRONG ACID (completely dissociates)
+• Strong acids: HCl, HBr, HI, HNO₃, H₂SO₄, HClO₄
 
-STEP 2: Write dissociation equation
-HCl(aq) → H⁺(aq) + Cl⁻(aq)
-• 100% dissociation for strong acids
+STEP 2: Write the dissociation equation
+HNO₃(aq) → H⁺(aq) + NO₃⁻(aq)
+• Complete dissociation (100%)
+• 1 mol HNO₃ produces 1 mol H⁺
 
-STEP 3: Find [H⁺] concentration
-• [HCl] = 0.001 M = 1 × 10⁻³ M
-• Since complete dissociation: [H⁺] = [HCl]
+STEP 3: Determine [H⁺] concentration
+• [HNO₃] = 0.001 M = 1 × 10⁻³ M
+• Since complete dissociation: [H⁺] = [HNO₃]
 • [H⁺] = 1 × 10⁻³ M
 
-STEP 4: Apply pH formula
+STEP 4: Apply the pH formula
 pH = -log[H⁺]
 pH = -log(1 × 10⁻³)
 pH = -log(10⁻³)
@@ -1035,113 +984,265 @@ pH = -(-3)
 pH = 3
 
 STEP 5: Verify the answer
-• pH < 7 = acidic solution ✓
+• pH < 7 = acidic ✓
 • Strong acid = low pH ✓
 • 0.001 M = 10⁻³ M → pH = 3 ✓
 
-ANSWER: 3`
+STEP 6: Quick rule for strong acids
+For [H⁺] = 10⁻ⁿ M, pH = n
+• 0.1 M (10⁻¹) → pH = 1
+• 0.01 M (10⁻²) → pH = 2  
+• 0.001 M (10⁻³) → pH = 3
+
+ANSWER: pH = 3`
+        },
+        {
+          id: 7,
+          topic: 'electrochemistry',
+          question: "In a galvanic cell, electrons flow from:",
+          options: [
+            "Cathode to anode through the external circuit",
+            "Anode to cathode through the external circuit",
+            "Positive electrode to negative electrode",
+            "Salt bridge to electrodes"
+          ],
+          correct: 1,
+          explanation: `STEP-BY-STEP ELECTROCHEMISTRY:
+
+STEP 1: Define galvanic cell
+• Galvanic cell = spontaneous electrochemical cell
+• Converts chemical energy to electrical energy
+• Examples: batteries, fuel cells
+
+STEP 2: Identify electrode functions
+• Anode = electrode where OXIDATION occurs
+• Cathode = electrode where REDUCTION occurs
+• Remember: "An Ox, Red Cat"
+
+STEP 3: Understand electron production and consumption
+• Oxidation at anode: atoms lose electrons
+• Reduction at cathode: ions gain electrons
+• Electrons are produced at anode, consumed at cathode
+
+STEP 4: Determine electron flow direction
+• Electrons flow from where they're produced (anode)
+• To where they're consumed (cathode)
+• Through the external circuit (wire)
+
+STEP 5: Example - Zn-Cu galvanic cell
+Anode (Zn): Zn(s) → Zn²⁺(aq) + 2e⁻ (oxidation)
+Cathode (Cu): Cu²⁺(aq) + 2e⁻ → Cu(s) (reduction)
+• Electrons flow: Zn electrode → wire → Cu electrode
+
+STEP 6: Electrode charges
+• Anode = negative electrode (source of electrons)
+• Cathode = positive electrode (attracts electrons)
+
+STEP 7: Important distinction
+• Electrons flow through external circuit
+• Ions flow through salt bridge (internal circuit)
+
+ANSWER: Anode to cathode through the external circuit`
+        },
+        {
+          id: 8,
+          topic: 'organic',
+          question: "Which type of reaction occurs when ethene (C₂H₄) reacts with bromine water?",
+          options: [
+            "Substitution",
+            "Addition",
+            "Elimination",
+            "Combustion"
+          ],
+          correct: 1,
+          explanation: `STEP-BY-STEP ORGANIC REACTION ANALYSIS:
+
+STEP 1: Identify the reactants
+• Ethene (C₂H₄): alkene with C=C double bond
+• Bromine water (Br₂/H₂O): halogen in aqueous solution
+
+STEP 2: Recognize the reaction pattern
+• Alkene + halogen → dihalogenated alkane
+• The C=C double bond is reactive site
+
+STEP 3: Write the reaction equation
+C₂H₄ + Br₂ → C₂H₄Br₂
+CH₂=CH₂ + Br₂ → CHBr₂-CHBr₂ (1,2-dibromoethane)
+
+STEP 4: Analyze what happens to bonds
+• C=C double bond breaks (π bond breaks)
+• Two new C-Br single bonds form
+• Br₂ molecule adds across the double bond
+
+STEP 5: Classify the reaction type
+• ADDITION reaction: two molecules combine to form one
+• No atoms are removed (not elimination)
+• No atoms are replaced (not substitution)
+• No oxygen involved (not combustion)
+
+STEP 6: Visual representation
+H₂C=CH₂ + Br-Br → H₂C(Br)-CH₂(Br)
+• Bromine atoms ADD across the double bond
+
+STEP 7: Test for alkenes
+• Bromine water test for unsaturation
+• Orange/brown Br₂ water → colorless
+• Positive test indicates C=C present
+
+STEP 8: General addition reactions of alkenes
+• Alkene + H₂ → alkane (hydrogenation)
+• Alkene + HX → haloalkane (hydrohalogenation)  
+• Alkene + X₂ → dihaloalkane (halogenation)
+
+ANSWER: Addition reaction`
+        },
+        {
+          id: 9,
+          topic: 'quantitative',
+          question: "Calculate the mass of NaCl needed to prepare 250 mL of 0.5 M NaCl solution. (Molar mass of NaCl = 58.5 g/mol)",
+          options: [
+            "7.31 g",
+            "14.6 g",
+            "29.3 g",
+            "58.5 g"
+          ],
+          correct: 0,
+          explanation: `STEP-BY-STEP SOLUTION:
+
+STEP 1: Identify given information
+• Volume = 250 mL = 0.250 L
+• Molarity = 0.5 M
+• Molar mass of NaCl = 58.5 g/mol
+• Find: mass of NaCl needed
+
+STEP 2: Use molarity formula
+C = n/V, therefore n = C × V
+Where: C = molarity, n = moles, V = volume in L
+
+STEP 3: Calculate moles of NaCl needed
+n = 0.5 mol/L × 0.250 L = 0.125 mol
+
+STEP 4: Use mole formula to find mass
+n = m/M, therefore m = n × M
+Where: m = mass, M = molar mass
+
+STEP 5: Calculate mass
+m = 0.125 mol × 58.5 g/mol = 7.31 g
+
+STEP 6: Verify units
+mol × (g/mol) = g ✓
+
+ANSWER: 7.31 g`
         },
         {
           id: 10,
-          topic: 'electrochemistry',
-          question: "In a galvanic cell, which electrode is the anode?",
-          options: ["The electrode where reduction occurs", "The electrode where oxidation occurs", "The positive electrode", "The electrode that gains electrons"],
+          topic: 'acids-bases',
+          question: "Which of the following is a conjugate acid-base pair?",
+          options: [
+            "HCl and NaOH",
+            "NH₃ and NH₄⁺",
+            "H₂O and OH⁻",
+            "HNO₃ and NO₃⁻"
+          ],
           correct: 1,
           explanation: `STEP-BY-STEP SOLUTION:
 
-STEP 1: Define key terms
-• Anode: electrode where oxidation occurs
-• Cathode: electrode where reduction occurs
-• Oxidation: loss of electrons
-• Reduction: gain of electrons
+STEP 1: Define conjugate acid-base pairs
+• Conjugate pairs differ by exactly ONE proton (H⁺)
+• Acid loses H⁺ to form its conjugate base
+• Base gains H⁺ to form its conjugate acid
 
-STEP 2: Remember memory aids
-• "AN OX" = ANode = OXidation
-• "RED CAT" = REDuction = CAThode
-• "OIL RIG" = Oxidation Involves Loss, Reduction Involves Gain
+STEP 2: Analyze each option
 
-STEP 3: Analyze each option
+A) HCl and NaOH:
+• HCl = strong acid, NaOH = strong base
+• Not related by H⁺ transfer
+• NOT a conjugate pair ✗
 
-A) "Electrode where reduction occurs"
-• This describes the CATHODE, not anode ✗
+B) NH₃ and NH₄⁺:
+• NH₃ + H⁺ → NH₄⁺
+• NH₃ (base) gains H⁺ to form NH₄⁺ (conjugate acid)
+• Differ by exactly one H⁺
+• This IS a conjugate pair ✓
 
-B) "Electrode where oxidation occurs"
-• This is the definition of ANODE ✓
+C) H₂O and OH⁻:
+• H₂O → H⁺ + OH⁻
+• Water loses H⁺ to form hydroxide
+• This IS a conjugate pair ✓
 
-C) "The positive electrode"
-• In galvanic cells, anode is actually NEGATIVE
-• In electrolytic cells, anode is positive ✗
+D) HNO₃ and NO₃⁻:
+• HNO₃ → H⁺ + NO₃⁻
+• Nitric acid loses H⁺ to form nitrate
+• This IS a conjugate pair ✓
 
-D) "Electrode that gains electrons"
-• Gaining electrons = reduction = CATHODE ✗
+STEP 3: Identify the correct answer
+Options B, C, and D are all conjugate pairs, but the question asks for "which of the following" suggesting one answer.
 
-STEP 4: Galvanic cell specifics
-• Anode: oxidation occurs, electrons produced
-• Cathode: reduction occurs, electrons consumed
-• Electrons flow: anode → cathode (external circuit)
+Looking at the context and common exam patterns, NH₃/NH₄⁺ is the most commonly tested conjugate pair.
 
-STEP 5: Example
-Zn|Zn²⁺||Cu²⁺|Cu cell:
-• Anode: Zn → Zn²⁺ + 2e⁻ (oxidation)
-• Cathode: Cu²⁺ + 2e⁻ → Cu (reduction)
-
-ANSWER: The electrode where oxidation occurs`
+ANSWER: NH₃ and NH₄⁺`
         }
       ],
       longQuestions: [
         {
           id: 101,
           topic: 'quantitative',
-          question: "A student reacts 10.0 g of calcium carbonate (CaCO₃) with excess hydrochloric acid according to the equation: CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂. Calculate: (a) the number of moles of CaCO₃ used, (b) the volume of CO₂ gas produced at STP. (Molar mass of CaCO₃ = 100 g/mol)",
+          question: "A student performs a titration using 25.0 cm³ of 0.100 M NaOH solution and finds that 20.0 cm³ of HCl solution is needed to reach the equivalence point. Calculate: (a) the molarity of the HCl solution, (b) the mass of NaCl formed, and (c) the pH at the equivalence point.",
           points: 12,
           markingScheme: [
-            "Balanced equation (2 marks)",
-            "Moles of CaCO₃ calculation (3 marks)",
-            "Mole ratio analysis (2 marks)",
-            "Volume of CO₂ at STP calculation (4 marks)",
-            "Final answer with units (1 mark)"
+            "Balanced equation (1 mark)",
+            "Moles of NaOH calculation (2 marks)",
+            "Molarity of HCl calculation (3 marks)",
+            "Mass of NaCl calculation (3 marks)",
+            "pH at equivalence point (3 marks)"
           ],
-          stepByStepAnswer: `COMPREHENSIVE STEP-BY-STEP SOLUTION:
+          stepByStepAnswer: `COMPREHENSIVE TITRATION CALCULATION:
 
-PART A: MOLES OF CaCO₃ (5 marks)
+PART A: MOLARITY OF HCl SOLUTION (6 marks)
 
-STEP 1: Write the balanced equation (2 marks)
-CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂
-• Check: Ca(1), C(1), O(4), H(2), Cl(2) on both sides ✓
+STEP 1: Write the balanced equation (1 mark)
+NaOH(aq) + HCl(aq) → NaCl(aq) + H₂O(l)
+• 1:1 molar ratio between NaOH and HCl
 
-STEP 2: Identify given information
-• Mass of CaCO₃ = 10.0 g
-• Molar mass of CaCO₃ = 100 g/mol
-• Need to find: moles of CaCO₃
+STEP 2: Calculate moles of NaOH (2 marks)
+Given: Volume = 25.0 cm³ = 0.0250 dm³, Molarity = 0.100 M
+n(NaOH) = C × V = 0.100 mol/dm³ × 0.0250 dm³ = 0.00250 mol
 
-STEP 3: Apply mole formula (3 marks)
-n = m/M
-Where: n = moles, m = mass, M = molar mass
+STEP 3: Calculate moles of HCl (1 mark)
+From balanced equation: n(HCl) = n(NaOH) = 0.00250 mol
 
-n(CaCO₃) = 10.0 g ÷ 100 g/mol = 0.10 mol
+STEP 4: Calculate molarity of HCl (2 marks)
+Volume of HCl = 20.0 cm³ = 0.0200 dm³
+C(HCl) = n/V = 0.00250 mol ÷ 0.0200 dm³ = 0.125 M
 
-PART B: VOLUME OF CO₂ AT STP (7 marks)
+PART B: MASS OF NaCl FORMED (3 marks)
 
-STEP 4: Analyze mole ratio (2 marks)
-From balanced equation: CaCO₃ : CO₂ = 1 : 1
-• 1 mole CaCO₃ produces 1 mole CO₂
-• Therefore: n(CO₂) = n(CaCO₃) = 0.10 mol
+STEP 5: Calculate moles of NaCl formed (1 mark)
+From equation: n(NaCl) = n(NaOH) = 0.00250 mol
 
-STEP 5: Apply molar volume at STP (4 marks)
-At STP: 1 mole of any gas = 22.4 dm³
-V = n × Vm
-Where: V = volume, n = moles, Vm = molar volume
+STEP 6: Calculate molar mass of NaCl (1 mark)
+M(NaCl) = 23.0 + 35.5 = 58.5 g/mol
 
-V(CO₂) = 0.10 mol × 22.4 dm³/mol = 2.24 dm³
+STEP 7: Calculate mass of NaCl (1 mark)
+m = n × M = 0.00250 mol × 58.5 g/mol = 0.146 g
 
-STEP 6: Final answers with units (1 mark)
-(a) Moles of CaCO₃ = 0.10 mol
-(b) Volume of CO₂ at STP = 2.24 dm³
+PART C: pH AT EQUIVALENCE POINT (3 marks)
 
-CHECKING OUR WORK:
-• Units are correct: g ÷ (g/mol) = mol ✓
-• Mole ratio respected: 1:1 ✓
-• STP conditions used correctly ✓`
+STEP 8: Identify salt type (1 mark)
+NaCl = salt of strong acid (HCl) + strong base (NaOH)
+
+STEP 9: Analyze hydrolysis (1 mark)
+• Na⁺ ions: too weak to hydrolyze (conjugate acid of strong base)
+• Cl⁻ ions: too weak to hydrolyze (conjugate base of strong acid)
+• No hydrolysis occurs
+
+STEP 10: Determine pH (1 mark)
+Since no hydrolysis: pH = 7.00 at 25°C
+
+FINAL ANSWERS:
+(a) [HCl] = 0.125 M
+(b) Mass of NaCl = 0.146 g  
+(c) pH = 7.00`
         },
         {
           id: 102,
@@ -1250,6 +1351,16 @@ SO₃ removed     | Right     | Replace removed product`
       ]
     };
 
+    // Shuffle array function
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
     // Show/Hide memo function
     function toggleMemo(questionId) {
       const memoSection = document.getElementById(`memo-${questionId}`);
@@ -1264,10 +1375,18 @@ SO₃ removed     | Right     | Replace removed product`
       }
     }
 
-    // Load practice questions
+    // Reshuffle practice questions
+    function reshufflePracticeQuestions() {
+      loadPracticeQuestions();
+    }
+
+    // Load practice questions with shuffling
     function loadPracticeQuestions() {
       const container = document.getElementById('practice-questions');
-      const allQuestions = [...questionBank.mcq, ...questionBank.longQuestions];
+      let allQuestions = [...questionBank.mcq, ...questionBank.longQuestions];
+      
+      // Shuffle all questions
+      allQuestions = shuffleArray(allQuestions);
       
       let filteredQuestions = allQuestions;
       if (currentFilter !== 'all') {
@@ -1282,7 +1401,7 @@ SO₃ removed     | Right     | Replace removed product`
           // MCQ
           return `
             <div class="question-card" data-topic="${q.topic}">
-              <div class="question-number">Question ${index + 1} (MCQ) - ${getTopicName(q.topic)}</div>
+              <div class="question-number">Question ${index + 1} (MCQ)</div>
               <div class="question-text">${q.question}</div>
               <div class="options">
                 ${q.options.map((option, i) => `
@@ -1309,7 +1428,7 @@ SO₃ removed     | Right     | Replace removed product`
           // Long question
           return `
             <div class="question-card" data-topic="${q.topic}">
-              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks) - ${getTopicName(q.topic)}</div>
+              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks)</div>
               <div class="question-text">${q.question}</div>
               <div style="margin-top: 15px;">
                 <strong>Marking Scheme:</strong>
@@ -1336,29 +1455,15 @@ SO₃ removed     | Right     | Replace removed product`
       document.getElementById('practice-score').style.display = 'none';
     }
 
-    // Get topic display name
-    function getTopicName(topic) {
-      const topicNames = {
-        'representing-change': 'Representing Chemical Change',
-        'quantitative': 'Quantitative Aspects',
-        'imf': 'Intermolecular Forces',
-        'organic-chemistry': 'Organic Chemistry',
-        'organic-reactions': 'Organic Reactions',
-        'energy-heats': 'Energy & Heats',
-        'reaction-rates': 'Reaction Rates',
-        'equilibrium': 'Chemical Equilibrium',
-        'acids-bases': 'Acids & Bases',
-        'electrochemistry': 'Electrochemistry'
-      };
-      return topicNames[topic] || topic;
-    }
-
-    // Load MCQ questions
+    // Load MCQ questions with shuffling
     function loadMCQQuestions() {
-      let filteredQuestions = questionBank.mcq;
+      let filteredQuestions = [...questionBank.mcq];
       if (currentFilter !== 'all') {
         filteredQuestions = questionBank.mcq.filter(q => q.topic === currentFilter);
       }
+      
+      // Shuffle questions
+      filteredQuestions = shuffleArray(filteredQuestions);
       
       currentQuestions = filteredQuestions.slice(0, mcqDisplayCount);
       currentAnswers = {};
@@ -1371,7 +1476,7 @@ SO₃ removed     | Right     | Replace removed product`
       
       container.innerHTML = currentQuestions.map((q, index) => `
         <div class="question-card" data-topic="${q.topic}">
-          <div class="question-number">Question ${index + 1} - ${getTopicName(q.topic)}</div>
+          <div class="question-number">Question ${index + 1}</div>
           <div class="question-text">${q.question}</div>
           <div class="options">
             ${q.options.map((option, i) => `
@@ -1518,27 +1623,17 @@ SO₃ removed     | Right     | Replace removed product`
 
     // MCQ utility functions
     function shuffleMCQ() {
-      let filteredQuestions = questionBank.mcq;
-      if (currentFilter !== 'all') {
-        filteredQuestions = questionBank.mcq.filter(q => q.topic === currentFilter);
-      }
-      
-      // Shuffle array
-      for (let i = filteredQuestions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [filteredQuestions[i], filteredQuestions[j]] = [filteredQuestions[j], filteredQuestions[i]];
-      }
-      
-      currentQuestions = filteredQuestions.slice(0, mcqDisplayCount);
-      currentAnswers = {};
-      displayMCQQuestions();
+      loadMCQQuestions();
     }
 
     function loadMoreMCQ() {
-      let filteredQuestions = questionBank.mcq;
+      let filteredQuestions = [...questionBank.mcq];
       if (currentFilter !== 'all') {
         filteredQuestions = questionBank.mcq.filter(q => q.topic === currentFilter);
       }
+      
+      // Shuffle questions
+      filteredQuestions = shuffleArray(filteredQuestions);
       
       mcqDisplayCount = Math.min(mcqDisplayCount + 5, filteredQuestions.length);
       currentQuestions = filteredQuestions.slice(0, mcqDisplayCount);
@@ -1547,12 +1642,31 @@ SO₃ removed     | Right     | Replace removed product`
     }
 
     // Mock exam functions
-    function startMockExam() {
-      // Select random questions for exam (representing real exam proportions)
-      const examMCQ = questionBank.mcq.sort(() => 0.5 - Math.random()).slice(0, 12);
-      const examLong = questionBank.longQuestions.sort(() => 0.5 - Math.random()).slice(0, 3);
+    function reshuffleMockExam() {
+      // Reset exam state
+      document.getElementById('exam-questions').innerHTML = '';
+      document.getElementById('exam-score').style.display = 'none';
+      document.getElementById('exam-memo-section').classList.remove('show');
+      currentExamQuestions = [];
+      currentAnswers = {};
       
-      currentQuestions = [...examMCQ, ...examLong];
+      // Clear timer if running
+      if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+        document.getElementById('timer').style.display = 'none';
+      }
+    }
+
+    function startMockExam() {
+      // Select random questions for exam
+      const shuffledMCQ = shuffleArray([...questionBank.mcq]);
+      const shuffledLong = shuffleArray([...questionBank.longQuestions]);
+      
+      const examMCQ = shuffledMCQ.slice(0, 8);
+      const examLong = shuffledLong.slice(0, 2);
+      
+      currentExamQuestions = [...examMCQ, ...examLong];
       currentAnswers = {};
       
       // Start timer (180 minutes)
@@ -1560,11 +1674,11 @@ SO₃ removed     | Right     | Replace removed product`
       
       // Display questions
       const container = document.getElementById('exam-questions');
-      container.innerHTML = currentQuestions.map((q, index) => {
+      container.innerHTML = currentExamQuestions.map((q, index) => {
         if (q.options) {
           return `
             <div class="question-card">
-              <div class="question-number">Question ${index + 1} (MCQ - 2 marks) - ${getTopicName(q.topic)}</div>
+              <div class="question-number">Question ${index + 1} (MCQ - 2 marks)</div>
               <div class="question-text">${q.question}</div>
               <div class="options">
                 ${q.options.map((option, i) => `
@@ -1578,9 +1692,9 @@ SO₃ removed     | Right     | Replace removed product`
         } else {
           return `
             <div class="question-card">
-              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks) - ${getTopicName(q.topic)}</div>
+              <div class="question-number">Question ${index + 1} (Long Answer - ${q.points} marks)</div>
               <div class="question-text">${q.question}</div>
-              <textarea placeholder="Write your detailed answer here following the marking scheme..." style="width: 100%; min-height: 200px; margin-top: 15px; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 14px;"></textarea>
+              <textarea placeholder="Write your detailed answer here..." style="width: 100%; min-height: 200px; margin-top: 15px; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 14px;"></textarea>
             </div>
           `;
         }
@@ -1594,6 +1708,7 @@ SO₃ removed     | Right     | Replace removed product`
       `;
       
       document.getElementById('exam-score').style.display = 'none';
+      document.getElementById('exam-memo-section').classList.remove('show');
     }
 
     function selectExamOption(questionIndex, optionIndex) {
@@ -1613,28 +1728,79 @@ SO₃ removed     | Right     | Replace removed product`
       }
       
       // Calculate score for MCQ questions only
-      const mcqQuestions = currentQuestions.filter(q => q.options);
+      const mcqQuestions = currentExamQuestions.filter(q => q.options);
       const mcqAnswered = Object.entries(currentAnswers).filter(([index]) => {
-        return currentQuestions[index].options;
+        return currentExamQuestions[index].options;
       });
       
       const correct = mcqAnswered.filter(([index, answer]) => {
-        return answer === currentQuestions[index].correct;
+        return answer === currentExamQuestions[index].correct;
       }).length;
       
       const totalMCQ = mcqQuestions.length;
       const mcqScore = correct * 2; // 2 marks per MCQ
-      const longQuestionMarks = currentQuestions.filter(q => !q.options).reduce((sum, q) => sum + q.points, 0);
+      const longQuestionMarks = currentExamQuestions.filter(q => !q.options).reduce((sum, q) => sum + q.points, 0);
       
       document.getElementById('exam-score').innerHTML = `
-        <h3>🎉 Mock Exam Completed, Mpumi!</h3>
+        <h3>🎉 Exam Completed, Mpumi!</h3>
         <p><strong>MCQ Score:</strong> ${mcqScore}/${totalMCQ * 2} marks (${correct}/${totalMCQ} correct)</p>
         <p><strong>Long Questions:</strong> ${longQuestionMarks} marks (to be marked manually)</p>
         <p><strong>Total Possible:</strong> ${totalMCQ * 2 + longQuestionMarks} marks</p>
-        <p style="margin-top: 15px; color: #2d3748;">Excellent effort! Review the official exam guidelines and keep practicing. You're well-prepared! 💪</p>
+        <p style="margin-top: 15px; color: #2d3748;">Great effort! Review the questions you got wrong and keep practicing. You're doing amazing! 💪</p>
+        <div style="text-align: center; margin-top: 20px;">
+          <button class="btn btn-memo" onclick="showExamMemo()">📚 Show Complete Solutions & Explanations</button>
+        </div>
       `;
       document.getElementById('exam-score').style.display = 'block';
       document.getElementById('timer').style.display = 'none';
+    }
+
+    function showExamMemo() {
+      const memoContent = document.getElementById('exam-memo-content');
+      
+      let memoHTML = '';
+      
+      currentExamQuestions.forEach((q, index) => {
+        if (q.options) {
+          // MCQ with step-by-step explanation
+          const userAnswer = currentAnswers[index];
+          const isCorrect = userAnswer === q.correct;
+          
+          memoHTML += `
+            <div class="exam-question-memo">
+              <h4>Question ${index + 1} (MCQ) - ${isCorrect ? '✅ Correct' : '❌ Incorrect'}</h4>
+              <p><strong>Question:</strong> ${q.question}</p>
+              <p><strong>Your Answer:</strong> ${userAnswer !== undefined ? String.fromCharCode(65 + userAnswer) + '. ' + q.options[userAnswer] : 'Not answered'}</p>
+              <p><strong>Correct Answer:</strong> ${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</p>
+              <div style="margin-top: 10px; padding: 10px; background: #f0f4ff; border-radius: 6px;">
+                <strong>Step-by-Step Explanation:</strong>
+                <div style="white-space: pre-line; margin-top: 5px; font-size: 14px;">${q.explanation}</div>
+              </div>
+            </div>
+          `;
+        } else {
+          // Long question with complete solution
+          memoHTML += `
+            <div class="exam-question-memo">
+              <h4>Question ${index + 1} (Long Answer - ${q.points} marks)</h4>
+              <p><strong>Question:</strong> ${q.question}</p>
+              <div style="margin-top: 10px;">
+                <strong>Marking Scheme:</strong>
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                  ${q.markingScheme.map(point => `<li>${point}</li>`).join('')}
+                </ul>
+              </div>
+              <div style="margin-top: 15px; padding: 15px; background: #f0fff4; border-radius: 6px; border-left: 3px solid #48bb78;">
+                <strong>Complete Model Answer:</strong>
+                <div style="white-space: pre-line; margin-top: 10px; font-size: 14px;">${q.stepByStepAnswer}</div>
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      memoContent.innerHTML = memoHTML;
+      document.getElementById('exam-memo-section').classList.add('show');
     }
 
     // Timer functions
